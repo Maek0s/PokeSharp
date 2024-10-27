@@ -1,0 +1,401 @@
+﻿# Consulta la documentación en la wiki para aprender a editar este archivo.
+#-------------------------------
+[HOENNCOOL]
+Name = Cinta Carisma
+IconPosition = 0
+Description = Concurso Carisma de Hoenn. Ganador nivel normal.
+#-------------------------------
+[HOENNCOOLSUPER]
+Name = Cinta Carisma Alto
+IconPosition = 1
+Description = Concurso carisma de Hoenn. Ganador nivel alto. 
+#-------------------------------
+[HOENNCOOLHYPER]
+Name = Cinta Carisma Avanzado
+IconPosition = 2
+Description = Concurso carisma de Hoenn. Ganador nivel avanzado.
+#-------------------------------
+[HOENNCOOLMASTER]
+Name = Cinta Carisma Experto
+IconPosition = 3
+Description = Concurso carisma de Hoenn. Ganador nivel experto
+#-------------------------------
+[HOENNBEAUTY]
+Name = Cinta Belleza
+IconPosition = 4
+Description = Concurso belleza de Hoenn. Ganador nivel normal.
+#-------------------------------
+[HOENNBEAUTYSUPER]
+Name = Cinta Belleza Alto
+IconPosition = 5
+Description = Concurso belleza de Hoenn. Ganador nivel alto. 
+#-------------------------------
+[HOENNBEAUTYHYPER]
+Name = Cinta Belleza Avanzado
+IconPosition = 6
+Description = Concurso belleza de Hoenn. Ganador nivel avanzado. 
+#-------------------------------
+[HOENNBEAUTYMASTER]
+Name = Cinta Belleza Experto
+IconPosition = 7
+Description = Concurso belleza de Hoenn. Ganador nivel experto.
+#-------------------------------
+[HOENNCUTE]
+Name = Cinta Dulzura
+IconPosition = 8
+Description = Concurso dulzura de Hoenn. Ganador nivel normal.
+#-------------------------------
+[HOENNCUTESUPER]
+Name = Cinta Dulzura Alto
+IconPosition = 9
+Description = Concurso dulzura de Hoenn. Ganador nivel alto.
+#-------------------------------
+[HOENNCUTEHYPER]
+Name = Cinta Dulzura Avanzado
+IconPosition = 10
+Description = Concurso dulzura de Hoenn. Ganador nivel avanzado.
+#-------------------------------
+[HOENNCUTEMASTER]
+Name = Cinta Dulzura Experto
+IconPosition = 11
+Description = Concurso dulzura de Hoenn. Ganador nivel experto. 
+#-------------------------------
+[HOENNSMART]
+Name = Cinta Ingenio
+IconPosition = 12
+Description = Concurso ingenio de Hoenn. Ganador nivel normal. 
+#-------------------------------
+[HOENNSMARTSUPER]
+Name = Cinta Ingenio Alto
+IconPosition = 13
+Description = Concurso ingenio de Hoenn. Ganador nivel alto. 
+#-------------------------------
+[HOENNSMARTHYPER]
+Name = Cinta Ingenio Avanzado
+IconPosition = 14
+Description = Concurso ingenio de Hoenn. Ganador nivel avanzado. 
+#-------------------------------
+[HOENNSMARTMASTER]
+Name = Cinta Ingenio Experto
+IconPosition = 15
+Description = Concurso ingenio de Hoenn. Ganador nivel experto.
+#-------------------------------
+[HOENNTOUGH]
+Name = Cinta Dureza
+IconPosition = 16
+Description = Concurso dureza de Hoenn. Ganador nivel normal.
+#-------------------------------
+[HOENNTOUGHSUPER]
+Name = Cinta Dureza Alto
+IconPosition = 17
+Description = Concurso dureza de Hoenn. Ganador nivel alto.
+#-------------------------------
+[HOENNTOUGHHYPER]
+Name = Cinta Dureza Avanzado
+IconPosition = 18
+Description = Concurso dureza de Hoenn. Ganador nivel avanzado. 
+#-------------------------------
+[HOENNTOUGHMASTER]
+Name = Cinta Dureza Experto
+IconPosition = 19
+Description = Concurso dureza de Hoenn. Ganador nivel experto. 
+#-------------------------------
+[SINNOHCOOL]
+Name = Cinta Carisma
+IconPosition = 20
+Description = Súper concurso carisma. Ganador nivel normal.
+#-------------------------------
+[SINNOHCOOLSUPER]
+Name = Cinta Carisma Difícil
+IconPosition = 21
+Description = Súper concurso carisma. Ganador nivel difícil.
+#-------------------------------
+[SINNOHCOOLHYPER]
+Name = Cinta Carisma Superior
+IconPosition = 22
+Description = Súper Concurso Carisma. Ganador nivel superior.
+#-------------------------------
+[SINNOHCOOLMASTER]
+Name = Cinta Carisma Experto
+IconPosition = 23
+Description = Súper concurso carisma. Ganador nivel experto.
+#-------------------------------
+[SINNOHBEAUTY]
+Name = Cinta Belleza
+IconPosition = 24
+Description = Súper concurso belleza. Ganador nivel normal.
+#-------------------------------
+[SINNOHBEAUTYSUPER]
+Name = Cinta Belleza Difícil
+IconPosition = 25
+Description = Súper concurso belleza. Ganador nivel difícil.
+#-------------------------------
+[SINNOHBEAUTYHYPER]
+Name = Cinta Belleza Superior
+IconPosition = 26
+Description = Súper concurso belleza. Ganador nivel superior.
+#-------------------------------
+[SINNOHBEAUTYMASTER]
+Name = Cinta Belleza Experto
+IconPosition = 27
+Description = Súper concurso belleza. Ganador nivel experto.
+#-------------------------------
+[SINNOHCUTE]
+Name = Cinta Dulzura
+IconPosition = 28
+Description = Súper concurso dulzura. Ganador nivel normal.
+#-------------------------------
+[SINNOHCUTESUPER]
+Name = Cinta Dulzura Difícil
+IconPosition = 29
+Description = Súper concurso dulzura. Ganador nivel difícil.
+#-------------------------------
+[SINNOHCUTEHYPER]
+Name = Cinta Dulzura Superior
+IconPosition = 30
+Description = Súper concurso dulzura. Ganador nivel superior.
+#-------------------------------
+[SINNOHCUTEMASTER]
+Name = Cinta Dulzura Experto
+IconPosition = 31
+Description = Súper concurso dulzura. Ganador nivel experto.
+#-------------------------------
+[SINNOHSMART]
+Name = Cinta Ingenio
+IconPosition = 32
+Description = Súper concurso ingenio. Ganador nivel normal.
+#-------------------------------
+[SINNOHSMARTSUPER]
+Name = Cinta Ingenio Difícil
+IconPosition = 33
+Description = Súper concurso ingenio. Ganador nivel difícil.
+#-------------------------------
+[SINNOHSMARTHYPER]
+Name = Cinta Ingenio Superior
+IconPosition = 34
+Description = Súper concurso ingenio. Ganador nivel superior.
+#-------------------------------
+[SINNOHSMARTMASTER]
+Name = Cinta Ingenio Experto
+IconPosition = 35
+Description = Súper concurso ingenio. Ganador nivel experto.
+#-------------------------------
+[SINNOHTOUGH]
+Name = Cinta Dureza
+IconPosition = 36
+Description = Súper concurso dureza. Ganador nivel normal.
+#-------------------------------
+[SINNOHTOUGHSUPER]
+Name = Cinta Dureza Difícil
+IconPosition = 37
+Description = Súper concurso dureza. Ganador nivel difícil.
+#-------------------------------
+[SINNOHTOUGHHYPER]
+Name = Cinta Dureza Superior
+IconPosition = 38
+Description = Súper concurso dureza. Ganador nivel superior.
+#-------------------------------
+[SINNOHTOUGHMASTER]
+Name = Cinta Dureza Experto
+IconPosition = 39
+Description = Súper concurso dureza. Ganador nivel experto.
+#-------------------------------
+[WINNING]
+Name = Cinta Ganador
+IconPosition = 40
+Description = Cinta obtenida por superar el desafío de la Torre Batalla Nv. 50.
+#-------------------------------
+[VICTORY]
+Name = Cinta Victoria
+IconPosition = 41
+Description = Cinta obtenida por superar el desafío de la Torre Batalla Nv. 100.
+#-------------------------------
+[ABILITY]
+Name = Cinta Habilidad
+IconPosition = 42
+Description = Cinta obtenida por vencer al Amo Torre en la Torre de Batalla.
+#-------------------------------
+[GREATABILITY]
+Name = Cinta Gran Habilidad
+IconPosition = 43
+Description = Cinta obtenida por vencer al Amo Torre en la Torre de Batalla.
+#-------------------------------
+[DOUBLEABILITY]
+Name = Cinta Doble Habilidad
+IconPosition = 44
+Description = Cinta obtenida por superar el desafío doble Torre Batalla.
+#-------------------------------
+[MULTIABILITY]
+Name = Cinta Habilidad Múltiple
+IconPosition = 45
+Description = Cinta obtenida por superar el desafío multi Torre Batalla.
+#-------------------------------
+[PAIRABILITY]
+Name = Cinta Habilidad Par
+IconPosition = 46
+Description = Cinta obtenida por superar el desafío multi conexión Torre Batalla.
+#-------------------------------
+[WORLDABILITY]
+Name = Cinta Hablildad Mundial
+IconPosition = 47
+Description = Cinta obtenida por superar el desafío Torre Batalla Wi-Fi.
+#-------------------------------
+[CHAMPION]
+Name = Cinta de Campeón
+IconPosition = 48
+Description = Cinta obtenida por superar la Liga Pokémon y entrar en el Hall de la Fama.
+#-------------------------------
+[SINNOHCHAMP]
+Name = Cinta Campeón de Sinnoh
+IconPosition = 49
+Description = Cinta obtenida por vencer a la Campeona de Sinnoh y entrar en el Hall de la Fama.
+#-------------------------------
+[RECORD]
+Name = Cinta Récord
+IconPosition = 50
+Description = Cinta obtenida por establecer un récord increíble.
+#-------------------------------
+[EVENT]
+Name = Cinta Evento
+IconPosition = 51
+Description = Cinta obtenida por establecer un récord histórico.
+#-------------------------------
+[LEGEND]
+Name = Cinta Leyenda
+IconPosition = 52
+Description = Cinta obtenida por establecer un récord legendario.
+#-------------------------------
+[GORGEOUS]
+Name = Cinta Maravilla
+IconPosition = 53
+Description = Cinta extremadamente bonita y extravagante.
+#-------------------------------
+[ROYAL]
+Name = Cinta Realeza
+IconPosition = 54
+Description = Cinta increíblemente majestuosa y con aire aristocrático.
+#-------------------------------
+[GORGEOUSROYAL]
+Name = Cinta Realeza Maravilla
+IconPosition = 55
+Description = Cinta preciosa y majestuosa que es de lo más fabulosa y maravillosa.
+#-------------------------------
+[ALERT]
+Name = Cinta Alerta
+IconPosition = 56
+Description = Cinta obtenida por recordar un suceso vigorizante que creó energía vital.
+#-------------------------------
+[SHOCK]
+Name = Cinta Impacto
+IconPosition = 57
+Description = Cinta obtenida por recordar un suceso excitante que hizo la vida más interesante.
+#-------------------------------
+[DOWNCAST]
+Name = Cinta Abatimiento
+IconPosition = 58
+Description = Cinta obtenida por recordar sentimientos tristes que añadieron interés a la vida.
+#-------------------------------
+[CARELESS]
+Name = Cinta Descuido
+IconPosition = 59
+Description = Cinta obtenida por recordar descuidos que ayudaron a tomar decisiones vitales.
+#-------------------------------
+[RELAX]
+Name = Cinta Relax
+IconPosition = 60
+Description = Cinta obtenida por recordar una anécdota refrescante que añadió chispa a la vida.
+#-------------------------------
+[SNOOZE]
+Name = Cinta Cabezada
+IconPosition = 61
+Description = Cinta obtenida por recordar un profundo sueño que hizo la vida más calmada.
+#-------------------------------
+[SMILE]
+Name = Cinta Sonrisa
+IconPosition = 62
+Description = Cinta obtenida por recordar que las sonrisas mejoran la calidad de vida.
+#-------------------------------
+[FOOTPRINT]
+Name = Cinta Huella
+IconPosition = 63
+Description = Cinta concedida a un Pokémon que deja huellas de primera.
+#-------------------------------
+[ARTIST]
+Name = Cinta Artista
+IconPosition = 64
+Description = Cinta obtenida por haber sido elegido como supermodelo.
+#-------------------------------
+[EFFORT]
+Name = Cinta Esfuerzo
+IconPosition = 65
+Description = Cinta obtenida por ser un excelente trabajador.
+#-------------------------------
+[BIRTHDAY]
+Name = Cinta Cumpleaños
+IconPosition = 66
+Description = Cinta obtenida para celebrar un cumpleaños.
+#-------------------------------
+[SPECIAL]
+Name = Cinta Especial
+IconPosition = 67
+Description = Cinta obtenida para celebrar un cumpleaños.
+#-------------------------------
+[CLASSIC]
+Name = Cinta Clásica
+IconPosition = 68
+Description = Cinta que demuestra que te encantan los Pokémon.
+#-------------------------------
+[PREMIER]
+Name = Cinta Principal
+IconPosition = 69
+Description = Cinta de vacaciones especiales.
+#-------------------------------
+[SOUVENIR]
+Name = Cinta Recuerdo
+IconPosition = 70
+Description = Una cinta para atesorar un recuerdo especial.
+#-------------------------------
+[WISHING]
+Name = Cinta Deseo
+IconPosition = 71
+Description = Una cinta dijo que tu deseo se haga realidad.
+#-------------------------------
+[NATIONAL]
+Name = Cinta Nacional
+IconPosition = 72
+Description = Cinta obtenida por superar todos los desafíos difíciles.
+#-------------------------------
+[COUNTRY]
+Name = Cinta Campo
+IconPosition = 73
+Description = Cinta de campeón.
+#-------------------------------
+[BATTLECHAMPION]
+Name = Cinta Campeón de Torneo
+IconPosition = 74
+Description = Cinta obtenida por vencer en un torneo.
+#-------------------------------
+[REGIONALCHAMPION]
+Name = Cinta Campeón Regional
+IconPosition = 75
+Description = Cinta de campeón regional del Campeonato mundial de videojuegos Pokémon.
+#-------------------------------
+[EARTH]
+Name = Cinta Planeta
+IconPosition = 76
+Description = Cinta obtenida por lograr 100 victorias consecutivas.
+#-------------------------------
+[WORLD]
+Name = Cinta Mundo
+IconPosition = 77
+Description = Cinta de campeón.
+#-------------------------------
+[NATIONALCHAMPION]
+Name = Cinta Campeón Nacional
+IconPosition = 78
+Description = Cinta de campeón nacional del Campeonato mundial de videojuegos Pokémon.
+#-------------------------------
+[WORLDCHAMPION]
+Name = Cinta Campeón Mundial
+IconPosition = 79
+Description = Cinta de campeón del Campeonato mundial de videojuegos Pokémon.

@@ -1,0 +1,34 @@
+﻿# Consulta la documentación en la wiki para aprender a editar este archivo.
+#-------------------------------
+[<Generics>]
+¿Cómo están tus Pokémon?\mMi \TP tiene mucha energía.  ¡Es extraordinario!\mEl otro día logré vencer a un \TE muy fuerte.\mNecesito hacer que mi equipo sea más fuerte.
+Mi \TP es realmente increíble.\mOjalá pudiera mostrártelo.\m¡No te lo vas a creer! Casi atrapo un \TE el otro día.\m¡Estuve taaaaaaan cerca!
+#-------------------------------
+[<BattleRequests>]
+¿Quieres pelear? No va a ser una repetición de la última vez que nos vimos.\mTe estaré esperando alrededor de \TM.
+¿Quieres pelear? ¡Esta vez voy a ganar!\mTe estaré esperando alrededor de \TM.\mBúscame, ¿de acuerdo? Mi \TP te estará esperando.
+#-------------------------------
+[<GreetingsMorning>]
+Buenos días, \PN.\mSoy \TN.  ¿Te he despertado?
+#-------------------------------
+[<GreetingsEvening>]
+¡Buenas noches, \PN!\mSoy \TN.
+#-------------------------------
+[<Greetings>]
+Hola. Soy \TN.
+¡Buenos días, \PN!  Soy \TN.
+Hola \PN, ¿cómo estás? Soy \TN.  ¿No es genial?
+¡Buenos días, \PN!  Soy yo, \TN.  ¿Tienes un minuto?
+Hola, \PN.  Soy \TN.  ¿Cómo te van las cosas?
+#-------------------------------
+[<Bodies1>]
+¿Cómo están tus Pokémon?\mMi \TP tiene mucha energía.  ¡Es extraordinario!
+¿Cómo están tus Pokémon?\mSiempre mantengo a mi \TP en plena forma yendo a los Centros Pokémon.
+Mi \TP se ve realmente genial. Me gustaría poder enseñártelo.
+He vestido a mi \TP y ahora se le ve más elegante.
+#-------------------------------
+[<Bodies2>]
+El otro día logré vencer a un \TE muy fuerte.\mNecesito hacer que mi equipo sea más fuerte.
+¡Tienes que escuchar esto! Luché contra \TE el otro día.\m¡Fue fácil! Tenía una ventaja de tipo.
+No te lo vas a creer! Casi atrapo un \TE el otro día.\m¡Estuve taaaaaaan cerca!
+Adivina lo que pasó el otro día. Estuve a punto de atrapar a \TE otra vez.\mIgual esto no se me da muy bien.

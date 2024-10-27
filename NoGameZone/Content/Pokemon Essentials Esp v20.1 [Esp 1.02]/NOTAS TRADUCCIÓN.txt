@@ -1,0 +1,58 @@
+
+==============================================================
+                                Traducido por Zunamer para Essentials Wiki en español
+==============================================================
+
+Versión de Pokémon Essentials: 20.1 (22 de junio de 2022)
+Versión de la traducción: 1.02 (22 de marzo de 2023)
+
+NOTA: Aunque se han traducido todos los elementos importantes e imprescindibles como
+Pokémon, movimientos, habilidades, objetos, scripts, etc... aún quedan por traducir la
+mayoría de los eventos que incluye Essentials a modo de tutorial, además de algunas frases sueltas que se han pasado por alto. A este respecto, se ha intentado utilizar la herramienta
+que incluye Essentials para facilitar las traducciones; esta extrae todo el texto a traducir en un archivo .txt que posteriormente hay que volver a compilar, pero por algún motivo la compilación no ha funcionado y eso ha complicado algo las cosas (se habían traducido
+algunos eventos que no han podido ser incorporados al juego, como la introducción del
+Prof. Oak).
+
+De todas formas, esto es algo secundario ya que todo el contenido de los eventos del tutorial
+se encuentra en la Wiki de Pokémon Essentials. RECOMIENDO CONSULTAR LA WIKI EN INGLÉS
+ya que la versión en español está desactualizada y la mayoría de los scripts ya no sirven para
+la versión 20.1 de Pokémon Essentials.
+
+================
+      Cambios v. 1.02
+================
+
+* Se ha añadido y traducido el plugin oficial "v20.1 Hotfixes" de Maruno que corrige algunos bugs detectados en la versión 20.1 de Pokémon Essentials.
+
+* En la pantalla de batalla, la cifra correspondiente al nivel de los Pokémon se superponía ligeramente al prefijo "Nv." y no se veía el punto. Se ha solucionado eso.
+
+================
+      Cambios v. 1.01
+================
+
+* Se ha arreglado la imagen correspondiente al nivel de los Pokémon en la pantalla
+de equipo. Esta se cortaba por la parte derecha ya que era más ancha que la original
+en inglés, por lo que se ha modificado el script para que se vea al completo y también
+se ha desplazado unos píxeles a la derecha, tanto la imagen como la cifra del nivel,
+para que se vean correctamente.
+
+* Se han traducido bastantes frases y palabras sueltas de los scripts que se habían pasado por alto en la primera versión, la mayoría pertenecientes al Depurador.
+
+* Ahora la ventana del juego se presenta como "Pokemon Essentials Esp v20.1" para
+diferenciarse de la versión en inglés.
+
+================
+      Cambios v. 1.00
+================
+
+* Traducidos todos los Pokémon, movimientos, habilidades, objetos, scripts, etc... (puede que
+algunas palabras o frases sueltas en los scripts se hayan pasado por alto, pero la gran mayoría
+están traducidos).
+
+* Nombres de movimientos y habilidades actualizados a la novena generación.
+
+* Traducidos algunos eventos pertenecientes al tutorial de Pokémon Essentials.
+
+Nota: No se han traducido ni se traducirán las anotaciones en verde de los scripts, ya que sería
+un trabajo que llevaría demasiado tiempo y no es algo imprescindible a la hora de desarrollar
+un juego.
