@@ -1,0 +1,18 @@
+El juego inicia con el Profesor Jorge "El delegado" con el siguiente dialogo:
+
+Jorge: "Mmmm... veo que eres nuevo aquí. ¿Cómo te llamas?"
+
+-Aparece para escribir un texto y asignar tu nombre-
+
+Jorge: "Me alegra conocerte {nombreJugador} ¿Me podrías decir como te identificas?
+
+-Aparecen 2 opciones (Hombre | Mujer) y asigna tu genero muestra 2 imagenes de chico o chica para elegir-
+
+Jorge: "Bienvenido/a (Depende del genero) {nombreJugador}, me puedes llamar Jorge, quien me llama "delegado" suele acabar mal..."
+
+[-Aparecen 2 opciones de dialogo para responder-
+1. Encantado Delegado - = - Respuesta: "Yo tendría cuidado..."
+2. ¿Y eso? **Delegado** - = - Respuesta: "Graciosos quedan pocos, yo me preguntaría por qué..."
+3. Buenas Jorge. - = - Respuesta: "Buenas." ]
+
+Jorge: "Te voy a dar unas nociones básicas, tienes que entender que está ocurriendo en este pueblo, para eso entrenarás con Pokémons y combatirás en gimnasios para volverte más fuerte, y captura a Pokémons que seán fuertes, esta aventura solo acaba de empezar, te voy a dar una Pokédex para que pienses que vas a conseguirlos a todos aunque no te lo creas ni tu, y ven a mi casa para elegir un Pokémon, esta por abajo."
