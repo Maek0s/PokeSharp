@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvnh42nse360s"]
+
+[ext_resource type="Texture2D" uid="uid://cyq0r5yslmd5k" path="res://assets/characters/main/boy/trProtag_BoyWalk.png" id="1_b8ely"]
+[ext_resource type="Script" path="res://scripts/MainCharacter.cs" id="1_lgr1c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2es0l"]
+size = Vector2(20, 27)
+
+[node name="MainCharacter" type="CharacterBody2D"]
+script = ExtResource("1_lgr1c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(29, 30)
+texture = ExtResource("1_b8ely")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(28, 44.5)
+shape = SubResource("RectangleShape2D_2es0l")
