@@ -69,4 +69,3 @@ Para información más detallada y visual del proyecto, visita la web:
 ---
 
 📌 Sigue el desarrollo de PokeSharp, únete a nuestro [Discord](https://discord.com/invite/FqJ6ZgYRrU) y mantente al día con las últimas novedades. ¡Prepárate para una aventura inolvidable!
-
