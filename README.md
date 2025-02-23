@@ -17,6 +17,7 @@ Un juego inspirado en el mundo **Pokémon**, con una historia única y una exper
 - [🌐 Web Oficial](#-web-oficial)
 - [📣 Redes Sociales](#-redes-sociales)
 - [❓ FAQ (Preguntas Frecuentes)](#-faq-preguntas-frecuentes)
+- [‼️IMPORTANTE](#-importante)
 
 ---
 
@@ -65,6 +66,16 @@ Para información más detallada y visual del proyecto, visita la web:
 
 ### 8️⃣ ¿Puedo colaborar?
 🤝 Actualmente no hay opciones de colaboración, pero en el futuro podría ser posible. Sin embargo, **sugerencias y reportes de bugs** siempre son bienvenidos. ¡Gracias por tu apoyo!
+
+---
+
+## ‼️IMPORTANTE
+
+![image](https://github.com/user-attachments/assets/5cb0a2ec-6b5d-472a-aebb-fe8b040d06cb)
+
+Este juego es un fangame de Pokémon y es un proyecto sin fines de lucro.  
+No se permite su venta, modificación, redistribución ni uso sin permiso del autor.  
+Todos los derechos de Pokémon pertenecen a Nintendo, Game Freak y The Pokémon Company.
 
 ---
 
