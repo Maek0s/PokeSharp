@@ -17,7 +17,7 @@ Un juego inspirado en el mundo **Pokémon**, con una historia única y una exper
 - [🌐 Web Oficial](#-web-oficial)
 - [📣 Redes Sociales](#-redes-sociales)
 - [❓ FAQ (Preguntas Frecuentes)](#-faq-preguntas-frecuentes)
-- [‼️IMPORTANTE](#-importante)
+- [‼️IMPORTANTE](#importante)
 
 ---
 
