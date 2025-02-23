@@ -23,7 +23,7 @@ Un juego inspirado en el mundo **Pokémon**, con una historia única y una exper
 ## 🌐 Web Oficial
 
 Para información más detallada y visual del proyecto, visita la web:
-🔗 [PokeSharp Web](https://github.com/Maek0s/PokeSharpWeb)
+🔗 [PokeSharp Web](https://maek0s.github.io/PokeSharpWeb/)
 
 ---
 
