@@ -1,0 +1,4 @@
+{
+    "Door_1": { "label": "Mi casa", "interior": "false", "scene": "res://scenes/Mapas/Interiores/interior.tscn", "xSpawnPoint": "0", "ySpawnPoint": "0" },
+    "Door_2": { "label": "Salir a Spawn", "interior": "true", "scene": "res://scenes/Mapas/map.tscn", "xSpawnPoint": "-59", "ySpawnPoint": "-125"}
+}

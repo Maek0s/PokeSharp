@@ -8,7 +8,7 @@ public partial class MainCharacter : CharacterBody2D
     // posibilidad de presionar el "Shift" para correr
     private int max_speed = 110;
     private AnimatedSprite2D animatedSprite2D;
-    private Godot.Vector2 last_direction = new Godot.Vector2(1,0);
+    private Godot.Vector2 last_direction = new Godot.Vector2(0,1);
 
     private Godot.Vector2 input_dir = new Godot.Vector2();
     private bool is_running = false;
@@ -16,6 +16,7 @@ public partial class MainCharacter : CharacterBody2D
     public override void _Ready()
     {
         animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        AddToGroup("player");
     }
 
 	public override void _PhysicsProcess(double delta)
@@ -48,9 +49,15 @@ public partial class MainCharacter : CharacterBody2D
             last_direction = direction;
             play_walk_animation(direction);
         } else {
-            play_idle_animation(last_direction);
-        }
+            var gameNode = GetNode<Game>("../../Game");
 
+            bool _isEntering = gameNode.IsEntering;
+
+            if (!_isEntering) {
+                play_idle_animation(last_direction);
+                last_direction = Godot.Vector2.Zero;
+            }
+        }
     }
 
     private void play_walk_animation(Godot.Vector2 direction) {
