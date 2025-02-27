@@ -11,14 +11,19 @@ config_version=5
 [application]
 
 config/name="PokeSharp"
+config/version="v0.0"
 run/main_scene="res://scenes/Important/game.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-config/icon="res://assets/other/icon.svg"
+config/icon="res://assets/images/logoProvisionalPokeSharp2.png"
 
 [autoload]
 
 DoorData="*res://scripts/DoorData.cs"
 Transition="*res://scenes/Others/transition.tscn"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -84,3 +89,4 @@ locale/locale_filter_mode=0
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/lossless_compression/force_png=true

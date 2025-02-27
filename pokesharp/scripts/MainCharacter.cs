@@ -9,7 +9,6 @@ public partial class MainCharacter : CharacterBody2D
     private int max_speed = 110;
     private AnimatedSprite2D animatedSprite2D;
     private Godot.Vector2 last_direction = new Godot.Vector2(0,1);
-
     private Godot.Vector2 input_dir = new Godot.Vector2();
     private bool is_running = false;
 
@@ -17,6 +16,25 @@ public partial class MainCharacter : CharacterBody2D
     {
         animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         AddToGroup("player");
+    }
+
+    public void FreezePlayer()
+    {
+        SetPhysicsProcess(false);
+        string nameAnim = animatedSprite2D.Animation;
+        string[] splitted = nameAnim.Split("_");
+
+        if (!splitted[0].Equals("idle")) {
+            string newAnim = "idle_" + splitted[1];
+            animatedSprite2D.Play(newAnim);
+        }
+    }
+
+    public void UnfreezePlayer()
+    {
+        // Reiniciamos su última dirección para que no la actualice después de descongelarlo
+        last_direction = Godot.Vector2.Zero;
+        SetPhysicsProcess(true);
     }
 
 	public override void _PhysicsProcess(double delta)

@@ -16,21 +16,21 @@ public partial class Door : Area2D
 		BodyEntered += OnBodyEntered;
 		BodyExited += OnBodyExited;
 
-		// Mostramos el label
+		// Se muestra el label / The label is displayed
         _label = GetNodeOrNull<Label>("Label");
         if (_label != null)
         {
             _label.Visible = false;
         }
 
-        // Obtener información desde 'DoorData.cs'
+        // Obtener información desde 'DoorData.cs' / Get information from 'DoorData.cs'.
         DoorData doorData = GetNode<DoorData>("/root/DoorData");
         if (doorData.DoorDestinations.TryGetValue(Name, out var doorInfo))
         {
             SceneToLoad = doorInfo["scene"];
             if (_label != null)
             {
-                _label.Text = doorInfo["label"]; // Cambia el texto del label
+                _label.Text = doorInfo["label"]; // Cambia el texto del label / Change the label text
             }
 
             if (doorInfo["interior"].Equals("true")) {
@@ -71,8 +71,4 @@ public partial class Door : Area2D
         }
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
 }

@@ -20,7 +20,7 @@ public partial class Game : Node2D
 		// Obtener la transición global
 		Transition transition = (Transition) GetNode("/root/Transition");
 
-		// **1. Iniciar la animación de transición y esperar a que termine**
+		// Iniciar la animación de transición y esperar a que termine
 		await transition.StartTransition();
 		
 		// Borrar las anteriores escenas cargadas

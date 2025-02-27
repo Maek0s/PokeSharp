@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxy81ylqskur8"]
+[gd_scene load_steps=6 format=3 uid="uid://cxy81ylqskur8"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_cp55e"]
 [ext_resource type="PackedScene" uid="uid://cnxpjircoklhk" path="res://scenes/Mapas/map.tscn" id="2_mmfiw"]
 [ext_resource type="PackedScene" uid="uid://dvnh42nse360s" path="res://scenes/Important/mainCharacter.tscn" id="3_nik74"]
+[ext_resource type="AudioStream" uid="uid://psmtxpglm3sn" path="res://assets/audios/openDoor.wav" id="4_sr6sa"]
+[ext_resource type="AudioStream" uid="uid://27k2vyyxskp8" path="res://assets/audios/closeDoor.wav" id="5_3031l"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -21,3 +23,13 @@ position = Vector2(0, 6.25001)
 scale = Vector2(1.25, 1.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="doorOpen" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("4_sr6sa")
+area_mask = 15
+
+[node name="doorClose" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("5_3031l")
+volume_db = -7.0

@@ -1,0 +1,208 @@
+[gd_scene load_steps=21 format=3 uid="uid://dytm46rpe0t7a"]
+
+[ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
+[ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
+[ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="1_ukcxp"]
+[ext_resource type="Texture2D" uid="uid://d3eqxnewa3h23" path="res://assets/images/battle-forest.png" id="2_0gi7n"]
+[ext_resource type="Texture2D" uid="uid://bb3tt4qtdr8ms" path="res://assets/images/Pokemons/Back/4.png" id="5_5ttu2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdpud"]
+bg_color = Color(0.376471, 0.815686, 0.501961, 1)
+border_width_top = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_qvsdf"]
+Panel/styles/panel = SubResource("StyleBoxFlat_sdpud")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4q3pg"]
+bg_color = Color(0.812222, 0.527921, 0.216034, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_vnq54"]
+default_font = ExtResource("1_ukcxp")
+Button/styles/normal = SubResource("StyleBoxFlat_4q3pg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbioa"]
+bg_color = Color(9.8668e-07, 0.631856, 0.156678, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_hbo7c"]
+default_font = ExtResource("1_ukcxp")
+Button/styles/normal = SubResource("StyleBoxFlat_dbioa")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0o4su"]
+bg_color = Color(0, 0.575585, 0.90231, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_e43l4"]
+default_font = ExtResource("1_ukcxp")
+Button/styles/normal = SubResource("StyleBoxFlat_0o4su")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uiqxb"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_1mtl0"]
+TextEdit/colors/search_result_color = Color(1, 1, 1, 1)
+TextEdit/colors/selection_color = Color(1, 1, 1, 1)
+TextEdit/styles/normal = SubResource("StyleBoxFlat_uiqxb")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt5re"]
+atlas = ExtResource("5_5ttu2")
+region = Rect2(145, 0, 62, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ade6x"]
+atlas = ExtResource("5_5ttu2")
+region = Rect2(207, 0, 62, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3c6i"]
+atlas = ExtResource("5_5ttu2")
+region = Rect2(21, 0, 62, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84qji"]
+atlas = ExtResource("5_5ttu2")
+region = Rect2(83, 0, 62, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgir6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt5re")
+}],
+"loop": true,
+"name": &"back_Normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ade6x")
+}],
+"loop": true,
+"name": &"back_Shiny",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3c6i")
+}],
+"loop": true,
+"name": &"front_Normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84qji")
+}],
+"loop": true,
+"name": &"front_Shiny",
+"speed": 5.0
+}]
+
+[node name="Combate" type="CanvasLayer"]
+
+[node name="Background Grass" type="Sprite2D" parent="."]
+position = Vector2(576.5, 233)
+scale = Vector2(4.55731, 3.24476)
+texture = ExtResource("1_4lwss")
+
+[node name="Background Forest" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576.5, 233)
+scale = Vector2(1.53121, 0.932)
+texture = ExtResource("2_0gi7n")
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = 465.0
+offset_right = 1153.0
+offset_bottom = 648.0
+theme = SubResource("Theme_qvsdf")
+
+[node name="Buttons" type="Control" parent="Panel"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -465.0
+offset_right = 40.0
+offset_bottom = -425.0
+
+[node name="Fight" type="Button" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 479.0
+offset_right = 908.0
+offset_bottom = 546.0
+theme = ExtResource("1_llmlm")
+action_mode = 0
+text = "FIGHT"
+
+[node name="Bag" type="Button" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 927.0
+offset_top = 479.0
+offset_right = 1131.0
+offset_bottom = 546.0
+theme = SubResource("Theme_vnq54")
+action_mode = 0
+text = "BAG"
+
+[node name="Team" type="Button" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 559.0
+offset_right = 908.0
+offset_bottom = 626.0
+theme = SubResource("Theme_hbo7c")
+action_mode = 0
+text = "TEAM"
+
+[node name="Run" type="Button" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 927.0
+offset_top = 559.0
+offset_right = 1131.0
+offset_bottom = 626.0
+theme = SubResource("Theme_e43l4")
+action_mode = 0
+text = "RUN"
+
+[node name="TextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.077
+anchor_right = 0.613
+anchor_bottom = 0.869
+offset_left = 24.0
+offset_top = 2.909
+offset_right = -28.7891
+offset_bottom = 2.97299
+theme = SubResource("Theme_1mtl0")
+editable = false
+scroll_smooth = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(255, 351)
+scale = Vector2(4.29032, 3.64091)
+sprite_frames = SubResource("SpriteFrames_hgir6")
+animation = &"back_Normal"

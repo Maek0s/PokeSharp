@@ -328,7 +328,7 @@ script = ExtResource("1_lgr1c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_atqv0")
-animation = &"idle_down"
+animation = &"idle_up"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
