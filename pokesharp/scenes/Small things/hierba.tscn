@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://bhah8vuyw4k2k"]
+[gd_scene load_steps=3 format=3 uid="uid://bhah8vuyw4k2k"]
+
+[ext_resource type="Texture2D" uid="uid://c6y820jo34esf" path="res://assets/textures/small things/HierbaAlta.png" id="1_cs42i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb4ur"]
+size = Vector2(13, 13)
 
 [node name="Hierba" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cs42i")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_jb4ur")

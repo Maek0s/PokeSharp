@@ -1,4 +1,4 @@
 {
-    "Door_1": { "label": "Mi casa", "interior": "false", "scene": "res://scenes/Mapas/Interiores/interior.tscn", "xSpawnPoint": "0", "ySpawnPoint": "0" },
-    "Door_2": { "label": "Salir a Spawn", "interior": "true", "scene": "res://scenes/Mapas/map.tscn", "xSpawnPoint": "-59", "ySpawnPoint": "-125"}
+    "Door_1": { "label": "Laboratorio", "interior": "false", "scene": "res://scenes/Mapas/Interiores/interior.tscn", "xSpawnPoint": "-84", "ySpawnPoint": "191,6667" },
+    "Door_2": { "label": "Salir a Pueblo Arcilla", "interior": "true", "scene": "res://scenes/Mapas/pueblo_arcilla.tscn", "xSpawnPoint": "-41,78065", "ySpawnPoint": "-556,4369"}
 }

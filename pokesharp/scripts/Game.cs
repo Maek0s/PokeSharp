@@ -8,6 +8,14 @@ public partial class Game : Node2D
 	[Export] public NodePath MapContainerPath;
 	private Node2D mapContainer;
 	public bool IsEntering = false;
+	/*
+    Estados Juego
+     Estado -1 - Menu de inicio (El jugador no deberia de existir)
+     Estado 0 - Juego en Pausa (No se puede mover y el resto de cosas tampoco)
+     Estado 1 - Corriendo juego (Todo normal)
+     Estado 2 - En combate (No se puede mover el jugador)
+    */
+    public int estadoJuego = 1;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,9 +24,18 @@ public partial class Game : Node2D
 		//ChangeMap();
 	}
 
+	public async void StartBattle()
+	{
+		// Obtener la transición global
+		BattleTransition transition = (BattleTransition) GetNode("/root/Transitions/BattleTransition");
+
+		// Iniciar la animación de transición y esperar a que termine
+		await transition.StartTransition();
+	}
+
 	public async void ChangeMap(String scenePath, bool _isInterior, float _xSpawnPoint, float _ySpawnPoint) {
 		// Obtener la transición global
-		Transition transition = (Transition) GetNode("/root/Transition");
+		DoorTransition transition = (DoorTransition) GetNode("/root/Transitions/DoorTransition");
 
 		// Iniciar la animación de transición y esperar a que termine
 		await transition.StartTransition();
@@ -51,14 +68,16 @@ public partial class Game : Node2D
 		timer.Start();
 
 		// Dependiendo si saliendo de un interior (casa) mirará hacia abajo y usará las coordenadas del json
-		// sino es así usará el spawnpoint de la propia escena para ver su punto de spawn
 		if (_isInterior) {
 			posSpawnPoint = new Godot.Vector2(_xSpawnPoint, _ySpawnPoint);
 			
+			GD.Print("Entrando a exterior");
+
 			sprite2D.Play("idle_down");
 		} else {
-			Node2D spawnPoint = newMapInstance.GetNode<Node2D>("SpawnPoint");
-			posSpawnPoint = new Godot.Vector2(spawnPoint.Position.X - 16, spawnPoint.Position.Y - 85);
+			posSpawnPoint = new Godot.Vector2(_xSpawnPoint, _ySpawnPoint);
+
+			GD.Print("Entrando a interior");
 
 			sprite2D.Play("idle_up");
 		}

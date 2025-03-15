@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://cnxpjircoklhk"]
+[gd_scene load_steps=15 format=4 uid="uid://cnxpjircoklhk"]
 
-[ext_resource type="Texture2D" uid="uid://ce47d1w0f1tkb" path="res://assets/tilesets/Terreno y decoración interior.png" id="1_j0pqh"]
-[ext_resource type="Script" path="res://scripts/Door.cs" id="2_mhq7h"]
+[ext_resource type="Texture2D" uid="uid://ce47d1w0f1tkb" path="res://assets/textures/tilesets/Terreno y decoración interior.png" id="1_j0pqh"]
+[ext_resource type="Texture2D" uid="uid://3ax3g2m4s87x" path="res://assets/textures/tilesets/Exteriores increible.png" id="2_kh1y6"]
+[ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/Door.cs" id="2_mhq7h"]
+[ext_resource type="Texture2D" uid="uid://bcjro50kd1jrw" path="res://assets/textures/tilesets/exteriores bien.png" id="3_ar7ha"]
 [ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="3_prnuf"]
+[ext_resource type="Script" uid="uid://bqe0hxs18hwrc" path="res://scripts/Hierbas.cs" id="6_wjn1f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dsby5"]
 texture = ExtResource("1_j0pqh")
@@ -78,7 +81,7 @@ texture = ExtResource("1_j0pqh")
 [sub_resource type="TileSet" id="TileSet_7oewf"]
 sources/0 = SubResource("TileSetAtlasSource_dsby5")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3idw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_spktx"]
 texture = ExtResource("1_j0pqh")
 9:42/size_in_atlas = Vector2i(6, 6)
 9:42/0 = 0
@@ -153,13 +156,30 @@ texture = ExtResource("1_j0pqh")
 15:5/0 = 0
 15:4/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lcvl5"]
+texture = ExtResource("2_kh1y6")
+14:138/0 = 0
+14:138/0/y_sort_origin = 2
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ra6l8"]
+texture = ExtResource("3_ar7ha")
+8:240/size_in_atlas = Vector2i(2, 2)
+8:240/0 = 0
+8:240/0/y_sort_origin = -50
+0:231/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_67rro"]
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
-sources/0 = SubResource("TileSetAtlasSource_k3idw")
+sources/0 = SubResource("TileSetAtlasSource_spktx")
+sources/1 = SubResource("TileSetAtlasSource_lcvl5")
+sources/2 = SubResource("TileSetAtlasSource_ra6l8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkrjk"]
 size = Vector2(20.7436, 167.639)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh21c"]
+size = Vector2(32, 32.75)
 
 [node name="Map" type="Node2D"]
 y_sort_enabled = true
@@ -201,10 +221,69 @@ horizontal_alignment = 1
 language = "es"
 metadata/_edit_use_anchors_ = true
 
-[node name="Collisions" type="StaticBody2D" parent="."]
+[node name="1_Hierbas" type="TileMapLayer" parent="."]
 light_mask = 3
 visibility_layer = 3
 z_index = 1
+y_sort_enabled = true
+position = Vector2(18, 6)
+scale = Vector2(0.8, 0.8)
+tile_map_data = PackedByteArray("AAAHAPv/AgAIAPAAAAAJAPv/AgAIAPAAAAAHAPn/AgAIAPAAAAAJAPn/AgAIAPAAAAA=")
+tile_set = SubResource("TileSet_67rro")
+
+[node name="Hierbas" type="Area2D" parent="1_Hierbas"]
+scale = Vector2(1.08, 1.08)
+script = ExtResource("6_wjn1f")
+
+[node name="Hierba1" type="Area2D" parent="1_Hierbas/Hierbas"]
+
+[node name="Hierba1" type="CollisionShape2D" parent="1_Hierbas/Hierbas/Hierba1"]
+position = Vector2(124, -115)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_vh21c")
+
+[node name="Hierba2" type="Area2D" parent="1_Hierbas/Hierbas"]
+
+[node name="Hierba2" type="CollisionShape2D" parent="1_Hierbas/Hierbas/Hierba2"]
+position = Vector2(148, -115)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_vh21c")
+
+[node name="Hierba3" type="Area2D" parent="1_Hierbas/Hierbas"]
+
+[node name="Hierba3" type="CollisionShape2D" parent="1_Hierbas/Hierbas/Hierba3"]
+position = Vector2(124, -89)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_vh21c")
+
+[node name="Hierba4" type="Area2D" parent="1_Hierbas/Hierbas"]
+
+[node name="Hierba4" type="CollisionShape2D" parent="1_Hierbas/Hierbas/Hierba4"]
+z_index = 1
+position = Vector2(148, -89)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_vh21c")
+
+[node name="Hierba5" type="Area2D" parent="1_Hierbas/Hierbas"]
+
+[node name="Hierba5" type="CollisionShape2D" parent="1_Hierbas/Hierbas/Hierba5"]
+z_index = 1
+position = Vector2(124, -63)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_vh21c")
+
+[node name="Hierba6" type="Area2D" parent="1_Hierbas/Hierbas"]
+
+[node name="Hierba6" type="CollisionShape2D" parent="1_Hierbas/Hierbas/Hierba6"]
+z_index = 1
+position = Vector2(148, -63)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_vh21c")
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+visible = false
+light_mask = 3
+visibility_layer = 3
 y_sort_enabled = true
 position = Vector2(0, 1)
 

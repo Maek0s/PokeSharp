@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7a2508itgfhb"
-path="res://.godot/imported/Interior_general_top.png-e61d16d5f10ef0b5651e29051b19fea9.ctex"
+uid="uid://c6y820jo34esf"
+path="res://.godot/imported/HierbaAlta.png-a70c3d9c0310897db6ce10756cabdbdc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Interior_general_top.png"
-dest_files=["res://.godot/imported/Interior_general_top.png-e61d16d5f10ef0b5651e29051b19fea9.ctex"]
+source_file="res://assets/textures/small things/HierbaAlta.png"
+dest_files=["res://.godot/imported/HierbaAlta.png-a70c3d9c0310897db6ce10756cabdbdc.ctex"]
 
 [params]
 

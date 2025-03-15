@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds01l6lvlensw"
-path="res://.godot/imported/thistle_town_by_ekat99_dg7ast6.png-381ed56b26ce3a7ffe240b8c67bb3b01.ctex"
+uid="uid://cy67jntqciyyh"
+path="res://.godot/imported/pokeballPrueba.png-849a94bff7c7aaa8ddc04924a0bc7e41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/thistle_town_by_ekat99_dg7ast6.png"
-dest_files=["res://.godot/imported/thistle_town_by_ekat99_dg7ast6.png-381ed56b26ce3a7ffe240b8c67bb3b01.ctex"]
+source_file="res://assets/images/pokeballPrueba.png"
+dest_files=["res://.godot/imported/pokeballPrueba.png-849a94bff7c7aaa8ddc04924a0bc7e41.ctex"]
 
 [params]
 

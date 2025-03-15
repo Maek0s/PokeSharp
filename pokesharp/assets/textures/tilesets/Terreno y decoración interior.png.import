@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7w21ijtiy5eq"
-path="res://.godot/imported/Exterior.png-a30cbe515331bb4feb1f79f7689bfed1.ctex"
+uid="uid://ce47d1w0f1tkb"
+path="res://.godot/imported/Terreno y decoración interior.png-b418b0d8c1254bf7328f24326015d815.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Exterior.png"
-dest_files=["res://.godot/imported/Exterior.png-a30cbe515331bb4feb1f79f7689bfed1.ctex"]
+source_file="res://assets/textures/tilesets/Terreno y decoración interior.png"
+dest_files=["res://.godot/imported/Terreno y decoración interior.png-b418b0d8c1254bf7328f24326015d815.ctex"]
 
 [params]
 

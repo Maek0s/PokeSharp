@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cac4m5dc63dhg"
-path="res://.godot/imported/Interior_general_bottom.png-27743bb00b2b36d4202dfd75eb83303f.ctex"
+uid="uid://3ax3g2m4s87x"
+path="res://.godot/imported/Exteriores increible.png-58f15765bb85dba1f65d6a399dea05c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Interior_general_bottom.png"
-dest_files=["res://.godot/imported/Interior_general_bottom.png-27743bb00b2b36d4202dfd75eb83303f.ctex"]
+source_file="res://assets/textures/tilesets/Exteriores increible.png"
+dest_files=["res://.godot/imported/Exteriores increible.png-58f15765bb85dba1f65d6a399dea05c2.ctex"]
 
 [params]
 

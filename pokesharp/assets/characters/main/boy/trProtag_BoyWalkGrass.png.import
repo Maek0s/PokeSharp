@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce47d1w0f1tkb"
-path="res://.godot/imported/Terreno y decoración interior.png-66ee76407f92cac168e28fafa53ed498.ctex"
+uid="uid://7bduv5em1xf1"
+path="res://.godot/imported/trProtag_BoyWalkGrass.png-643b0cbaca6210545a4b940ee5b73f66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Terreno y decoración interior.png"
-dest_files=["res://.godot/imported/Terreno y decoración interior.png-66ee76407f92cac168e28fafa53ed498.ctex"]
+source_file="res://assets/characters/main/boy/trProtag_BoyWalkGrass.png"
+dest_files=["res://.godot/imported/trProtag_BoyWalkGrass.png-643b0cbaca6210545a4b940ee5b73f66.ctex"]
 
 [params]
 

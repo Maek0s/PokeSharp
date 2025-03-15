@@ -37,6 +37,10 @@ public partial class Door : Area2D
                 _isInterior = true;
                 _xSpawnPoint = float.Parse(doorInfo["xSpawnPoint"]);
                 _ySpawnPoint = float.Parse(doorInfo["ySpawnPoint"]);
+            } else {
+                _isInterior = false;
+                _xSpawnPoint = float.Parse(doorInfo["xSpawnPoint"]);
+                _ySpawnPoint = float.Parse(doorInfo["ySpawnPoint"]);
             }
         }
         else
