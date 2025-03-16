@@ -16,4 +16,5 @@ corner_radius_bottom_left = 15
 
 [resource]
 default_font = ExtResource("1_x4cfj")
+Button/font_sizes/font_size = 14
 Button/styles/normal = SubResource("StyleBoxFlat_xua4l")

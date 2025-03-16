@@ -18,6 +18,7 @@ config/icon="res://assets/images/pokeballPrueba.png"
 
 [autoload]
 
+GameManager="*res://scripts/GameManager.cs"
 DoorData="*res://scripts/DoorData.cs"
 Transitions="*res://scenes/Others/transitions.tscn"
 
@@ -32,6 +33,10 @@ project/assembly_name="PokeSharp"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
+
+[global_group]
+
+mapa=""
 
 [input]
 

@@ -12,6 +12,7 @@ public partial class BattleTransition : CanvasLayer
 	public override void _Ready()
 	{
 		Layer = -1;
+        
 		_animationPlayer = (AnimationPlayer) GetNode<Node>("AnimationPlayer");
 
 		_player = GetNode<MainCharacter>("/root/Game/Player");

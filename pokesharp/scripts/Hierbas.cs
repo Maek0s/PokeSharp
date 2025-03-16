@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Hierbas : Area2D
 {
@@ -46,6 +47,11 @@ public partial class Hierbas : Area2D
                 playerNode.FreezePlayer();
                 gameNode.estadoJuego = 2;
                 await transitionNode.StartTransition();
+
+                await Task.Delay(1000);  // 3000 milisegundos = 3 segundos
+
+                GameManager gameManager = (GameManager)GetNode("/root/GameManager");
+                gameManager.IniciarCombate();
             }
 
             _player.in_grass = true;

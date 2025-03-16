@@ -12,7 +12,8 @@ y_sort_enabled = true
 script = ExtResource("1_cp55e")
 MapContainerPath = NodePath("Pueblo Arcilla")
 
-[node name="Pueblo Arcilla" parent="." instance=ExtResource("3_72jce")]
+[node name="Pueblo Arcilla" parent="." groups=["mapa"] instance=ExtResource("3_72jce")]
+position = Vector2(62, 29)
 scale = Vector2(1.4, 1.4)
 
 [node name="Player" parent="." instance=ExtResource("3_nik74")]
@@ -36,15 +37,15 @@ area_mask = 15
 stream = ExtResource("5_3031l")
 volume_db = -7.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="inScreen" type="CanvasLayer" parent="."]
 
-[node name="UI" type="Control" parent="CanvasLayer"]
+[node name="UI" type="Control" parent="inScreen"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="FPSDisplay" type="Label" parent="CanvasLayer/UI"]
+[node name="FPSDisplay" type="Label" parent="inScreen/UI"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
