@@ -5,8 +5,10 @@ using System.Numerics;
 
 public partial class Game : Node2D
 {
+    
 	[Export] public NodePath MapContainerPath;
 	private Node2D mapContainer;
+
 	public bool IsEntering = false;
 	/*
     Estados Juego
@@ -21,6 +23,7 @@ public partial class Game : Node2D
 	public override void _Ready()
 	{
 		mapContainer = GetNode<Node2D>(MapContainerPath);
+
 		//ChangeMap();
 	}
 
@@ -32,6 +35,8 @@ public partial class Game : Node2D
 		// Iniciar la animación de transición y esperar a que termine
 		await transition.StartTransition();
 	}
+
+    
 
 	public async void ChangeMap(String scenePath, bool _isInterior, float _xSpawnPoint, float _ySpawnPoint) {
 		// Obtener la transición global

@@ -1,79 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://dytm46rpe0t7a"]
+[gd_scene load_steps=37 format=3 uid="uid://dytm46rpe0t7a"]
 
 [ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
 [ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
 [ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="1_ukcxp"]
 [ext_resource type="Texture2D" uid="uid://d3eqxnewa3h23" path="res://assets/images/battle-forest.png" id="2_0gi7n"]
-[ext_resource type="Texture2D" uid="uid://b3ten1fjg0t7q" path="res://assets/pokemons/front/RIOLU.png" id="5_oe6pr"]
+[ext_resource type="Texture2D" uid="uid://b3ten1fjg0t7q" path="res://assets/pokemons/front/RIOLU.png" id="3_eej6d"]
 [ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="6_61ry6"]
 [ext_resource type="Texture2D" uid="uid://cy2mlummcb8xg" path="res://assets/pokemons/back/CHARMANDER.png" id="6_eej6d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdpud"]
-bg_color = Color(0.376471, 0.815686, 0.501961, 1)
-border_width_top = 4
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Theme" id="Theme_qvsdf"]
-Panel/styles/panel = SubResource("StyleBoxFlat_sdpud")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4q3pg"]
-bg_color = Color(0.812222, 0.527921, 0.216034, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="Theme" id="Theme_vnq54"]
-default_font = ExtResource("1_ukcxp")
-Button/font_sizes/font_size = 14
-Button/styles/normal = SubResource("StyleBoxFlat_4q3pg")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbioa"]
-bg_color = Color(9.8668e-07, 0.631856, 0.156678, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="Theme" id="Theme_hbo7c"]
-default_font = ExtResource("1_ukcxp")
-Button/font_sizes/font_size = 14
-Button/styles/normal = SubResource("StyleBoxFlat_dbioa")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0o4su"]
-bg_color = Color(0, 0.575585, 0.90231, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="Theme" id="Theme_e43l4"]
-default_font = ExtResource("1_ukcxp")
-Button/font_sizes/font_size = 14
-Button/styles/normal = SubResource("StyleBoxFlat_0o4su")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uiqxb"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="Theme" id="Theme_1mtl0"]
-TextEdit/colors/search_result_color = Color(1, 1, 1, 1)
-TextEdit/colors/selection_color = Color(1, 1, 1, 1)
-TextEdit/styles/normal = SubResource("StyleBoxFlat_uiqxb")
+[ext_resource type="Script" uid="uid://d07vq05ixwb3i" path="res://scripts/Transitions/TransitionManager.cs" id="8_eej6d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe6pr"]
 bg_color = Color(0.99666, 0.989636, 0.986782, 1)
@@ -127,6 +61,190 @@ default_font = ExtResource("1_ukcxp")
 default_font_size = 8
 Label/colors/font_color = Color(0.929412, 0.619608, 0.639216, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdpud"]
+bg_color = Color(0.376471, 0.815686, 0.501961, 1)
+border_width_top = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_qvsdf"]
+Panel/styles/panel = SubResource("StyleBoxFlat_sdpud")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45ino"]
+bg_color = Color(0.894118, 0.592157, 0.129412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eej6d"]
+bg_color = Color(0.894118, 0.592157, 0.129412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4q3pg"]
+bg_color = Color(0.956863, 0.647059, 0.196078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3t4w"]
+bg_color = Color(0.894118, 0.592157, 0.129412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_vnq54"]
+default_font = ExtResource("1_ukcxp")
+Button/font_sizes/font_size = 14
+Button/styles/focus = SubResource("StyleBoxFlat_45ino")
+Button/styles/hover = SubResource("StyleBoxFlat_eej6d")
+Button/styles/normal = SubResource("StyleBoxFlat_4q3pg")
+Button/styles/pressed = SubResource("StyleBoxFlat_g3t4w")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbf2p"]
+bg_color = Color(0, 0.596078, 0.145098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc6gq"]
+bg_color = Color(1.44392e-07, 0.594272, 0.145411, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbioa"]
+bg_color = Color(9.8668e-07, 0.631856, 0.156678, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyosk"]
+bg_color = Color(0, 0.596078, 0.145098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_hbo7c"]
+default_font = ExtResource("1_ukcxp")
+Button/font_sizes/font_size = 14
+Button/styles/focus = SubResource("StyleBoxFlat_mbf2p")
+Button/styles/hover = SubResource("StyleBoxFlat_wc6gq")
+Button/styles/normal = SubResource("StyleBoxFlat_dbioa")
+Button/styles/pressed = SubResource("StyleBoxFlat_dyosk")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxqsj"]
+bg_color = Color(0, 0.54902, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efw1u"]
+bg_color = Color(0, 0.550536, 0.865019, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0o4su"]
+bg_color = Color(0.118346, 0.651612, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddtha"]
+bg_color = Color(0, 0.54902, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_e43l4"]
+default_font = ExtResource("1_ukcxp")
+Button/font_sizes/font_size = 14
+Button/styles/focus = SubResource("StyleBoxFlat_qxqsj")
+Button/styles/hover = SubResource("StyleBoxFlat_efw1u")
+Button/styles/normal = SubResource("StyleBoxFlat_0o4su")
+Button/styles/pressed = SubResource("StyleBoxFlat_ddtha")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uiqxb"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_1mtl0"]
+TextEdit/colors/search_result_color = Color(1, 1, 1, 1)
+TextEdit/colors/selection_color = Color(1, 1, 1, 1)
+TextEdit/styles/normal = SubResource("StyleBoxFlat_uiqxb")
+
 [node name="Combate" type="CanvasLayer"]
 offset = Vector2(7.815, -7.555)
 scale = Vector2(1.31, 1.31)
@@ -142,6 +260,122 @@ visible = false
 position = Vector2(576.5, 233)
 scale = Vector2(1.53121, 0.932)
 texture = ExtResource("2_0gi7n")
+
+[node name="PokeEnemy" type="Sprite2D" parent="."]
+position = Vector2(1000.09, 174)
+scale = Vector2(1.58, 1.206)
+texture = ExtResource("3_eej6d")
+
+[node name="PokeAlly" type="Sprite2D" parent="."]
+position = Vector2(-131.92, 278.286)
+scale = Vector2(1.58, 1.2625)
+texture = ExtResource("6_eej6d")
+
+[node name="InfoEnemy" type="Panel" parent="."]
+offset_left = 68.0
+offset_top = -73.6565
+offset_right = 359.0
+offset_bottom = -3.65648
+theme = SubResource("Theme_eej6d")
+
+[node name="levelPokemon" type="Label" parent="InfoEnemy"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 10.0
+offset_right = 282.0
+offset_bottom = 33.0
+theme = SubResource("Theme_4jk2h")
+text = "Lv30"
+
+[node name="namePokemon" type="Label" parent="InfoEnemy"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 132.0
+offset_bottom = 35.0
+theme = SubResource("Theme_4jk2h")
+text = "RIOLU"
+
+[node name="Panel" type="Panel" parent="InfoEnemy"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 44.0
+offset_right = 279.0
+offset_bottom = 57.0
+theme = SubResource("Theme_wc6gq")
+
+[node name="ProgressBar" type="ProgressBar" parent="InfoEnemy/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 1.0
+offset_right = 180.0
+offset_bottom = 12.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="levelPokemon" type="Label" parent="InfoEnemy/Panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 21.0
+offset_bottom = 14.0
+theme = SubResource("Theme_45ino")
+text = "HP"
+
+[node name="InfoAlly" type="Panel" parent="."]
+offset_left = 514.0
+offset_top = 379.626
+offset_right = 805.0
+offset_bottom = 449.626
+theme = SubResource("Theme_eej6d")
+
+[node name="levelPokemon" type="Label" parent="InfoAlly"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 10.0
+offset_right = 282.0
+offset_bottom = 33.0
+theme = SubResource("Theme_4jk2h")
+text = "Lv30"
+
+[node name="namePokemon" type="Label" parent="InfoAlly"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 132.0
+offset_bottom = 35.0
+theme = SubResource("Theme_4jk2h")
+text = "CHARMANDER"
+
+[node name="Panel" type="Panel" parent="InfoAlly"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 44.0
+offset_right = 279.0
+offset_bottom = 57.0
+theme = SubResource("Theme_wc6gq")
+
+[node name="ProgressBar" type="ProgressBar" parent="InfoAlly/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 1.0
+offset_right = 180.0
+offset_bottom = 12.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="levelPokemon" type="Label" parent="InfoAlly/Panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 21.0
+offset_bottom = 14.0
+theme = SubResource("Theme_45ino")
+text = "HP"
 
 [node name="ParteInferior" type="Panel" parent="."]
 offset_left = -6.0
@@ -211,119 +445,9 @@ theme = SubResource("Theme_1mtl0")
 editable = false
 scroll_smooth = true
 
-[node name="PokeEnemy" type="Sprite2D" parent="."]
-position = Vector2(652, 176)
-scale = Vector2(1.58, 1.206)
-texture = ExtResource("5_oe6pr")
-metadata/_edit_group_ = true
-
-[node name="PokeAlly" type="Sprite2D" parent="."]
-position = Vector2(207.6, 276)
-scale = Vector2(1.58, 1.2625)
-texture = ExtResource("6_eej6d")
-
-[node name="InfoEnemy" type="Panel" parent="."]
-offset_left = 68.0
-offset_top = 21.0
-offset_right = 359.0
-offset_bottom = 91.0
-theme = SubResource("Theme_eej6d")
-
-[node name="levelPokemon" type="Label" parent="InfoEnemy"]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 10.0
-offset_right = 282.0
-offset_bottom = 33.0
-theme = SubResource("Theme_4jk2h")
-text = "Lv30"
-
-[node name="namePokemon" type="Label" parent="InfoEnemy"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 132.0
-offset_bottom = 35.0
-theme = SubResource("Theme_4jk2h")
-text = "RIOLU"
-
-[node name="Panel" type="Panel" parent="InfoEnemy"]
-layout_mode = 0
-offset_left = 98.0
-offset_top = 44.0
-offset_right = 279.0
-offset_bottom = 57.0
-theme = SubResource("Theme_wc6gq")
-
-[node name="ProgressBar" type="ProgressBar" parent="InfoEnemy/Panel"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 1.0
-offset_right = 180.0
-offset_bottom = 12.0
-theme = SubResource("Theme_efw1u")
-value = 100.0
-rounded = true
-show_percentage = false
-
-[node name="levelPokemon" type="Label" parent="InfoEnemy/Panel"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 3.0
-offset_right = 21.0
-offset_bottom = 14.0
-theme = SubResource("Theme_45ino")
-text = "HP"
-
-[node name="InfoAlly" type="Panel" parent="."]
-offset_left = 514.0
-offset_top = 301.0
-offset_right = 805.0
-offset_bottom = 371.0
-theme = SubResource("Theme_eej6d")
-
-[node name="levelPokemon" type="Label" parent="InfoAlly"]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 10.0
-offset_right = 282.0
-offset_bottom = 33.0
-theme = SubResource("Theme_4jk2h")
-text = "Lv30"
-
-[node name="namePokemon" type="Label" parent="InfoAlly"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 132.0
-offset_bottom = 35.0
-theme = SubResource("Theme_4jk2h")
-text = "CHARMANDER"
-
-[node name="Panel" type="Panel" parent="InfoAlly"]
-layout_mode = 0
-offset_left = 98.0
-offset_top = 44.0
-offset_right = 279.0
-offset_bottom = 57.0
-theme = SubResource("Theme_wc6gq")
-
-[node name="ProgressBar" type="ProgressBar" parent="InfoAlly/Panel"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 1.0
-offset_right = 180.0
-offset_bottom = 12.0
-theme = SubResource("Theme_efw1u")
-value = 100.0
-rounded = true
-show_percentage = false
-
-[node name="levelPokemon" type="Label" parent="InfoAlly/Panel"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 3.0
-offset_right = 21.0
-offset_bottom = 14.0
-theme = SubResource("Theme_45ino")
-text = "HP"
+[node name="TransitionManager" type="Node2D" parent="." node_paths=PackedStringArray("allyPokeSprite", "infoAlly", "enemyPokeSprite", "infoEnemy")]
+script = ExtResource("8_eej6d")
+allyPokeSprite = NodePath("../PokeAlly")
+infoAlly = NodePath("../InfoAlly")
+enemyPokeSprite = NodePath("../PokeEnemy")
+infoEnemy = NodePath("../InfoEnemy")

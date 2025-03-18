@@ -37,25 +37,81 @@ public partial class Hierbas : Area2D
 
             if (numRnd > 0 && numRnd <= porcentage)
             {
-                GD.Print("Pokémon!");
-
-                // Sacamos el nodo del juego para consultar sus variables
-                var gameNode = GetNode<Game>("/root/Game");
-                var playerNode = GetNode<MainCharacter>("/root/Game/Player");
-                var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
-
-                playerNode.FreezePlayer();
-                gameNode.estadoJuego = 2;
-                await transitionNode.StartTransition();
-
-                await Task.Delay(1000);  // 3000 milisegundos = 3 segundos
-
-                GameManager gameManager = (GameManager)GetNode("/root/GameManager");
-                gameManager.IniciarCombate();
+                pokemonFound();
             }
 
             _player.in_grass = true;
         }
+    }
+
+    private async void pokemonFound() {
+        GD.Print("Pokémon!");
+
+        // Sacamos el nodo del juego para consultar sus variables
+        var gameNode = GetNode<Game>("/root/Game");
+        var playerNode = GetNode<MainCharacter>("/root/Game/Player");
+        var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
+
+        int idPoke = getRandom(1, 649);
+        Pokemon pokemon = await PokemonController.GetPokemonById(idPoke);
+
+        playerNode.FreezePlayer();
+        gameNode.estadoJuego = 2;
+        await transitionNode.StartTransition();
+
+        await Task.Delay(750);
+
+        PackedScene transitionScene = (PackedScene)GD.Load("res://scenes/interfaces/combate.tscn");
+        CanvasLayer battle = transitionScene.Instantiate<CanvasLayer>();
+
+        // FALTA OPTIMIZACIÓN
+        String namePokeUpper = pokemon.Nombre.ToUpper();
+        var namePokeEnemy = battle.GetNode<Label>("InfoEnemy/namePokemon");
+
+        namePokeEnemy.Text = namePokeUpper;
+        var spriteEnemy = battle.GetNode<Sprite2D>("PokeEnemy");
+
+        GD.Print(namePokeUpper);
+        Texture2D nuevoSprite = (Texture2D)GD.Load($"res://assets/pokemons/front/{namePokeUpper}.png");
+        spriteEnemy.Texture = nuevoSprite;
+        Texture2D texture = spriteEnemy.Texture;
+
+        /* Intento de centrado a la plataforma (Faltan ajustes a los pequeños) */
+        Image image = texture.GetImage();
+
+        Vector2 sumPositions = Vector2.Zero;
+        int count = 0;
+
+        int width = image.GetWidth();
+        int height = image.GetHeight();
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Color pixel = image.GetPixel(x, y);
+                if (pixel.A > 0.1f)
+                {
+                    sumPositions += new Vector2(x, y);
+                    count++;
+                }
+            }
+        }
+
+        if (count > 0)
+        {
+            Vector2 visualCenter = sumPositions / count;
+            Vector2 textureCenter = new Vector2(width / 2, height / 2);
+
+            spriteEnemy.Offset = visualCenter - textureCenter;
+        }
+
+        //
+
+        GetTree().Root.AddChild(battle);  // Lo agregamos al árbol de nodos
+        TransitionManager transitionManager = battle.GetNode<TransitionManager>("TransitionManager");
+
+        transitionManager.IniciarCombate();
     }
 
     private void OnBodyExited(Node body, Node area)
@@ -70,6 +126,12 @@ public partial class Hierbas : Area2D
                 _grassCount = 0;
             }
         }
+    }
+
+    private int getRandom(int min, int max)
+    {
+        Random rnd = new Random();
+        return rnd.Next(min, max);
     }
 
 }

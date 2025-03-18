@@ -18,7 +18,7 @@ config/icon="res://assets/images/pokeballPrueba.png"
 
 [autoload]
 
-GameManager="*res://scripts/GameManager.cs"
+MgtDatabase="*res://scripts/Database/MgtDatabase.cs"
 DoorData="*res://scripts/DoorData.cs"
 Transitions="*res://scenes/Others/transitions.tscn"
 
