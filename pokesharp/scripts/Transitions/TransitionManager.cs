@@ -12,6 +12,12 @@ public partial class TransitionManager : Node2D
     private Node _combateInstance;
     private Tween tween;
 
+    CanvasLayer battle;
+    TransitionManager transitionManager;
+
+    private Control moveset;
+    private TextEdit combatlog;
+
     public override void _Ready()
 	{
 	}
@@ -23,27 +29,7 @@ public partial class TransitionManager : Node2D
         if (mapa is Node2D node2D)
             node2D.Visible = false;  // Ocultar el mapa
 
-        /*// Instancia la escena de combate y la agrega al árbol de nodos
-        _combateInstance = _combateScene.Instantiate();
-        GetTree().GetRoot().AddChild(_combateInstance);*/
-
-        // Mover ambos sprites con Tween (esto es lo que quieres hacer)
         await MoverSprites();
-    }
-
-    public void TerminarCombate()
-    {
-        // Borra la escena de combate
-        if (_combateInstance != null)
-        {
-            _combateInstance.QueueFree();
-            _combateInstance = null;
-        }
-
-        // Muestra de nuevo el mapa
-        Node mapa = GetTree().GetFirstNodeInGroup("mapa");
-        if (mapa is Node2D node2D)
-            node2D.Visible = false;
     }
 
     private Task MoverSprites()
@@ -52,7 +38,7 @@ public partial class TransitionManager : Node2D
 
         // Crear el Tween solo cuando se necesite
         Tween tween = GetTree().CreateTween();
-        tween.SetParallel(true);  // 🔹 Esto asegura que ambas animaciones ocurran a la vez
+        tween.SetParallel(true); // Esto hace que ambas animaciones ocurran a la vez
 
         // Definir las posiciones de destino
         Godot.Vector2 nuevaPosAlly = new Godot.Vector2(207, 276);
@@ -79,4 +65,6 @@ public partial class TransitionManager : Node2D
 
         return tcs.Task; // Espera la animación antes de continuar
     }
+
+    
 }

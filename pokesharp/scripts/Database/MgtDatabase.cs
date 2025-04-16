@@ -74,6 +74,44 @@ public partial class MgtDatabase : Node
     private Task<string> SendRequest(string url, string[] headers)
     {
         var tcs = new TaskCompletionSource<string>();
+
+        // Verificar que _httpRequest no sea nulo
+        if (_httpRequest == null)
+        {
+            GD.PrintErr("[❌] HttpRequest no está inicializado.");
+            tcs.SetResult(null);
+            return tcs.Task;
+        }
+
+        // Solo desconectar si ya está conectado
+        // Ensure we unsubscribe from the event before subscribing again
+        _httpRequest.RequestCompleted += OnRequestCompleted;
+
+        var err = _httpRequest.Request(url, headers);
+        if (err != Error.Ok)
+        {
+            GD.PrintErr("[❌] Error al enviar la solicitud.");
+            tcs.SetResult(null);
+        }
+
+        return tcs.Task;
+
+        void OnRequestCompleted(long result, long responseCode, string[] responseHeaders, byte[] body)
+        {
+            _httpRequest.RequestCompleted -= OnRequestCompleted; // Desuscribirse después de recibir la respuesta
+
+            if (responseCode == 200)
+            {
+                string json = Encoding.UTF8.GetString(body);
+                tcs.TrySetResult(json); // Evita excepciones si la tarea ya se completó
+            }
+            else
+            {
+                GD.PrintErr($"[❌] Error en la solicitud: {responseCode}");
+                tcs.TrySetResult(null);
+            }
+        }
+        /*var tcs = new TaskCompletionSource<string>();
         var httpRequest = new HttpRequest(); // Crear una instancia nueva para evitar conflictos
         AddChild(httpRequest);
 
@@ -98,6 +136,6 @@ public partial class MgtDatabase : Node
             tcs.SetResult(null);
         }
 
-        return tcs.Task;
+        return tcs.Task;*/
     }
 }

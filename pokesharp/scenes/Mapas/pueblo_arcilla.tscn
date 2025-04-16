@@ -471,6 +471,7 @@ tile_set = SubResource("TileSet_jt0ji")
 [node name="Hierbas" type="Area2D" parent="1_Hierbas"]
 scale = Vector2(1.08, 1.08)
 script = ExtResource("8_tqktf")
+MaxLevel = 10
 
 [node name="Hierba1" type="Area2D" parent="1_Hierbas/Hierbas"]
 

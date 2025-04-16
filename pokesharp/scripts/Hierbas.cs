@@ -8,6 +8,10 @@ public partial class Hierbas : Area2D
     private AnimatedSprite2D _animacion;
     private int _grassCount = 0;
     private int porcentage = 25;
+    private bool inEncounter = false;
+
+    [Export(PropertyHint.Range, "0,100")] public int MinLevel = 1;
+    [Export(PropertyHint.Range, "0,100")] public int MaxLevel = 100;
 
 	public override void _Ready()
     {
@@ -26,7 +30,7 @@ public partial class Hierbas : Area2D
 
     private async void OnBodyEntered(Node body, Node area)
     {
-        if (body.IsInGroup("player"))
+        if (body.IsInGroup("player") && !inEncounter)
         {
             _grassCount++;
             
@@ -37,6 +41,7 @@ public partial class Hierbas : Area2D
 
             if (numRnd > 0 && numRnd <= porcentage)
             {
+                inEncounter = true;
                 pokemonFound();
             }
 
@@ -53,10 +58,14 @@ public partial class Hierbas : Area2D
         var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
 
         int idPoke = getRandom(1, 649);
+        int levelPoke = getRandom(MinLevel, MaxLevel);
         Pokemon pokemon = await PokemonController.GetPokemonById(idPoke);
 
+        pokemon.Nivel = levelPoke;
+
         playerNode.FreezePlayer();
-        gameNode.estadoJuego = 2;
+        Game.EstadoJuego = 2;
+
         await transitionNode.StartTransition();
 
         await Task.Delay(750);
@@ -71,12 +80,34 @@ public partial class Hierbas : Area2D
         namePokeEnemy.Text = namePokeUpper;
         var spriteEnemy = battle.GetNode<Sprite2D>("PokeEnemy");
 
-        GD.Print(namePokeUpper);
-        Texture2D nuevoSprite = (Texture2D)GD.Load($"res://assets/pokemons/front/{namePokeUpper}.png");
+        var levelEnemy = battle.GetNode<Label>("InfoEnemy/levelPokemon");
+        levelEnemy.Text = $"Lv{levelPoke}";
+
+        GD.Print($"{namePokeUpper} - Nv{levelPoke}");
+        Texture2D nuevoSprite = null;
+
+        try {
+            nuevoSprite = (Texture2D)GD.Load($"res://assets/pokemons/front/{namePokeUpper}.png");
+        } catch (Exception e) {
+            GD.Print(e.Message);
+            playerNode.UnfreezePlayer();
+            Game.EstadoJuego = 1;
+            return;
+        }
+
+        if (nuevoSprite == null){
+            playerNode.UnfreezePlayer();
+            Game.EstadoJuego = 1;
+            transitionNode.LetCamera();
+            return;
+        }
+        
         spriteEnemy.Texture = nuevoSprite;
         Texture2D texture = spriteEnemy.Texture;
 
-        /* Intento de centrado a la plataforma (Faltan ajustes a los pequeños) */
+        transitionNode.LetCamera();
+
+        /* Centrado a la plataforma (Faltan ajustes a los pequeños) */
         Image image = texture.GetImage();
 
         Vector2 sumPositions = Vector2.Zero;
@@ -106,12 +137,12 @@ public partial class Hierbas : Area2D
             spriteEnemy.Offset = visualCenter - textureCenter;
         }
 
-        //
-
         GetTree().Root.AddChild(battle);  // Lo agregamos al árbol de nodos
         TransitionManager transitionManager = battle.GetNode<TransitionManager>("TransitionManager");
 
         transitionManager.IniciarCombate();
+
+        inEncounter = false;
     }
 
     private void OnBodyExited(Node body, Node area)

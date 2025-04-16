@@ -5,9 +5,13 @@ using System.Numerics;
 
 public partial class Game : Node2D
 {
-    
 	[Export] public NodePath MapContainerPath;
-	private Node2D mapContainer;
+	private static Node2D mapContainer;
+
+	private static Node2D startMenu;
+	private static MainCharacter player;
+	private static Label fpsDisplay;
+	private static CanvasLayer menuInGame;
 
 	public bool IsEntering = false;
 	/*
@@ -17,14 +21,83 @@ public partial class Game : Node2D
      Estado 1 - Corriendo juego (Todo normal)
      Estado 2 - En combate (No se puede mover el jugador)
     */
-    public int estadoJuego = 1;
+	public static int EstadoJuego = -1;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		mapContainer = GetNode<Node2D>(MapContainerPath);
+		asignarVariables();
+		ChangeState(-1);
+	}
 
-		//ChangeMap();
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("menu"))
+		{
+			TogglePauseMenu();
+		}
+	}
+
+	public void TogglePauseMenu()
+	{
+		var pauseMenu = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
+
+		var mainCharacter = GetNode<MainCharacter>("/root/Game/Player");
+
+		if (EstadoJuego == 1)
+		{
+			pauseMenu.Visible = true;
+			EstadoJuego = 0;
+			mainCharacter.FreezePlayer();
+		}
+		else if (EstadoJuego == 0)
+		{
+			pauseMenu.Visible = false;
+			EstadoJuego = 1;
+			mainCharacter.UnfreezePlayer();
+		}
+	}
+
+	public static void ChangeState(int newState) {
+		if (newState >= -1 && newState <= 2) {
+			EstadoJuego = newState;
+
+			switch (EstadoJuego) {
+				case -1:
+					menuInicio();
+					break;
+				case 0:
+					break;
+				case 1:
+					inGame();
+					break;
+				case 2:
+					break;
+				default:
+					break;
+			}
+		} else {
+			GD.PrintErr("Estado invalido " + newState);
+		}
+	}
+
+	public static void menuInicio()
+	{
+		startMenu.Visible = true;
+		mapContainer.Visible = false;
+		player.Visible = false;
+		fpsDisplay.Visible = false;
+		menuInGame.Visible = false;
+	}
+
+	public static void inGame()
+	{
+		startMenu.Visible = false;
+		mapContainer.Visible = true;
+		player.Visible = true;
+		fpsDisplay.Visible = true;
+		menuInGame.Visible = false;
+		player.SetPhysicsProcess(true);
 	}
 
 	public async void StartBattle()
@@ -36,9 +109,7 @@ public partial class Game : Node2D
 		await transition.StartTransition();
 	}
 
-    
-
-	public async void ChangeMap(String scenePath, bool _isInterior, float _xSpawnPoint, float _ySpawnPoint) {
+    public async void ChangeMap(String scenePath, bool _isInterior, float _xSpawnPoint, float _ySpawnPoint) {
 		// Obtener la transición global
 		DoorTransition transition = (DoorTransition) GetNode("/root/Transitions/DoorTransition");
 
@@ -90,5 +161,14 @@ public partial class Game : Node2D
 		player.Position = posSpawnPoint;
 
 		await transition.EndTransition();
+	}
+
+	public void asignarVariables()
+	{
+		startMenu = GetNode<Node2D>("/root/Game/inScreen/UI/PaginaInicio");
+		mapContainer = GetNode<Node2D>(MapContainerPath);
+		player = GetNode<MainCharacter>("/root/Game/Player");
+		fpsDisplay = GetNode<Label>("/root/Game/inScreen/UI/FPSDisplay");
+		menuInGame = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
 	}
 }

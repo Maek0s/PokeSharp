@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxy81ylqskur8"]
+[gd_scene load_steps=9 format=3 uid="uid://cxy81ylqskur8"]
 
 [ext_resource type="Script" uid="uid://cjjg1gaabdb5" path="res://scripts/Game.cs" id="1_cp55e"]
 [ext_resource type="PackedScene" uid="uid://265aok0khn3c" path="res://scenes/Mapas/pueblo_arcilla.tscn" id="3_72jce"]
@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://psmtxpglm3sn" path="res://assets/audios/openDoor.wav" id="4_sr6sa"]
 [ext_resource type="AudioStream" uid="uid://27k2vyyxskp8" path="res://assets/audios/closeDoor.wav" id="5_3031l"]
 [ext_resource type="Script" uid="uid://h8fjnvh2gxmj" path="res://scripts/UI/FpsDisplay.cs" id="6_3c70g"]
+[ext_resource type="PackedScene" uid="uid://dkod8e4mtalxi" path="res://scenes/Interfaces/pause_menu.tscn" id="7_6ulj2"]
+[ext_resource type="PackedScene" uid="uid://basly4n0vmnkd" path="res://scenes/Others/pagina_inicio.tscn" id="8_883ts"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -13,10 +15,12 @@ script = ExtResource("1_cp55e")
 MapContainerPath = NodePath("Pueblo Arcilla")
 
 [node name="Pueblo Arcilla" parent="." groups=["mapa"] instance=ExtResource("3_72jce")]
+visible = false
 position = Vector2(62, 29)
 scale = Vector2(1.4, 1.4)
 
 [node name="Player" parent="." instance=ExtResource("3_nik74")]
+visible = false
 position = Vector2(252, -738)
 scale = Vector2(0.8, 0.8)
 
@@ -50,3 +54,8 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_3c70g")
+
+[node name="PauseMenu" parent="inScreen/UI" instance=ExtResource("7_6ulj2")]
+visible = false
+
+[node name="PaginaInicio" parent="inScreen/UI" instance=ExtResource("8_883ts")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dytm46rpe0t7a"]
+[gd_scene load_steps=45 format=3 uid="uid://dytm46rpe0t7a"]
 
 [ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
 [ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://b3ten1fjg0t7q" path="res://assets/pokemons/front/RIOLU.png" id="3_eej6d"]
 [ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="6_61ry6"]
 [ext_resource type="Texture2D" uid="uid://cy2mlummcb8xg" path="res://assets/pokemons/back/CHARMANDER.png" id="6_eej6d"]
+[ext_resource type="FontFile" uid="uid://21v80whd7y8x" path="res://multimedia/fonts/PokemonEmeraldLatin.ttf" id="8_4jk2h"]
 [ext_resource type="Script" uid="uid://d07vq05ixwb3i" path="res://scripts/Transitions/TransitionManager.cs" id="8_eej6d"]
+[ext_resource type="Script" uid="uid://c3d3hu72vep51" path="res://scripts/UI/BattleManager.cs" id="8_wc6gq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe6pr"]
 bg_color = Color(0.99666, 0.989636, 0.986782, 1)
@@ -237,18 +239,50 @@ Button/styles/hover = SubResource("StyleBoxFlat_efw1u")
 Button/styles/normal = SubResource("StyleBoxFlat_0o4su")
 Button/styles/pressed = SubResource("StyleBoxFlat_ddtha")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uiqxb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy4kp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_nm1h7"]
+Panel/styles/panel = SubResource("StyleBoxFlat_wy4kp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm1h7"]
 bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="Theme" id="Theme_1mtl0"]
-TextEdit/colors/search_result_color = Color(1, 1, 1, 1)
-TextEdit/colors/selection_color = Color(1, 1, 1, 1)
-TextEdit/styles/normal = SubResource("StyleBoxFlat_uiqxb")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7g8q"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.830335, 0.830335, 0.830335, 1)
+
+[sub_resource type="Theme" id="Theme_38y2l"]
+default_font = ExtResource("6_61ry6")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/styles/background = SubResource("StyleBoxFlat_nm1h7")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_n7g8q")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16bnu"]
+bg_color = Color(0.870916, 0.320269, 0.331634, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_n7g8q"]
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("8_4jk2h")
+Button/styles/normal = SubResource("StyleBoxFlat_16bnu")
+Label/fonts/font = ExtResource("6_61ry6")
+
+[sub_resource type="Theme" id="Theme_leojp"]
+Label/font_sizes/font_size = 9
 
 [node name="Combate" type="CanvasLayer"]
 offset = Vector2(7.815, -7.555)
 scale = Vector2(1.31, 1.31)
 transform = Transform2D(1.31, 0, 0, 1.31, 7.815, -7.555)
+script = ExtResource("8_wc6gq")
 
 [node name="Background Grass" type="Sprite2D" parent="."]
 position = Vector2(433.017, 190.788)
@@ -431,19 +465,115 @@ theme = SubResource("Theme_e43l4")
 action_mode = 0
 text = "RUN"
 
-[node name="TextEdit" type="TextEdit" parent="ParteInferior"]
+[node name="CombatLogMoveset" type="Panel" parent="ParteInferior"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.111
+anchor_right = 0.579
+anchor_bottom = 0.889
+offset_left = 0.293999
+offset_top = 0.013999
+offset_right = -0.362061
+offset_bottom = -0.0140076
+theme = SubResource("Theme_nm1h7")
+
+[node name="CombatLog" type="RichTextLabel" parent="ParteInferior/CombatLogMoveset"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.077
-anchor_right = 0.613
-anchor_bottom = 0.869
-offset_left = 24.0
-offset_top = 2.909
-offset_right = -28.7891
-offset_bottom = 2.97299
-theme = SubResource("Theme_1mtl0")
-editable = false
-scroll_smooth = true
+anchor_right = 0.982
+anchor_bottom = 1.0
+offset_top = -8.546
+offset_right = 8.71198
+offset_bottom = -1.0
+theme = SubResource("Theme_38y2l")
+bbcode_enabled = true
+autowrap_mode = 0
+
+[node name="Moveset" type="Control" parent="ParteInferior/CombatLogMoveset"]
+visible = false
+anchors_preset = 0
+offset_right = 484.0
+offset_bottom = 98.0
+
+[node name="firstMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+layout_mode = 0
+offset_right = 209.0
+offset_bottom = 45.0
+theme = SubResource("Theme_n7g8q")
+text = "Ascuas
+"
+
+[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/firstMove"]
+layout_mode = 0
+offset_left = 149.317
+offset_top = 28.5077
+offset_right = 205.317
+offset_bottom = 43.5077
+theme = SubResource("Theme_leojp")
+text = "30/30"
+horizontal_alignment = 2
+
+[node name="secondMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+layout_mode = 0
+offset_left = 221.374
+offset_top = 0.763367
+offset_right = 430.374
+offset_bottom = 45.7634
+theme = SubResource("Theme_n7g8q")
+text = "Ascuas
+"
+
+[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/secondMove"]
+layout_mode = 0
+offset_left = 149.317
+offset_top = 28.5077
+offset_right = 205.317
+offset_bottom = 43.5077
+theme = SubResource("Theme_leojp")
+text = "30/30"
+horizontal_alignment = 2
+
+[node name="thirdMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+layout_mode = 0
+offset_left = -0.301526
+offset_top = 51.4084
+offset_right = 208.698
+offset_bottom = 96.4084
+theme = SubResource("Theme_n7g8q")
+text = "Ascuas
+"
+
+[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/thirdMove"]
+layout_mode = 0
+offset_left = 149.317
+offset_top = 28.5077
+offset_right = 205.317
+offset_bottom = 43.5077
+theme = SubResource("Theme_leojp")
+text = "30/30"
+horizontal_alignment = 2
+
+[node name="fourthMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+layout_mode = 0
+offset_left = 221.073
+offset_top = 51.4084
+offset_right = 430.073
+offset_bottom = 96.4084
+theme = SubResource("Theme_n7g8q")
+text = "Ascuas
+"
+
+[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/fourthMove"]
+layout_mode = 0
+offset_left = 149.317
+offset_top = 28.5077
+offset_right = 205.317
+offset_bottom = 43.5077
+theme = SubResource("Theme_leojp")
+text = "30/30"
+horizontal_alignment = 2
 
 [node name="TransitionManager" type="Node2D" parent="." node_paths=PackedStringArray("allyPokeSprite", "infoAlly", "enemyPokeSprite", "infoEnemy")]
 script = ExtResource("8_eej6d")

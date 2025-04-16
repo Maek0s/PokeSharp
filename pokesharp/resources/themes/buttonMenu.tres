@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c0b6mthpimccj"]
+
+[ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="1_sop2s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sop2s"]
+
+[resource]
+Button/font_sizes/font_size = 15
+Button/fonts/font = ExtResource("1_sop2s")
+Button/styles/normal = SubResource("StyleBoxFlat_sop2s")

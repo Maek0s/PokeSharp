@@ -8,6 +8,7 @@ public partial class BattleTransition : CanvasLayer
     private AnimationPlayer _animationPlayer;
 	private Camera2D _camera;
 	private MainCharacter _player;
+    private Vector2 _originalZoom;
 
 	public override void _Ready()
 	{
@@ -17,6 +18,8 @@ public partial class BattleTransition : CanvasLayer
 
 		_player = GetNode<MainCharacter>("/root/Game/Player");
 		_camera = (Camera2D) _player.GetNode("CameraFollow");
+
+        _originalZoom = _camera.Zoom; // Guardamos el zoom original al inicio
 	}
 
 	// Inicia la transición / Starts the transition
@@ -38,9 +41,12 @@ public partial class BattleTransition : CanvasLayer
         await playAnimTask;
 	}
 
-    public void OnZoomMidpoint()
+    // funciona mal, no quita el zoom o no se
+    public async Task LetCamera()
     {
-        _ = ZoomCamera(3.0f, 1.0f); // Hacer zoom x3 en 1 segundo
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(_camera, "zoom", _originalZoom, 0.5f);
+        await ToSignal(tween, "finished");
     }
 
     private async Task ZoomCamera(float zoomFactor, float duration)

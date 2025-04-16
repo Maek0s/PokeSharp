@@ -15,4 +15,6 @@ public class Pokemon {
 
     [JsonProperty("pok_base_experience")]
     public int ExperienciaBase { get; set; }
+
+    public int Nivel { get; set; }
 }

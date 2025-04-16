@@ -33,6 +33,7 @@ public partial class MainCharacter : CharacterBody2D
 
     public void FreezePlayer()
     {
+        Game.ChangeState(0);
         SetPhysicsProcess(false);
         string nameAnim = animatedSprite2D.Animation;
         string[] splitted = nameAnim.Split("_");
@@ -47,6 +48,7 @@ public partial class MainCharacter : CharacterBody2D
     {
         // Reiniciamos su última dirección para que no la actualice después de descongelarlo
         last_direction = Godot.Vector2.Zero;
+        Game.ChangeState(1);
         SetPhysicsProcess(true);
     }
     
@@ -55,7 +57,7 @@ public partial class MainCharacter : CharacterBody2D
         // Sacamos el nodo del juego para consultar sus variables
         var gameNode = GetNode<Game>("../../Game");
 
-        etapaJuego = gameNode.estadoJuego;
+        etapaJuego = Game.EstadoJuego;
 
         if (etapaJuego != 1) {
             return;
@@ -102,8 +104,6 @@ public partial class MainCharacter : CharacterBody2D
             }
         }
     }
-
-
 
     private void play_walk_animation(Godot.Vector2 direction) {
         if (direction.X > 0) {

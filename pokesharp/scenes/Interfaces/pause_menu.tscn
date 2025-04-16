@@ -1,0 +1,134 @@
+[gd_scene load_steps=19 format=3 uid="uid://dkod8e4mtalxi"]
+
+[ext_resource type="Script" uid="uid://csqob3t8aqh4o" path="res://scripts/UI/PauseMenuInterface.cs" id="1_1ct1h"]
+[ext_resource type="Theme" uid="uid://c0b6mthpimccj" path="res://resources/themes/buttonMenu.tres" id="1_npwxu"]
+[ext_resource type="Texture2D" uid="uid://knru5ybhj2lu" path="res://multimedia/images/psyduckMenu.png" id="2_ewaxd"]
+[ext_resource type="Texture2D" uid="uid://cyyvprft2rrpb" path="res://multimedia/images/logoPokeSharpKfondoquitado.png" id="3_ewaxd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npwxu"]
+bg_color = Color(0, 0, 0, 0.596078)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.276426, 0.680564, 0.79189, 1)
+
+[sub_resource type="Theme" id="Theme_ewaxd"]
+Panel/styles/panel = SubResource("StyleBoxFlat_npwxu")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17wef"]
+bg_color = Color(0.290196, 0.639216, 0.317647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hcwv"]
+bg_color = Color(0.290196, 0.639216, 0.317647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1xo7"]
+bg_color = Color(0.288366, 0.637909, 0.316565, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73jsj"]
+bg_color = Color(0.318635, 0.702995, 0.347419, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wr3kl"]
+bg_color = Color(0.0974337, 0.646957, 0.886807, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3ior"]
+bg_color = Color(0.0980392, 0.647059, 0.886275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjqq1"]
+bg_color = Color(0.0980392, 0.647059, 0.886275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rr18j"]
+bg_color = Color(0.271988, 0.648427, 0.808453, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewaxd"]
+bg_color = Color(1, 0.0901961, 0.0627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m57h1"]
+bg_color = Color(0.999997, 0.0907962, 0.0610245, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ct1h"]
+bg_color = Color(1, 0.0901961, 0.0627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uabxo"]
+bg_color = Color(1, 0.357326, 0.290209, 1)
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_1ct1h")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -163.0
+offset_right = 156.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_ewaxd")
+
+[node name="btnContinue" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.0
+offset_top = 72.0
+offset_right = 89.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme = ExtResource("1_npwxu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_17wef")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2hcwv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d1xo7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_73jsj")
+text = "Continuar"
+
+[node name="btnSettings" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.5
+offset_top = 148.0
+offset_right = 90.5
+offset_bottom = 186.0
+grow_horizontal = 2
+theme = ExtResource("1_npwxu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wr3kl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_s3ior")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cjqq1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rr18j")
+text = "Ajustes"
+
+[node name="btnExit" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_top = 227.0
+offset_right = 89.5
+offset_bottom = 265.0
+grow_horizontal = 2
+theme = ExtResource("1_npwxu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ewaxd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m57h1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ct1h")
+theme_override_styles/normal = SubResource("StyleBoxFlat_uabxo")
+text = "Salir"
+
+[node name="PsyduckMenu" type="Sprite2D" parent="Panel"]
+position = Vector2(283.953, 294.563)
+scale = Vector2(0.123961, 0.133164)
+texture = ExtResource("2_ewaxd")
+
+[node name="LogoPokeSharp" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.776471)
+position = Vector2(575.5, 157.75)
+scale = Vector2(0.0879629, 0.0828704)
+texture = ExtResource("3_ewaxd")
