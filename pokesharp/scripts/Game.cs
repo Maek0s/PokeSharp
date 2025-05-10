@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 public partial class Game : Node2D
 {
@@ -84,6 +85,23 @@ public partial class Game : Node2D
 		}
 	}
 
+	public static async void StartCoroutine(float targetVolume, Node rootNode)
+    {
+		GD.Print(rootNode.GetPath());
+        var battleMusic = rootNode.GetNode<AudioStreamPlayer2D>("SFX/battleMusic");
+
+        float time = 0;
+        float startVolume = battleMusic.VolumeDb;
+
+        while (time < 2.5f)
+        {
+            time += (float)rootNode.GetProcessDeltaTime();
+            battleMusic.VolumeDb = Mathf.Lerp(startVolume, targetVolume, time / 2.5f);
+            await Task.Delay(5);
+        }
+        battleMusic.VolumeDb = targetVolume;
+    }
+
 	public static void ChangeState(int newState) {
 		if (newState >= -1 && newState <= 2) {
 			EstadoJuego = newState;
@@ -122,6 +140,9 @@ public partial class Game : Node2D
 	public static void menuInicio()
 	{
 		startMenu.Visible = true;
+		var musicBackground = startMenu.GetNode<AudioStreamPlayer2D>("MusicManager/musicBackground");
+		musicBackground.Play();
+		
 		mapContainer.Visible = false;
 		player.Visible = false;
 		fpsDisplay.Visible = false;

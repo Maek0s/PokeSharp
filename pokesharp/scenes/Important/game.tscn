@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxy81ylqskur8"]
+[gd_scene load_steps=11 format=3 uid="uid://cxy81ylqskur8"]
 
 [ext_resource type="Script" uid="uid://cjjg1gaabdb5" path="res://scripts/Game.cs" id="1_cp55e"]
 [ext_resource type="PackedScene" uid="uid://265aok0khn3c" path="res://scenes/mapas/pueblo_arcilla.tscn" id="3_72jce"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://psmtxpglm3sn" path="res://assets/audios/openDoor.wav" id="4_sr6sa"]
 [ext_resource type="AudioStream" uid="uid://27k2vyyxskp8" path="res://assets/audios/closeDoor.wav" id="5_3031l"]
 [ext_resource type="Script" uid="uid://h8fjnvh2gxmj" path="res://scripts/ui/FpsDisplay.cs" id="6_3c70g"]
+[ext_resource type="AudioStream" uid="uid://by2br8a4wse4m" path="res://assets/audios/wildBattleMusic.wav" id="6_kou12"]
 [ext_resource type="PackedScene" uid="uid://dkod8e4mtalxi" path="res://scenes/interfaces/pause_menu.tscn" id="7_6ulj2"]
 [ext_resource type="PackedScene" uid="uid://basly4n0vmnkd" path="res://scenes/others/pagina_inicio.tscn" id="8_883ts"]
 [ext_resource type="PackedScene" uid="uid://c14i3tmyehje4" path="res://scenes/interfaces/menu_principal.tscn" id="9_17aap"]
@@ -41,6 +42,10 @@ area_mask = 15
 [node name="doorClose" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("5_3031l")
 volume_db = -7.0
+
+[node name="battleMusic" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("6_kou12")
+volume_db = -20.0
 
 [node name="inScreen" type="CanvasLayer" parent="."]
 

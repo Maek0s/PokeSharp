@@ -29,7 +29,7 @@ public partial class Hierbas : Area2D
         }
     }
 
-    private async void OnBodyEntered(Node body, Node area)
+    private void OnBodyEntered(Node body, Node area)
     {
         if (body.IsInGroup("player") && !inEncounter)
         {
@@ -53,16 +53,29 @@ public partial class Hierbas : Area2D
     private async void pokemonFound() {
         GD.Print("Pokémon!");
 
+        var musicBattle = GetNode<AudioStreamPlayer2D>("/root/Game/SFX/battleMusic");
+        musicBattle.VolumeDb = -15.0f;
+
         // Sacamos el nodo del juego para consultar sus variables
         var gameNode = GetNode<Game>("/root/Game");
         var playerNode = GetNode<MainCharacter>("/root/Game/Player");
         var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
 
+
         // gen 1 hasta la 5
         int idPoke = getRandom(1, 649);
         int levelPokeEnemy = getRandom(MinLevel, MaxLevel);
         Pokemon = await PokemonController.GetPokemonById(idPoke);
-        Pokemon pokemonAllyFirst = Game.PlayerPlaying.listPokemonsTeam[0];
+
+        Pokemon pokemonAllyFirst = new Pokemon();
+
+        if (Game.PlayerPlaying.listPokemonsTeam.Count == 0) {
+            pokemonAllyFirst.nivel = 1;
+            pokemonAllyFirst.Nombre = "charmander";
+            pokemonAllyFirst.NombreCamelCase = "Charmander";
+        } else {
+            pokemonAllyFirst = Game.PlayerPlaying.listPokemonsTeam[0];
+        }
 
         String namePokeUpperEnemy = Pokemon.Nombre.ToUpper();
         String namePokeUpperAlly = pokemonAllyFirst.Nombre.ToUpper();
@@ -85,6 +98,7 @@ public partial class Hierbas : Area2D
         GD.Print($"Pokemon Hierbas: {Pokemon}");
 
         playerNode.FreezePlayer();
+        musicBattle.Play();
         Game.ChangeState(2);
 
         await transitionNode.StartTransition();
@@ -94,7 +108,6 @@ public partial class Hierbas : Area2D
         PackedScene transitionScene = (PackedScene) GD.Load("res://scenes/interfaces/combate.tscn");
         CanvasLayer battle = transitionScene.Instantiate<CanvasLayer>();
 
-        // FALTA OPTIMIZACIÓN
         var namePokeEnemy = battle.GetNode<Label>("InfoEnemy/namePokemon");
         var namePokeAlly = battle.GetNode<Label>("InfoAlly/namePokemon");
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://dytm46rpe0t7a"]
+[gd_scene load_steps=125 format=3 uid="uid://dytm46rpe0t7a"]
 
 [ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
 [ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://cq8m322gjcnuh" path="res://multimedia/images/superballItem.png" id="14_mbf2p"]
 [ext_resource type="Texture2D" uid="uid://b5q5yeqxkx4bb" path="res://multimedia/images/ultraballItem.png" id="15_dyosk"]
 [ext_resource type="Texture2D" uid="uid://cmjwlajnah3on" path="res://multimedia/images/masterballItem.png" id="16_wy4kp"]
+[ext_resource type="AudioStream" uid="uid://by2br8a4wse4m" path="res://assets/audios/wildBattleMusic.wav" id="27_1qwbm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jijpb"]
 atlas = ExtResource("4_jooxb")
@@ -1376,3 +1377,9 @@ allyPokeSprite = NodePath("../PokeAlly")
 infoAlly = NodePath("../InfoAlly")
 enemyPokeSprite = NodePath("../PokeEnemy")
 infoEnemy = NodePath("../InfoEnemy")
+
+[node name="MusicManager" type="Node2D" parent="."]
+
+[node name="musicBackground" type="AudioStreamPlayer2D" parent="MusicManager"]
+stream = ExtResource("27_1qwbm")
+volume_db = -20.0

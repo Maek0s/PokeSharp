@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PokeSharp"
-config/version="alpha"
+config/version="000"
 run/main_scene="res://scenes/important/game.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 boot_splash/image="uid://de2v2wi7mm6mn"

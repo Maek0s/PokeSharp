@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://basly4n0vmnkd"]
+[gd_scene load_steps=29 format=3 uid="uid://basly4n0vmnkd"]
 
 [ext_resource type="Script" uid="uid://dsklrms44m7lt" path="res://scripts/ui/PaginaInicioUI.cs" id="1_k8ivb"]
 [ext_resource type="Texture2D" uid="uid://cyyvprft2rrpb" path="res://multimedia/images/logoPokeSharpKfondoquitado.png" id="1_mi0lt"]
@@ -7,6 +7,9 @@
 [ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="5_b1j1g"]
 [ext_resource type="Texture2D" uid="uid://b7gcmewyxl5vo" path="res://multimedia/images/usuario.png" id="6_hhc5w"]
 [ext_resource type="Texture2D" uid="uid://c1kwvw12dwmll" path="res://multimedia/images/bloquear.png" id="7_rqkmr"]
+[ext_resource type="AudioStream" uid="uid://dxrfhoh17bxo6" path="res://assets/audios/musicStart.wav" id="8_kyksv"]
+[ext_resource type="Texture2D" uid="uid://i1p0v7gfjkjr" path="res://multimedia/images/icons/speaker.png" id="9_7dfpl"]
+[ext_resource type="Theme" uid="uid://di00nl18u0vol" path="res://presets/btnThemes/btnInvisible.tres" id="10_cn3xf"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_cv1o7"]
 file = "res://multimedia/videos/fondoTeselia.ogv"
@@ -320,3 +323,22 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_l5r15")
 text = "Ya  tienes  una  cuenta?  Inicia sesion"
+
+[node name="MusicManager" type="Node2D" parent="."]
+
+[node name="iconSpeaker" type="Sprite2D" parent="MusicManager"]
+position = Vector2(33.5, 619.25)
+scale = Vector2(0.115234, 0.106445)
+texture = ExtResource("9_7dfpl")
+
+[node name="btnMuteUnmute" type="Button" parent="MusicManager"]
+offset_left = 1.0
+offset_top = 591.0
+offset_right = 63.0
+offset_bottom = 648.0
+theme = ExtResource("10_cn3xf")
+
+[node name="musicBackground" type="AudioStreamPlayer2D" parent="MusicManager"]
+stream = ExtResource("8_kyksv")
+volume_db = -10.0
+autoplay = true

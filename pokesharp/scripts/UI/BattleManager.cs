@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class BattleManager : CanvasLayer {
 
@@ -33,10 +34,19 @@ public partial class BattleManager : CanvasLayer {
     Button btnNoConfirmarLanzar;
 
     String stringTypePokeball = "Pokeball";
+
     public override void _Ready()
     {
         pokemonEnemy = Game.PokemonInFight;
-        pokemonAlly = Game.PlayerPlaying.listPokemonsTeam[0];
+
+        if (Game.PlayerPlaying.listPokemonsTeam.Count == 0) {
+            pokemonAlly = new Pokemon();
+            pokemonAlly.nivel = 1;
+            pokemonAlly.Nombre = "charmander";
+            pokemonAlly.NombreCamelCase = "Charmander";
+        } else {
+            pokemonAlly = Game.PlayerPlaying.listPokemonsTeam[0];
+        }
 
         Panel parteInferior = GetNode<Panel>("ParteInferior");
         Panel combatLogMoveset = parteInferior.GetNode<Panel>("BoxResultCombat");
@@ -239,6 +249,8 @@ public partial class BattleManager : CanvasLayer {
                 // Suscribirse a la señal animation_finished
                 effect.AnimationFinished += () =>
                 {
+                    Game.StartCoroutine(-80.0f, GetTree().Root.GetNode("Game"));
+                    
                     GD.Print("Efecto 'captured' terminado");
 
                     // Creamos otro tween tras el efecto
@@ -249,6 +261,7 @@ public partial class BattleManager : CanvasLayer {
 
                     postTween.TweenCallback(Callable.From(() =>
                     {
+
                         GD.Print("[🔄️] Añadiendo Pokémon al equipo...");
 
                         addPokemonDB();
@@ -290,10 +303,10 @@ public partial class BattleManager : CanvasLayer {
 
     public void OnNoLanzarPokeball()
     {
-        var pokeball = GetNode<AnimatedSprite2D>("Pokeball");
+        /*var pokeball = GetNode<AnimatedSprite2D>("Pokeball");
 
         pokeball.Position = new Vector2(27, 365);
-        pokeball.Play("idle");
+        pokeball.Play("idle");*/
     }
 
     public void TerminarCombate()
@@ -443,6 +456,7 @@ public partial class BattleManager : CanvasLayer {
 
     public void OnRunButtonPressed() {
         GD.Print("Button Huir pressed");
+        Game.StartCoroutine(-80.0f, GetTree().Root.GetNode("Game"));
 
         TerminarCombate();
     }
