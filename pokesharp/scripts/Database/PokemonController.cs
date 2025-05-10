@@ -10,6 +10,8 @@ public partial class PokemonController {
     {
         Pokemon pokemon = new Pokemon();
         MgtDatabase mgtDatabase = new MgtDatabase();
+
+        // (TABLE pokemon) Pokemon attributes
         var listPokemons = await mgtDatabase.GetFromTable<Pokemon>("pokemon", $"pok_id=eq.{id}");
         pokemon = listPokemons[0];
 
@@ -21,6 +23,29 @@ public partial class PokemonController {
         {
             GD.PrintErr("[❌] No se encontró el Pokémon.");
         }
+
+        // (TABLE base_stats) Stats base
+        var statsData = await mgtDatabase.GetFromTable<Pokemon>("base_stats", $"pok_id=eq.{id}");
+        if (statsData.Length > 0)
+        {
+            var stats = statsData[0];
+            pokemon.b_hp = stats.b_hp;
+            pokemon.b_atk = stats.b_atk;
+            pokemon.b_def = stats.b_def;
+            pokemon.b_sp_atk = stats.b_sp_atk;
+            pokemon.b_sp_def = stats.b_sp_def;
+            pokemon.b_speed = stats.b_speed;
+        }
+
+        // (TABLE pokemon_evolution_matchup) Capture rate
+
+        var catchRateEvolution = await mgtDatabase.GetFromTable<Pokemon>("pokemon_evolution_matchup", $"pok_id=eq.{id}");
+        if (catchRateEvolution.Length > 0) {
+            var element = catchRateEvolution[0];
+            pokemon.catchRate = element.catchRate;
+        }
+
+        GD.Print($"Pokemon: {pokemon}");
 
         return pokemon;
     }

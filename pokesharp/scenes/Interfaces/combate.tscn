@@ -1,15 +1,464 @@
-[gd_scene load_steps=45 format=3 uid="uid://dytm46rpe0t7a"]
+[gd_scene load_steps=124 format=3 uid="uid://dytm46rpe0t7a"]
 
 [ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
 [ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
 [ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="1_ukcxp"]
-[ext_resource type="Texture2D" uid="uid://d3eqxnewa3h23" path="res://assets/images/battle-forest.png" id="2_0gi7n"]
+[ext_resource type="Texture2D" uid="uid://c28dloi7vw4wa" path="res://multimedia/images/ball_BEASTBALL_open.png" id="3_dyosk"]
 [ext_resource type="Texture2D" uid="uid://b3ten1fjg0t7q" path="res://assets/pokemons/front/RIOLU.png" id="3_eej6d"]
+[ext_resource type="Texture2D" uid="uid://wf4q4kschx8e" path="res://multimedia/images/ball_BEASTBALL.png" id="3_mbf2p"]
+[ext_resource type="Texture2D" uid="uid://co51aepdkdqd2" path="res://assets/textures/battle/pokeballs/ball_MASTERBALL_open.png" id="4_jooxb"]
+[ext_resource type="Texture2D" uid="uid://c8xyb2tt4dks5" path="res://multimedia/images/captureEffectPrueba.png" id="5_wy4kp"]
+[ext_resource type="Texture2D" uid="uid://ii0vjglq6kyp" path="res://assets/textures/battle/pokeballs/ball_GREATBALL_open.png" id="6_04jrt"]
 [ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="6_61ry6"]
 [ext_resource type="Texture2D" uid="uid://cy2mlummcb8xg" path="res://assets/pokemons/back/CHARMANDER.png" id="6_eej6d"]
+[ext_resource type="Texture2D" uid="uid://bgjmuj2818w86" path="res://assets/textures/battle/pokeballs/ball_ULTRABALL_open.png" id="7_muost"]
+[ext_resource type="Texture2D" uid="uid://g4nyhg5jng38" path="res://assets/textures/battle/pokeballs/ball_MASTERBALL.png" id="8_0ci24"]
 [ext_resource type="FontFile" uid="uid://21v80whd7y8x" path="res://multimedia/fonts/PokemonEmeraldLatin.ttf" id="8_4jk2h"]
-[ext_resource type="Script" uid="uid://d07vq05ixwb3i" path="res://scripts/Transitions/TransitionManager.cs" id="8_eej6d"]
-[ext_resource type="Script" uid="uid://c3d3hu72vep51" path="res://scripts/UI/BattleManager.cs" id="8_wc6gq"]
+[ext_resource type="Script" uid="uid://d07vq05ixwb3i" path="res://scripts/transitions/TransitionManager.cs" id="8_eej6d"]
+[ext_resource type="Script" uid="uid://c3d3hu72vep51" path="res://scripts/ui/BattleManager.cs" id="8_wc6gq"]
+[ext_resource type="Texture2D" uid="uid://pe2llr33yyyd" path="res://assets/textures/battle/pokeballs/ball_GREATBALL.png" id="10_3nw6j"]
+[ext_resource type="Texture2D" uid="uid://d3jsod260g1n4" path="res://multimedia/images/pocion.png" id="10_efw1u"]
+[ext_resource type="Texture2D" uid="uid://21px26kigdr0" path="res://assets/textures/battle/pokeballs/ball_ULTRABALL.png" id="11_owoy7"]
+[ext_resource type="Theme" uid="uid://dgqnjdnwnafhv" path="res://presets/labelThemes/lblObjects.tres" id="12_ddtha"]
+[ext_resource type="Texture2D" uid="uid://b8m33rd1voftj" path="res://multimedia/images/pokeballItem.png" id="12_efw1u"]
+[ext_resource type="Texture2D" uid="uid://xe6ihj0exja4" path="res://multimedia/images/pokeball.png" id="12_qxqsj"]
+[ext_resource type="Theme" uid="uid://43m64ucajq5j" path="res://presets/themesButtons/btnConfirmarCaptura.tres" id="13_mbf2p"]
+[ext_resource type="Texture2D" uid="uid://cq8m322gjcnuh" path="res://multimedia/images/superballItem.png" id="14_mbf2p"]
+[ext_resource type="Texture2D" uid="uid://b5q5yeqxkx4bb" path="res://multimedia/images/ultraballItem.png" id="15_dyosk"]
+[ext_resource type="Texture2D" uid="uid://cmjwlajnah3on" path="res://multimedia/images/masterballItem.png" id="16_wy4kp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jijpb"]
+atlas = ExtResource("4_jooxb")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04jrt"]
+atlas = ExtResource("3_dyosk")
+region = Rect2(0, 0, 32, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p57r"]
+atlas = ExtResource("6_04jrt")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vtpo"]
+atlas = ExtResource("7_muost")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1v5o"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muost"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb8vy"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3vn6"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnig7"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j1fd"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n8m7"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvlih"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybpmw"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmevo"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga7ye"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0opq"]
+atlas = ExtResource("8_0ci24")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyosk"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy4kp"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nm1h7"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16bnu"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7g8q"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38y2l"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xbck"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jooxb"]
+atlas = ExtResource("3_mbf2p")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urso1"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5l1l"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_achtc"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbx1a"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by08q"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibaer"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q24t8"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr0xg"]
+atlas = ExtResource("10_3nw6j")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ar1b"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf3uu"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_semdy"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvx4p"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bth2"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w2y0"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1moeo"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jkwc"]
+atlas = ExtResource("11_owoy7")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04jrt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jijpb")
+}],
+"loop": true,
+"name": &"abierta_Masterball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04jrt")
+}],
+"loop": true,
+"name": &"abierta_Pokeball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p57r")
+}],
+"loop": true,
+"name": &"abierta_Superball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vtpo")
+}],
+"loop": true,
+"name": &"abierta_Ultraball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1v5o")
+}],
+"loop": true,
+"name": &"idle_Masterball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muost")
+}],
+"loop": true,
+"name": &"idle_Pokeball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb8vy")
+}],
+"loop": true,
+"name": &"idle_Superball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3vn6")
+}],
+"loop": true,
+"name": &"idle_Ultraball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnig7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4j1fd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n8m7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvlih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybpmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmevo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ga7ye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0opq")
+}],
+"loop": true,
+"name": &"lanzamiento_Masterball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyosk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy4kp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nm1h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16bnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7g8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38y2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xbck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jooxb")
+}],
+"loop": true,
+"name": &"lanzamiento_Pokeball",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urso1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5l1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_achtc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbx1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by08q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibaer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q24t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lr0xg")
+}],
+"loop": true,
+"name": &"lanzamiento_Superball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ar1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rf3uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_semdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvx4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bth2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w2y0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1moeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jkwc")
+}],
+"loop": true,
+"name": &"lanzamiento_Ultraball",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ci24"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(0, 0, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nw6j"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(49, 0, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owoy7"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(98, 0, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj77i"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(0, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty4a8"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(49, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r6o6"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(98, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cijq7"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(147, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8hc1"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(196, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmbjh"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(245, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phqy0"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(294, 196, 49, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipl7a"]
+atlas = ExtResource("5_wy4kp")
+region = Rect2(343, 196, 49, 49)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jijpb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ci24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nw6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owoy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj77i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty4a8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r6o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cijq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8hc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmbjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phqy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipl7a")
+}],
+"loop": false,
+"name": &"captured",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe6pr"]
 bg_color = Color(0.99666, 0.989636, 0.986782, 1)
@@ -278,6 +727,85 @@ Label/fonts/font = ExtResource("6_61ry6")
 [sub_resource type="Theme" id="Theme_leojp"]
 Label/font_sizes/font_size = 9
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xbck"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38y2l"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jooxb"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_4xbck"]
+Button/styles/hover = SubResource("StyleBoxFlat_4xbck")
+Button/styles/normal = SubResource("StyleBoxFlat_38y2l")
+Button/styles/pressed = SubResource("StyleBoxFlat_jooxb")
+
+[sub_resource type="Theme" id="Theme_jooxb"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("6_61ry6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muost"]
+bg_color = Color(0.870588, 0.0313726, 0.164706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ci24"]
+bg_color = Color(0.870588, 0.0313726, 0.164706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nw6j"]
+bg_color = Color(0.869065, 0.0313702, 0.164775, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_1phyx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04jrt"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
 [node name="Combate" type="CanvasLayer"]
 offset = Vector2(7.815, -7.555)
 scale = Vector2(1.31, 1.31)
@@ -289,16 +817,20 @@ position = Vector2(433.017, 190.788)
 scale = Vector2(3.47022, 2.65438)
 texture = ExtResource("1_4lwss")
 
-[node name="Background Forest" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(576.5, 233)
-scale = Vector2(1.53121, 0.932)
-texture = ExtResource("2_0gi7n")
-
 [node name="PokeEnemy" type="Sprite2D" parent="."]
 position = Vector2(1000.09, 174)
 scale = Vector2(1.58, 1.206)
 texture = ExtResource("3_eej6d")
+
+[node name="Pokeball" type="AnimatedSprite2D" parent="."]
+position = Vector2(29.9122, 416.454)
+sprite_frames = SubResource("SpriteFrames_04jrt")
+animation = &"abierta_Masterball"
+
+[node name="Effects" type="AnimatedSprite2D" parent="Pokeball"]
+position = Vector2(0.763358, -22.9008)
+sprite_frames = SubResource("SpriteFrames_jijpb")
+autoplay = "default"
 
 [node name="PokeAlly" type="Sprite2D" parent="."]
 position = Vector2(-131.92, 278.286)
@@ -465,7 +997,7 @@ theme = SubResource("Theme_e43l4")
 action_mode = 0
 text = "RUN"
 
-[node name="CombatLogMoveset" type="Panel" parent="ParteInferior"]
+[node name="BoxResultCombat" type="Panel" parent="ParteInferior"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.027
@@ -478,7 +1010,7 @@ offset_right = -0.362061
 offset_bottom = -0.0140076
 theme = SubResource("Theme_nm1h7")
 
-[node name="CombatLog" type="RichTextLabel" parent="ParteInferior/CombatLogMoveset"]
+[node name="CombatLog" type="RichTextLabel" parent="ParteInferior/BoxResultCombat"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.077
@@ -491,13 +1023,13 @@ theme = SubResource("Theme_38y2l")
 bbcode_enabled = true
 autowrap_mode = 0
 
-[node name="Moveset" type="Control" parent="ParteInferior/CombatLogMoveset"]
+[node name="Moveset" type="Control" parent="ParteInferior/BoxResultCombat"]
 visible = false
 anchors_preset = 0
 offset_right = 484.0
 offset_bottom = 98.0
 
-[node name="firstMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+[node name="firstMove" type="Button" parent="ParteInferior/BoxResultCombat/Moveset"]
 layout_mode = 0
 offset_right = 209.0
 offset_bottom = 45.0
@@ -505,7 +1037,7 @@ theme = SubResource("Theme_n7g8q")
 text = "Ascuas
 "
 
-[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/firstMove"]
+[node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/firstMove"]
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -515,7 +1047,7 @@ theme = SubResource("Theme_leojp")
 text = "30/30"
 horizontal_alignment = 2
 
-[node name="secondMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+[node name="secondMove" type="Button" parent="ParteInferior/BoxResultCombat/Moveset"]
 layout_mode = 0
 offset_left = 221.374
 offset_top = 0.763367
@@ -525,7 +1057,7 @@ theme = SubResource("Theme_n7g8q")
 text = "Ascuas
 "
 
-[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/secondMove"]
+[node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/secondMove"]
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -535,7 +1067,7 @@ theme = SubResource("Theme_leojp")
 text = "30/30"
 horizontal_alignment = 2
 
-[node name="thirdMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+[node name="thirdMove" type="Button" parent="ParteInferior/BoxResultCombat/Moveset"]
 layout_mode = 0
 offset_left = -0.301526
 offset_top = 51.4084
@@ -545,7 +1077,7 @@ theme = SubResource("Theme_n7g8q")
 text = "Ascuas
 "
 
-[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/thirdMove"]
+[node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/thirdMove"]
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -555,7 +1087,7 @@ theme = SubResource("Theme_leojp")
 text = "30/30"
 horizontal_alignment = 2
 
-[node name="fourthMove" type="Button" parent="ParteInferior/CombatLogMoveset/Moveset"]
+[node name="fourthMove" type="Button" parent="ParteInferior/BoxResultCombat/Moveset"]
 layout_mode = 0
 offset_left = 221.073
 offset_top = 51.4084
@@ -565,7 +1097,7 @@ theme = SubResource("Theme_n7g8q")
 text = "Ascuas
 "
 
-[node name="Label" type="Label" parent="ParteInferior/CombatLogMoveset/Moveset/fourthMove"]
+[node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/fourthMove"]
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -574,6 +1106,269 @@ offset_bottom = 43.5077
 theme = SubResource("Theme_leojp")
 text = "30/30"
 horizontal_alignment = 2
+
+[node name="Bag" type="Control" parent="ParteInferior/BoxResultCombat"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelesObjetos" type="Panel" parent="ParteInferior/BoxResultCombat/Bag"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelButtons" type="Panel" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonObjetosCuracion" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelButtons"]
+layout_mode = 0
+offset_right = 242.0
+offset_bottom = 98.0
+theme = SubResource("Theme_4xbck")
+
+[node name="LblObjCuracion" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelButtons/ButtonObjetosCuracion"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.587
+anchor_right = 1.0
+anchor_bottom = 0.822
+offset_left = 30.9962
+offset_top = 0.752686
+offset_right = -37.0038
+offset_bottom = 0.722687
+theme = SubResource("Theme_jooxb")
+text = "Objetos  curacion"
+
+[node name="PocionImage" type="Sprite2D" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelButtons/ButtonObjetosCuracion"]
+position = Vector2(114.202, 31.2583)
+scale = Vector2(0.110717, 0.103127)
+texture = ExtResource("10_efw1u")
+
+[node name="ButtonObjetosCaptura" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelButtons"]
+layout_mode = 0
+offset_left = 241.985
+offset_right = 483.985
+offset_bottom = 98.0
+theme = SubResource("Theme_4xbck")
+
+[node name="LblObjCaptura" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelButtons/ButtonObjetosCaptura"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.587
+anchor_right = 1.0
+anchor_bottom = 0.822
+offset_left = 30.9962
+offset_top = 1.51602
+offset_right = -37.0038
+offset_bottom = 1.48602
+theme = SubResource("Theme_jooxb")
+text = "Objetos  captura"
+
+[node name="PokeballImage" type="Sprite2D" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelButtons/ButtonObjetosCaptura"]
+position = Vector2(114.202, 31.9267)
+scale = Vector2(0.110717, 0.108571)
+texture = ExtResource("12_qxqsj")
+
+[node name="PanelObjetosCuracion" type="Panel" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelObjetosCaptura" type="Panel" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos"]
+visible = false
+layout_mode = 0
+offset_right = 483.0
+offset_bottom = 96.0
+
+[node name="ConfirmacionCaptura" type="Panel" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LblInfoConfirmacion" type="RichTextLabel" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/ConfirmacionCaptura"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425
+anchor_top = 0.178
+anchor_right = 11.412
+anchor_bottom = 0.75
+offset_left = -17.0
+offset_top = -6.12
+offset_right = 27.52
+offset_bottom = 5.0
+theme = ExtResource("12_ddtha")
+bbcode_enabled = true
+text = "¿Estas  seguro  de  usar la  "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnDenegar" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/ConfirmacionCaptura"]
+layout_mode = 0
+offset_left = 263.542
+offset_top = 46.2367
+offset_right = 394.542
+offset_bottom = 84.2367
+theme = ExtResource("13_mbf2p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_muost")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ci24")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3nw6j")
+text = "No"
+
+[node name="btnConfirmar" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/ConfirmacionCaptura"]
+layout_mode = 0
+offset_left = 89.7748
+offset_top = 45.3016
+offset_right = 220.775
+offset_bottom = 83.3016
+theme = ExtResource("13_mbf2p")
+text = "Si"
+
+[node name="Pokeballs" type="Panel" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Pokeball" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 243.0
+offset_bottom = 49.0
+theme = SubResource("Theme_1phyx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_04jrt")
+
+[node name="LblName" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Pokeball"]
+layout_mode = 0
+offset_left = 53.897
+offset_top = 14.7634
+offset_right = 137.897
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "Pokeball"
+
+[node name="LblPokeballQuantity" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Pokeball"]
+layout_mode = 0
+offset_left = 181.378
+offset_top = 14.7634
+offset_right = 239.378
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "x10"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PokeballItem" type="Sprite2D" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Pokeball"]
+position = Vector2(26.416, 24.1641)
+scale = Vector2(0.262049, 0.261723)
+texture = ExtResource("12_efw1u")
+
+[node name="Superball" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs"]
+layout_mode = 0
+offset_left = 240.92
+offset_top = -1.26337
+offset_right = 483.92
+offset_bottom = 48.7366
+theme = SubResource("Theme_1phyx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_04jrt")
+
+[node name="LblName" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Superball"]
+layout_mode = 0
+offset_left = 53.897
+offset_top = 14.7634
+offset_right = 137.897
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "Superball"
+
+[node name="LblSuperballQuantity" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Superball"]
+layout_mode = 0
+offset_left = 181.378
+offset_top = 14.7634
+offset_right = 239.378
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "x5"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SuperballItem" type="Sprite2D" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Superball"]
+position = Vector2(26.416, 24.1641)
+scale = Vector2(0.262049, 0.261723)
+texture = ExtResource("14_mbf2p")
+
+[node name="Ultraball" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs"]
+layout_mode = 0
+offset_left = -0.301525
+offset_top = 46.8283
+offset_right = 242.698
+offset_bottom = 96.8283
+theme = SubResource("Theme_1phyx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_04jrt")
+
+[node name="LblName" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Ultraball"]
+layout_mode = 0
+offset_left = 53.897
+offset_top = 14.7634
+offset_right = 137.897
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "Ultraball"
+
+[node name="LblUltraballQuantity" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Ultraball"]
+layout_mode = 0
+offset_left = 181.378
+offset_top = 14.7634
+offset_right = 239.378
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "x3"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="UltraballItem" type="Sprite2D" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Ultraball"]
+position = Vector2(26.416, 24.1641)
+scale = Vector2(0.262049, 0.261723)
+texture = ExtResource("15_dyosk")
+
+[node name="Masterball" type="Button" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs"]
+layout_mode = 0
+offset_left = 240.92
+offset_top = 46.8283
+offset_right = 483.92
+offset_bottom = 96.8283
+theme = SubResource("Theme_1phyx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_04jrt")
+
+[node name="LblName" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Masterball"]
+layout_mode = 0
+offset_left = 53.897
+offset_top = 14.7634
+offset_right = 137.897
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "Masterball"
+
+[node name="LblMasterballQuantity" type="Label" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Masterball"]
+layout_mode = 0
+offset_left = 181.378
+offset_top = 14.7634
+offset_right = 239.378
+offset_bottom = 37.7634
+theme = ExtResource("12_ddtha")
+text = "x1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MasterballItem" type="Sprite2D" parent="ParteInferior/BoxResultCombat/Bag/PanelesObjetos/PanelObjetosCaptura/Pokeballs/Masterball"]
+position = Vector2(26.416, 24.1641)
+scale = Vector2(0.262049, 0.261723)
+texture = ExtResource("16_wy4kp")
 
 [node name="TransitionManager" type="Node2D" parent="." node_paths=PackedStringArray("allyPokeSprite", "infoAlly", "enemyPokeSprite", "infoEnemy")]
 script = ExtResource("8_eej6d")

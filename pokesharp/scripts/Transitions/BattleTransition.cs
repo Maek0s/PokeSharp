@@ -16,10 +16,17 @@ public partial class BattleTransition : CanvasLayer
         
 		_animationPlayer = (AnimationPlayer) GetNode<Node>("AnimationPlayer");
 
-		_player = GetNode<MainCharacter>("/root/Game/Player");
-		_camera = (Camera2D) _player.GetNode("CameraFollow");
+		if (HasNode("/root/Game/Player"))
+		{
+			_player = GetNode<MainCharacter>("/root/Game/Player");
+			_camera = _player.GetNode<Camera2D>("CameraFollow");
+            _originalZoom = _camera.Zoom; // Guardamos el zoom original al inicio
+		}
+		else
+		{
+			GD.Print("[⚠️] Player no está disponible todavía.");
+		}
 
-        _originalZoom = _camera.Zoom; // Guardamos el zoom original al inicio
 	}
 
 	// Inicia la transición / Starts the transition

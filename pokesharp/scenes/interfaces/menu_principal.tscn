@@ -1,0 +1,545 @@
+[gd_scene load_steps=15 format=3 uid="uid://c14i3tmyehje4"]
+
+[ext_resource type="Script" uid="uid://cht3vng6bw0rv" path="res://scenes/interfaces/MenuPrincipal.cs" id="1_pa63l"]
+[ext_resource type="Theme" uid="uid://dgqnjdnwnafhv" path="res://presets/labelThemes/lblObjects.tres" id="2_8l87r"]
+[ext_resource type="Theme" uid="uid://dgjdw2oh0nb8s" path="res://presets/panelThemes/pokemonTeam.tres" id="2_nlu0u"]
+[ext_resource type="Texture2D" uid="uid://vx5quw6ginja" path="res://multimedia/images/riolu.png" id="4_riqai"]
+[ext_resource type="Texture2D" uid="uid://c3o4vj88ifu5a" path="res://multimedia/images/iconPokeball.png" id="8_20hdv"]
+[ext_resource type="Theme" uid="uid://di00nl18u0vol" path="res://presets/btnThemes/btnInvisible.tres" id="9_20hdv"]
+[ext_resource type="Texture2D" uid="uid://bg4cbm8q6w0u7" path="res://multimedia/images/backpack.png" id="9_781s0"]
+[ext_resource type="Texture2D" uid="uid://cg3uoeh1u7jyo" path="res://multimedia/images/iconPokedex.png" id="10_8hrsg"]
+[ext_resource type="PackedScene" uid="uid://n3dudk71uyui" path="res://scenes/interfaces/pc_pokemons.tscn" id="12_20hdv"]
+[ext_resource type="Texture2D" uid="uid://d4l0rmsplscfu" path="res://multimedia/images/oddish.png" id="12_pa63l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pa63l"]
+bg_color = Color(3.77826e-06, 0.61014, 0.233372, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_7nr1k"]
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_pa63l")
+
+[sub_resource type="Theme" id="Theme_1gcw7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0ep8"]
+bg_color = Color(0.203922, 0.239216, 0.27451, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MenuPrincipal" type="CanvasLayer"]
+script = ExtResource("1_pa63l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1160.0
+offset_bottom = 651.0
+color = Color(0.18359, 0.18359, 0.18359, 0.458824)
+
+[node name="Pokemons" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 42.0
+offset_top = 46.0
+offset_right = 426.0
+offset_bottom = 597.0
+
+[node name="TextoEquipo" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 88.0
+offset_right = 298.0
+offset_bottom = 40.0
+theme = ExtResource("2_nlu0u")
+
+[node name="Label" type="Label" parent="Pokemons/TextoEquipo"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 210.0
+offset_bottom = 40.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = " EQUIPO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Riolu" type="Sprite2D" parent="Pokemons/TextoEquipo"]
+position = Vector2(29, 14)
+scale = Vector2(0.0993497, 0.108854)
+texture = ExtResource("4_riqai")
+
+[node name="Pokemon1" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 51.0
+offset_right = 357.0
+offset_bottom = 112.0
+theme = ExtResource("2_nlu0u")
+
+[node name="LblNamePokemon" type="Label" parent="Pokemons/Pokemon1"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="LblLevelPokemon" type="Label" parent="Pokemons/Pokemon1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.279
+anchor_right = 1.0
+anchor_bottom = 0.429
+offset_left = -88.0
+offset_top = -11.483
+offset_right = -5.0
+offset_bottom = -0.0330009
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 2
+
+[node name="Sprite" type="Sprite2D" parent="Pokemons/Pokemon1"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(227.5, 31)
+scale = Vector2(0.677084, 0.625)
+
+[node name="ProgressBar" type="ProgressBar" parent="Pokemons/Pokemon1"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 171.0
+offset_bottom = 57.0
+theme = SubResource("Theme_7nr1k")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Pokemons/Pokemon1/ProgressBar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 27.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Pokemon2" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 127.0
+offset_right = 357.0
+offset_bottom = 188.0
+theme = ExtResource("2_nlu0u")
+
+[node name="LblNamePokemon" type="Label" parent="Pokemons/Pokemon2"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="LblLevelPokemon" type="Label" parent="Pokemons/Pokemon2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.279
+anchor_right = 1.0
+anchor_bottom = 0.429
+offset_left = -88.0
+offset_top = -11.483
+offset_right = -5.0
+offset_bottom = -0.0330009
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Pokemons/Pokemon2"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 171.0
+offset_bottom = 57.0
+theme = SubResource("Theme_7nr1k")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Pokemons/Pokemon2/ProgressBar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 27.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Sprite" type="Sprite2D" parent="Pokemons/Pokemon2"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(227.5, 31)
+scale = Vector2(0.677084, 0.625)
+
+[node name="Pokemon3" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 203.0
+offset_right = 357.0
+offset_bottom = 264.0
+theme = ExtResource("2_nlu0u")
+
+[node name="LblNamePokemon" type="Label" parent="Pokemons/Pokemon3"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="LblLevelPokemon" type="Label" parent="Pokemons/Pokemon3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.279
+anchor_right = 1.0
+anchor_bottom = 0.429
+offset_left = -88.0
+offset_top = -11.483
+offset_right = -5.0
+offset_bottom = -0.0330009
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 2
+
+[node name="Sprite" type="Sprite2D" parent="Pokemons/Pokemon3"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(227.5, 31)
+scale = Vector2(0.677084, 0.625)
+
+[node name="ProgressBar" type="ProgressBar" parent="Pokemons/Pokemon3"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 171.0
+offset_bottom = 57.0
+theme = SubResource("Theme_7nr1k")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Pokemons/Pokemon3/ProgressBar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 27.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Pokemon4" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 279.0
+offset_right = 357.0
+offset_bottom = 340.0
+theme = ExtResource("2_nlu0u")
+
+[node name="LblNamePokemon" type="Label" parent="Pokemons/Pokemon4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="LblLevelPokemon" type="Label" parent="Pokemons/Pokemon4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.279
+anchor_right = 1.0
+anchor_bottom = 0.429
+offset_left = -88.0
+offset_top = -11.483
+offset_right = -5.0
+offset_bottom = -0.0330009
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 2
+
+[node name="Sprite" type="Sprite2D" parent="Pokemons/Pokemon4"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(227.5, 31)
+scale = Vector2(0.677084, 0.625)
+
+[node name="ProgressBar" type="ProgressBar" parent="Pokemons/Pokemon4"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 171.0
+offset_bottom = 57.0
+theme = SubResource("Theme_7nr1k")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Pokemons/Pokemon4/ProgressBar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 27.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Pokemon5" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 354.0
+offset_right = 357.0
+offset_bottom = 415.0
+theme = ExtResource("2_nlu0u")
+
+[node name="LblNamePokemon" type="Label" parent="Pokemons/Pokemon5"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="LblLevelPokemon" type="Label" parent="Pokemons/Pokemon5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.279
+anchor_right = 1.0
+anchor_bottom = 0.429
+offset_left = -88.0
+offset_top = -11.483
+offset_right = -5.0
+offset_bottom = -0.0330009
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 2
+
+[node name="Sprite" type="Sprite2D" parent="Pokemons/Pokemon5"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(227.5, 31)
+scale = Vector2(0.677084, 0.625)
+
+[node name="ProgressBar" type="ProgressBar" parent="Pokemons/Pokemon5"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 171.0
+offset_bottom = 57.0
+theme = SubResource("Theme_7nr1k")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Pokemons/Pokemon5/ProgressBar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 27.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Pokemon6" type="Panel" parent="Pokemons"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 430.0
+offset_right = 357.0
+offset_bottom = 491.0
+theme = ExtResource("2_nlu0u")
+
+[node name="LblNamePokemon" type="Label" parent="Pokemons/Pokemon6"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="LblLevelPokemon" type="Label" parent="Pokemons/Pokemon6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.279
+anchor_right = 1.0
+anchor_bottom = 0.429
+offset_left = -88.0
+offset_top = -11.483
+offset_right = -5.0
+offset_bottom = -0.0330009
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 2
+
+[node name="Sprite" type="Sprite2D" parent="Pokemons/Pokemon6"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(227.5, 33)
+scale = Vector2(0.677084, 0.625)
+
+[node name="ProgressBar" type="ProgressBar" parent="Pokemons/Pokemon6"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 171.0
+offset_bottom = 57.0
+theme = SubResource("Theme_7nr1k")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Pokemons/Pokemon6/ProgressBar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 27.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100/100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="OpcionesMenu" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 810.0
+offset_top = 46.0
+offset_right = 1098.0
+offset_bottom = 505.0
+
+[node name="TextoEquipo" type="Panel" parent="OpcionesMenu"]
+layout_mode = 0
+offset_left = 39.0
+offset_right = 249.0
+offset_bottom = 40.0
+theme = ExtResource("2_nlu0u")
+
+[node name="Label" type="Label" parent="OpcionesMenu/TextoEquipo"]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 210.0
+offset_bottom = 39.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PokemonsOpcion" type="Panel" parent="OpcionesMenu"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 69.0
+offset_right = 271.0
+offset_bottom = 119.0
+theme = SubResource("Theme_1gcw7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_e0ep8")
+
+[node name="IconPokeball" type="Sprite2D" parent="OpcionesMenu/PokemonsOpcion"]
+position = Vector2(27.5, 24)
+scale = Vector2(0.0800781, 0.0742188)
+texture = ExtResource("8_20hdv")
+
+[node name="Label" type="Label" parent="OpcionesMenu/PokemonsOpcion"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 10.0
+offset_right = 237.0
+offset_bottom = 45.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Pokemons"
+vertical_alignment = 1
+
+[node name="btnPokemonsCaja" type="Button" parent="OpcionesMenu/PokemonsOpcion"]
+layout_mode = 0
+offset_right = 244.0
+offset_bottom = 50.0
+theme = ExtResource("9_20hdv")
+
+[node name="BolsaOpcion" type="Panel" parent="OpcionesMenu"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 133.0
+offset_right = 271.0
+offset_bottom = 183.0
+theme = SubResource("Theme_1gcw7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_e0ep8")
+
+[node name="Backpack" type="Sprite2D" parent="OpcionesMenu/BolsaOpcion"]
+position = Vector2(28, 25)
+scale = Vector2(0.105469, 0.0859375)
+texture = ExtResource("9_781s0")
+
+[node name="Label" type="Label" parent="OpcionesMenu/BolsaOpcion"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 10.0
+offset_right = 237.0
+offset_bottom = 45.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Bolsa"
+vertical_alignment = 1
+
+[node name="PokedexOpcion" type="Panel" parent="OpcionesMenu"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 198.0
+offset_right = 271.0
+offset_bottom = 248.0
+theme = SubResource("Theme_1gcw7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_e0ep8")
+
+[node name="IconPokedex" type="Sprite2D" parent="OpcionesMenu/PokedexOpcion"]
+position = Vector2(33, 26)
+scale = Vector2(0.149641, 0.147527)
+texture = ExtResource("10_8hrsg")
+
+[node name="Label" type="Label" parent="OpcionesMenu/PokedexOpcion"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 10.0
+offset_right = 237.0
+offset_bottom = 45.0
+theme = ExtResource("2_8l87r")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Pokedex"
+vertical_alignment = 1
+
+[node name="Oddish" type="Sprite2D" parent="."]
+position = Vector2(1034, 58.6021)
+scale = Vector2(0.155642, 0.122071)
+texture = ExtResource("12_pa63l")
+
+[node name="PCPokemons" parent="." instance=ExtResource("12_20hdv")]
+visible = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b8bmiwi453xo8"]
 
-[ext_resource type="Script" uid="uid://c2wrw8ok0lpdf" path="res://scripts/Transitions/DoorTransition.cs" id="1_f3muj"]
-[ext_resource type="Script" uid="uid://dmb4u7xdacpcv" path="res://scripts/Transitions/BattleTransition.cs" id="2_jq4a2"]
+[ext_resource type="Script" uid="uid://c2wrw8ok0lpdf" path="res://scripts/transitions/DoorTransition.cs" id="1_f3muj"]
+[ext_resource type="Script" uid="uid://dmb4u7xdacpcv" path="res://scripts/transitions/BattleTransition.cs" id="2_jq4a2"]
 
 [sub_resource type="Animation" id="Animation_ahfwt"]
 length = 0.001

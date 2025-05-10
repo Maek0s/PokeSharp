@@ -8,7 +8,7 @@ public partial class TransitionManager : Node2D
     [Export] private Panel infoAlly;
     [Export] private Sprite2D enemyPokeSprite;
     [Export] private Panel infoEnemy;
-    private PackedScene _combateScene = (PackedScene)GD.Load("res://scenes/Interfaces/combate.tscn"); // Ruta de la escena del combate
+    private PackedScene _combateScene = (PackedScene)GD.Load("res://scenes/interfaces/combate.tscn"); // Ruta de la escena del combate
     private Node _combateInstance;
     private Tween tween;
 

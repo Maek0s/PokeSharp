@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c5v2dft80k7s4"]
+
+[ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="1_anf84"]
+
+[resource]
+Label/font_sizes/font_size = 14
+Label/fonts/font = ExtResource("1_anf84")

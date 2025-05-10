@@ -412,7 +412,7 @@ size = Vector2(32.2118, 31.3356)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b8v8p"]
 a = Vector2(256, -678)
-b = Vector2(256, 89)
+b = Vector2(257, 162)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wjjj8"]
 a = Vector2(274, 84)
@@ -506,20 +506,21 @@ shape = SubResource("RectangleShape2D_mrr3a")
 position = Vector2(-13, 26)
 scale = Vector2(0.1, 0.1)
 
-[node name="Límites" type="StaticBody2D" parent="."]
+[node name="Limites" type="StaticBody2D" parent="."]
 
-[node name="Izquierda" type="CollisionShape2D" parent="Límites"]
+[node name="Izquierda" type="CollisionShape2D" parent="Limites"]
 position = Vector2(-607, 1)
 shape = SubResource("SegmentShape2D_b8v8p")
 
-[node name="Derecha" type="CollisionShape2D" parent="Límites"]
+[node name="Derecha" type="CollisionShape2D" parent="Limites"]
 position = Vector2(17, 0)
 shape = SubResource("SegmentShape2D_b8v8p")
 debug_color = Color(0.248847, 0.560237, 0.802804, 0.419608)
 
-[node name="Abajo" type="CollisionShape2D" parent="Límites"]
+[node name="Abajo" type="CollisionShape2D" parent="Limites"]
+position = Vector2(0, 77)
 shape = SubResource("SegmentShape2D_wjjj8")
 
-[node name="Arriba" type="CollisionShape2D" parent="Límites"]
+[node name="Arriba" type="CollisionShape2D" parent="Limites"]
 position = Vector2(0, -756)
 shape = SubResource("SegmentShape2D_wjjj8")

@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://sj3dth82jl8c"]
+
+[ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="1_8m46f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpret"]
+bg_color = Color(0.0719054, 0.671981, 0.194935, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+Button/fonts/font = ExtResource("1_8m46f")
+Button/styles/normal = SubResource("StyleBoxFlat_gpret")

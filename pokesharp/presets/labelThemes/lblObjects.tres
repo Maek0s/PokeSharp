@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dgqnjdnwnafhv"]
+
+[ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="1_xd57d"]
+[ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="2_f6v3g"]
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_xd57d")
+RichTextLabel/fonts/bold_font = ExtResource("1_xd57d")
+RichTextLabel/fonts/normal_font = ExtResource("2_f6v3g")

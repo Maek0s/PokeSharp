@@ -78,6 +78,22 @@ public partial class MainCharacter : CharacterBody2D
             GD.Print("X: " + Position.X + " | Y: " + Position.Y);
         }
 
+        if (Input.IsActionJustPressed("debug")) {
+            var root = GetTree().Root.GetNode("Game");
+            var scriptMenuPrincipal = root.GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
+            scriptMenuPrincipal.ColocarPokemonsVisual();
+
+            GD.Print($"\n(listPokemonsCaja) Count {Game.PlayerPlaying.listPokemonsCaja.Count} - Lista pokemons en caja:");
+            foreach (Pokemon pokemon in Game.PlayerPlaying.listPokemonsCaja) {
+                GD.Print(pokemon);
+            }
+
+            GD.Print($"\n(listPokemonsTeam) Count {Game.PlayerPlaying.listPokemonsTeam.Count} - Lista pokemons en team:");
+            foreach (Pokemon pokemon in Game.PlayerPlaying.listPokemonsTeam) {
+                GD.Print(pokemon);
+            }
+        }
+
         // Ajusta la velocidad dependiendo de si está corriendo o no
         if (Input.IsActionPressed("run")) {
             is_running = true;
@@ -96,7 +112,7 @@ public partial class MainCharacter : CharacterBody2D
             last_direction = direction;
             play_walk_animation(direction);
         } else {
-            bool _isEntering = gameNode.IsEntering;
+            bool _isEntering = Game.IsEntering;
 
             if (!_isEntering) {
                 play_idle_animation(last_direction);

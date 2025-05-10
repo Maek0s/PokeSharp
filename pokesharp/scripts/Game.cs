@@ -2,18 +2,26 @@ using Godot;
 using System;
 using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 public partial class Game : Node2D
 {
 	[Export] public NodePath MapContainerPath;
+	public static Pokemon PokemonInFight;
+	public static Player PlayerPlaying;
 	private static Node2D mapContainer;
 
 	private static Node2D startMenu;
 	private static MainCharacter player;
+	private static Camera2D cameraFollow;
 	private static Label fpsDisplay;
-	private static CanvasLayer menuInGame;
 
-	public bool IsEntering = false;
+	// Menus
+	private static CanvasLayer menuInGame;
+	public static CanvasLayer pauseMenu;
+	public static CanvasLayer menuPrincipal;
+
+	public static bool IsEntering = false;
 	/*
     Estados Juego
      Estado -1 - Menu de inicio (El jugador no deberia de existir)
@@ -27,6 +35,7 @@ public partial class Game : Node2D
 	public override void _Ready()
 	{
 		asignarVariables();
+		asignarLimitesCamera();
 		ChangeState(-1);
 	}
 
@@ -34,7 +43,26 @@ public partial class Game : Node2D
 	{
 		if (@event.IsActionPressed("menu"))
 		{
-			TogglePauseMenu();
+			if (EstadoJuego == 1 || pauseMenu.Visible) {
+				TogglePauseMenu();
+			}
+		} else if (@event.IsActionPressed("menuPrincipal")) {
+			if (EstadoJuego == 1 || menuPrincipal.Visible) {
+				TogglePrincipalMenu();
+			}
+		}
+	}
+
+	public void TogglePrincipalMenu()
+	{
+		if (menuPrincipal.Visible) {
+			menuPrincipal.Visible = false;
+			EstadoJuego = 1;
+			player.UnfreezePlayer();
+		} else {
+			menuPrincipal.Visible = true;
+			EstadoJuego = 0;
+			player.FreezePlayer();
 		}
 	}
 
@@ -42,19 +70,17 @@ public partial class Game : Node2D
 	{
 		var pauseMenu = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
 
-		var mainCharacter = GetNode<MainCharacter>("/root/Game/Player");
-
 		if (EstadoJuego == 1)
 		{
 			pauseMenu.Visible = true;
 			EstadoJuego = 0;
-			mainCharacter.FreezePlayer();
+			player.FreezePlayer();
 		}
 		else if (EstadoJuego == 0)
 		{
 			pauseMenu.Visible = false;
 			EstadoJuego = 1;
-			mainCharacter.UnfreezePlayer();
+			player.UnfreezePlayer();
 		}
 	}
 
@@ -72,12 +98,24 @@ public partial class Game : Node2D
 					inGame();
 					break;
 				case 2:
+					fixInterfaces();
 					break;
 				default:
 					break;
 			}
 		} else {
 			GD.PrintErr("Estado invalido " + newState);
+		}
+	}
+
+	public static void fixInterfaces()
+	{
+		if (pauseMenu.Visible) {
+			pauseMenu.Visible = false;
+		}
+
+		if (menuPrincipal.Visible) {
+			menuPrincipal.Visible = false;
 		}
 	}
 
@@ -168,7 +206,57 @@ public partial class Game : Node2D
 		startMenu = GetNode<Node2D>("/root/Game/inScreen/UI/PaginaInicio");
 		mapContainer = GetNode<Node2D>(MapContainerPath);
 		player = GetNode<MainCharacter>("/root/Game/Player");
+		cameraFollow = player.GetNode<Camera2D>("CameraFollow");
 		fpsDisplay = GetNode<Label>("/root/Game/inScreen/UI/FPSDisplay");
 		menuInGame = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
+		pauseMenu = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
+		menuPrincipal = GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
+	}
+
+	public void asignarLimitesCamera()
+	{
+		StaticBody2D limites = mapContainer.GetNode<StaticBody2D>("Limites");
+
+		CollisionShape2D colIzq = limites.GetNode<CollisionShape2D>("Izquierda");
+		CollisionShape2D colDer = limites.GetNode<CollisionShape2D>("Derecha");
+		CollisionShape2D colArriba = limites.GetNode<CollisionShape2D>("Arriba");
+		CollisionShape2D colAbajo = limites.GetNode<CollisionShape2D>("Abajo");
+
+		Godot.Vector2 GetXMin(CollisionShape2D col)
+		{
+			var shape = col.Shape as SegmentShape2D;
+			var p1 = col.ToGlobal(shape.A);
+			var p2 = col.ToGlobal(shape.B);
+			return new Godot.Vector2(Mathf.Min(p1.X, p2.X), 0);
+		}
+
+		Godot.Vector2 GetXMax(CollisionShape2D col)
+		{
+			var shape = col.Shape as SegmentShape2D;
+			var p1 = col.ToGlobal(shape.A);
+			var p2 = col.ToGlobal(shape.B);
+			return new Godot.Vector2(Mathf.Max(p1.X, p2.X), 0);
+		}
+
+		Godot.Vector2 GetYMin(CollisionShape2D col)
+		{
+			var shape = col.Shape as SegmentShape2D;
+			var p1 = col.ToGlobal(shape.A);
+			var p2 = col.ToGlobal(shape.B);
+			return new Godot.Vector2(0, Mathf.Min(p1.Y, p2.Y));
+		}
+
+		Godot.Vector2 GetYMax(CollisionShape2D col)
+		{
+			var shape = col.Shape as SegmentShape2D;
+			var p1 = col.ToGlobal(shape.A);
+			var p2 = col.ToGlobal(shape.B);
+			return new Godot.Vector2(0, Mathf.Max(p1.Y, p2.Y));
+		}
+
+		cameraFollow.LimitLeft = (int)GetXMin(colIzq).X;
+		cameraFollow.LimitRight = (int)GetXMax(colDer).X;
+		cameraFollow.LimitTop = (int)GetYMin(colArriba).Y;
+		cameraFollow.LimitBottom = (int)GetYMax(colAbajo).Y;
 	}
 }

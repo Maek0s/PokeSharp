@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public partial class Hierbas : Area2D
 {
+    public Pokemon Pokemon;
     private MainCharacter _player;
     private AnimatedSprite2D _animacion;
     private int _grassCount = 0;
@@ -57,52 +58,73 @@ public partial class Hierbas : Area2D
         var playerNode = GetNode<MainCharacter>("/root/Game/Player");
         var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
 
+        // gen 1 hasta la 5
         int idPoke = getRandom(1, 649);
-        int levelPoke = getRandom(MinLevel, MaxLevel);
-        Pokemon pokemon = await PokemonController.GetPokemonById(idPoke);
+        int levelPokeEnemy = getRandom(MinLevel, MaxLevel);
+        Pokemon = await PokemonController.GetPokemonById(idPoke);
+        Pokemon pokemonAllyFirst = Game.PlayerPlaying.listPokemonsTeam[0];
 
-        pokemon.Nivel = levelPoke;
+        String namePokeUpperEnemy = Pokemon.Nombre.ToUpper();
+        String namePokeUpperAlly = pokemonAllyFirst.Nombre.ToUpper();
+        
+        Texture2D nuevoSprite = GD.Load<Texture2D>($"res://assets/pokemons/front/{namePokeUpperEnemy}.png");
+        
+        if (nuevoSprite == null) {
+            GD.PrintErr($"No se pudo cargar el sprite para {namePokeUpperEnemy}");
+            playerNode.UnfreezePlayer();
+            Game.ChangeState(1);
+            inEncounter = false;
+            return;
+        }
+
+        Pokemon.nivel = levelPokeEnemy;
+        Pokemon.CalcularStats();
+
+        Game.PokemonInFight = Pokemon;
+
+        GD.Print($"Pokemon Hierbas: {Pokemon}");
 
         playerNode.FreezePlayer();
-        Game.EstadoJuego = 2;
+        Game.ChangeState(2);
 
         await transitionNode.StartTransition();
 
         await Task.Delay(750);
 
-        PackedScene transitionScene = (PackedScene)GD.Load("res://scenes/interfaces/combate.tscn");
+        PackedScene transitionScene = (PackedScene) GD.Load("res://scenes/interfaces/combate.tscn");
         CanvasLayer battle = transitionScene.Instantiate<CanvasLayer>();
 
         // FALTA OPTIMIZACIÓN
-        String namePokeUpper = pokemon.Nombre.ToUpper();
         var namePokeEnemy = battle.GetNode<Label>("InfoEnemy/namePokemon");
+        var namePokeAlly = battle.GetNode<Label>("InfoAlly/namePokemon");
 
-        namePokeEnemy.Text = namePokeUpper;
+        namePokeEnemy.Text = namePokeUpperEnemy;
+        namePokeAlly.Text = namePokeUpperAlly;
+
         var spriteEnemy = battle.GetNode<Sprite2D>("PokeEnemy");
+        var spriteAlly = battle.GetNode<Sprite2D>("PokeAlly");
 
         var levelEnemy = battle.GetNode<Label>("InfoEnemy/levelPokemon");
-        levelEnemy.Text = $"Lv{levelPoke}";
+        levelEnemy.Text = $"Lv{levelPokeEnemy}";
 
-        GD.Print($"{namePokeUpper} - Nv{levelPoke}");
-        Texture2D nuevoSprite = null;
+        var levelAlly = battle.GetNode<Label>("InfoAlly/levelPokemon");
+        levelAlly.Text = $"Lv{pokemonAllyFirst.nivel}";
 
-        try {
-            nuevoSprite = (Texture2D)GD.Load($"res://assets/pokemons/front/{namePokeUpper}.png");
-        } catch (Exception e) {
-            GD.Print(e.Message);
-            playerNode.UnfreezePlayer();
-            Game.EstadoJuego = 1;
-            return;
-        }
+        GD.Print($"{namePokeUpperEnemy} - Nv{levelPokeEnemy}");
 
         if (nuevoSprite == null){
             playerNode.UnfreezePlayer();
-            Game.EstadoJuego = 1;
+            Game.ChangeState(1);
             transitionNode.LetCamera();
+            inEncounter = false;
             return;
         }
         
+        Texture2D spriteTextureAlly = GD.Load<Texture2D>($"res://assets/pokemons/back/{namePokeUpperAlly}.png");
+
         spriteEnemy.Texture = nuevoSprite;
+        spriteAlly.Texture = spriteTextureAlly;
+
         Texture2D texture = spriteEnemy.Texture;
 
         transitionNode.LetCamera();
