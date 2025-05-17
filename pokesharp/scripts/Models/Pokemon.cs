@@ -1,13 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Godot;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Host;
 using Newtonsoft.Json;
 
-public class Pokemon {
+
+//[JsonObject(MemberSerialization.OptIn)]
+public partial class Pokemon : Resource {
+
     [JsonProperty("id")]
     public int IdPK { get; set; }
 
     [JsonProperty("pok_id")]
+    [Export]
     public int Id { get; set; }
 
     [JsonProperty("pok_name")]
+    [Export]
     public string Nombre { get; set; }
     public string NombreCamelCase { get; set; }
 
@@ -18,6 +28,7 @@ public class Pokemon {
     public int Peso { get; set; } // El último dígito es decimal realmente
 
     [JsonProperty("pok_base_experience")]
+    [Export]
     public int ExperienciaBase { get; set; }
 
     [JsonProperty("inTeam")]
@@ -52,21 +63,30 @@ public class Pokemon {
     [JsonProperty("capture_rate")]
     public int catchRate { get; set; }
 
+    [Export]
     public int nivel { get; set; }
+
+    public List<Movimiento> Movimientos { get; set; } = new List<Movimiento>();
 
     public override string ToString()
     {
         return $"Pokemon {Nombre} (Pokedex ID: {Id})\n" +
-               $"Nivel: {nivel}, HP: {currentHP}/{maxHP}\n, inTeam: {inTeam}" +
-               $"Stats: ATK: {atk}, DEF: {def}, SP_ATK: {sp_atk}, SP_DEF: {sp_def}, SPEED: {speed}\n" +
-               $"Base Stats: B_ATK: {b_atk}, B_DEF: {b_def}, B_SP_ATK: {b_sp_atk}, B_SP_DEF: {b_sp_def}, B_SPEED: {b_speed}\n" +
-               $"Altura: {Altura}, Peso: {Peso}, Experiencia Base: {ExperienciaBase}, Tasa de Captura: {catchRate}\n";
+               $"Nivel: {nivel}, HP: {currentHP}/{maxHP}, inTeam: {inTeam} \n" +
+               $"Stats: ATK: {atk}, DEF: {def}, SP_ATK: {sp_atk}, SP_DEF: {sp_def}, SPEED: {speed}, MAX_HP: {maxHP}\n" +
+               $"Base Stats: B_ATK: {b_atk}, B_DEF: {b_def}, B_SP_ATK: {b_sp_atk}, B_SP_DEF: {b_sp_def}, B_SPEED: {b_speed}, B_HP: {b_hp} \n" +
+               $"Altura: {Altura}, Peso: {Peso}, Experiencia Base: {ExperienciaBase}, Tasa de Captura: {catchRate}\n" +
+               $"Movimientos: \n- {string.Join("\n- ", Movimientos)}\n";
     }
 
     public void CalcularStats()
     {
-        maxHP = (int)(((2 * b_hp * nivel) / 100) + nivel + 10);
+        CalcularStatsBattle();
         currentHP = maxHP;
+    }
+
+    public void CalcularStatsBattle()
+    {
+        maxHP = (int)(((2 * b_hp * nivel) / 100) + nivel + 10);
 
         atk = (int)(((2 * b_atk * nivel) / 100) + 5);
         def = (int)(((2 * b_def * nivel) / 100) + 5);
@@ -76,5 +96,132 @@ public class Pokemon {
 
         // asignar nombre
         NombreCamelCase = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
+    }
+
+    public async Task<bool> getMovesetDB()
+    {
+        PokePlayerMovesController pokePlayerMovesController = new PokePlayerMovesController();
+        Movimientos = await pokePlayerMovesController.GetMovesetByPokeId(IdPK);
+
+        GD.Print($"Movimientos conseguidos de DB de {NombreCamelCase} - Movimientos:\n- {string.Join("\n- ", Movimientos)}\n");
+
+        return true;
+    }
+
+    public async Task<bool> generateMoveset(bool insertDB)
+    {
+        GD.Print("getMoveset()");
+
+        MovesController movesController = new MovesController();
+
+        var move1 = await movesController.GetMovimientoByPorcentage(Id);
+        move1.setTypeName();
+
+        var move2 = await movesController.GetMovimientoByPorcentage(Id);
+        move2.setTypeName();
+
+        var move3 = await movesController.GetMovimientoByPorcentage(Id);
+        move3.setTypeName();
+
+        var move4 = await movesController.GetMovimientoByPorcentage(Id);
+        move4.setTypeName();
+
+        Movimientos.Add(move1);
+        Movimientos.Add(move2);
+        Movimientos.Add(move3);
+        Movimientos.Add(move4);
+
+        GD.Print(Movimientos);
+
+        if (insertDB) {
+            var mgtDatabase = new MgtDatabase();
+
+            for (int i = 0; i < Movimientos.Count; i++) {
+                var movimiento = Movimientos[i];
+
+                var data = new Dictionary<string, object>()
+                {
+                    { "poke_player_id", IdPK }, // Asegúrate de tener esta propiedad en el Pokémon
+                    { "move_id", movimiento.move_id },
+                    { "inSlot", i + 1 } // Convertimos a short por el tipo smallint
+                };
+
+                bool insertSuccess = await mgtDatabase.InsertIntoTable("poke_players_moves", data);
+
+                if (insertSuccess)
+                    GD.Print($"✅ Movimiento insertado correctamente en el slot {i}: {movimiento.move_name}");
+                else
+                    GD.PrintErr($"❌ Error al insertar el movimiento en el slot {i}: {movimiento.move_name}");
+            }
+        }
+        return true;
+    }
+
+    public async Task<int> AtacarPokemon(Pokemon pokemonEnemy, Movimiento movUtilizado) {
+        CalcularStatsBattle();
+        pokemonEnemy.CalcularStatsBattle();
+
+        GD.Print($"Nivel pokemon atacante {nivel} \n" +
+                 $"movUtilizadoMovePower {movUtilizado.move_power} \n" +
+                 $"atk {atk} \n" +
+                 $"pokeEnemy DEF {pokemonEnemy.def}"
+        );
+
+        if (movUtilizado.move_accuracy != 100) {
+            Random rnd = new Random();
+            var numRandom = rnd.Next(1, 100);
+
+            GD.Print($"Numrandom {numRandom} acc - {movUtilizado.move_accuracy}");
+
+            // Movimiento fallido
+            if (numRandom > movUtilizado.move_accuracy)
+                return -1;
+        }
+
+        GD.Print($"(((2f * {nivel} / 5f) + 2f) * {movUtilizado.move_power * atk / pokemonEnemy.def}) / 50f + 2f");
+
+        float daño = (float) (((2f * nivel / 5f) + 2f) * movUtilizado.move_power * atk / pokemonEnemy.def) / 50f + 2f;
+
+        GD.Print($"Daño resultado formula: {daño}");
+
+        PokemonTypesController pokemonTypesController = new PokemonTypesController();
+
+        List<int> typeIdsAlly = await pokemonTypesController.GetTypesByPokemonId(Id);
+        List<int> typeIdsEnemy = await pokemonTypesController.GetTypesByPokemonId(pokemonEnemy.Id);
+
+        bool tieneStab = typeIdsAlly.Contains(movUtilizado.type_id);
+        if (tieneStab)
+        {
+            daño *= 1.3f;
+        }
+
+        if (GenerarCritico()) {
+            GD.Print("¡Golpe crítico!");
+            daño *= 1.5f;
+        }
+
+        GD.Print($"Daño después de Stab y crit: {daño}");
+
+        float multiplicadorTotal = 1.0f;
+
+        foreach (int defensorTypeId in typeIdsEnemy)
+        {
+            int multiplicador = await pokemonTypesController.GetMultiplicadorTipo(movUtilizado.type_id, defensorTypeId);
+            GD.Print($"Calculando multiplicador de tipo {movUtilizado.type_id} vs {defensorTypeId}, resultado {multiplicador}");
+            float factor = multiplicador / 100f;
+            multiplicadorTotal *= factor;
+        }
+
+        daño *= multiplicadorTotal;
+
+        GD.Print($"Con multiplicadorTotal {multiplicadorTotal} daño total: {daño}");
+
+        return (int) daño;
+    }
+
+    public bool GenerarCritico()
+    {
+        Random rand = new Random();
+        return rand.Next(0, 16) == 0;
     }
 }

@@ -24,9 +24,24 @@ public class Player {
         return $"Player ID: {id}, Nickname: {nickname}, Skin: {skin}, Team Count: {listPokemonsTeam?.Count ?? 0}, Box Count: {listPokemonsCaja?.Count ?? 0}" +
                $"ListPokemonsTeam: {listPokemonsTeam}, ListPokemonsCaja: {listPokemonsCaja}";
     }
+
+    public bool checkVivos()
+    {
+        foreach (Pokemon pokeInTeam in listPokemonsTeam)
+        {
+            if (pokeInTeam.currentHP > 0)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
     
     public async Task<bool> AddPokeTeamAsync(Pokemon pokemon, Node sceneRoot)
     {
+        await pokemon.getMovesetDB();
+
         listPokemonsTeam.Add(pokemon);
 
         GD.Print($"Pokémon entrado a AddPokeTeamAsync() \n:{pokemon}");
@@ -62,7 +77,8 @@ public class Player {
 
         bool result = await pokemonPlayersController.UpdatePokemonInTeam(Game.PlayerPlaying.id, pokemon.IdPK, maxIdTeam);
 
-        if (result) {
+        if (result)
+        {
             GD.Print($"(UpdatePokemonInTeam) Ejecutado correctamente de playerId {Game.PlayerPlaying.id} - Id {pokemon.IdPK} - idTeam {maxIdTeam}");
         }
 
@@ -122,6 +138,14 @@ public class Player {
                 //GD.Print("Salió");
             } else {
                 if (!listPokemonsTeam.Contains(poke)) {
+                    await poke.getMovesetDB();
+
+                    if (poke.Movimientos == null || poke.Movimientos.Count < 4) {
+                        GD.Print($"Pokémon {poke.NombreCamelCase} con menos de 4 moves ({poke.Movimientos.Count} moves), generando moveset.");
+
+                        await poke.generateMoveset(true);
+                    }
+
                     //GD.Print($"Añadido pokemon team a {poke.NombreCamelCase}");
                     listPokemonsTeam.Add(poke);
                 }

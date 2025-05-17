@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 using System.Numerics;
+using System.Threading.Tasks;
 
 public partial class MainCharacter : CharacterBody2D
 {
@@ -78,12 +79,16 @@ public partial class MainCharacter : CharacterBody2D
             GD.Print("X: " + Position.X + " | Y: " + Position.Y);
         }
 
+        // debug
         if (Input.IsActionJustPressed("debug")) {
-            var root = GetTree().Root.GetNode("Game");
-            var scriptMenuPrincipal = root.GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
-            scriptMenuPrincipal.ColocarPokemonsVisual();
+            GD.Print("");
 
-            GD.Print($"\n(listPokemonsCaja) Count {Game.PlayerPlaying.listPokemonsCaja.Count} - Lista pokemons en caja:");
+            _ = CallDeferred(nameof(CallGetRandomMovement));
+
+            _ = CallDeferred(nameof(CallGetRandomTutorMovement));
+
+            _ = CallDeferred(nameof(CallGetRandomTypeMovement));
+            /*GD.Print($"\n(listPokemonsCaja) Count {Game.PlayerPlaying.listPokemonsCaja.Count} - Lista pokemons en caja:");
             foreach (Pokemon pokemon in Game.PlayerPlaying.listPokemonsCaja) {
                 GD.Print(pokemon);
             }
@@ -91,7 +96,7 @@ public partial class MainCharacter : CharacterBody2D
             GD.Print($"\n(listPokemonsTeam) Count {Game.PlayerPlaying.listPokemonsTeam.Count} - Lista pokemons en team:");
             foreach (Pokemon pokemon in Game.PlayerPlaying.listPokemonsTeam) {
                 GD.Print(pokemon);
-            }
+            }*/
         }
 
         // Ajusta la velocidad dependiendo de si está corriendo o no
@@ -119,6 +124,27 @@ public partial class MainCharacter : CharacterBody2D
                 last_direction = Godot.Vector2.Zero;
             }
         }
+    }
+
+    private async void CallGetRandomMovement()
+    {
+        var movesController = new MovesController();
+        Movimiento mov = await movesController.GetRandomMovement();
+        GD.Print($"Random mov: {mov}");
+    }
+
+    private async void CallGetRandomTutorMovement()
+    {
+        var movesController = new MovesController();
+        Movimiento mov = await movesController.GetRandomTutorMovement(1);
+        GD.Print($"Random Tutor mov: {mov}");
+    }
+
+    private async void CallGetRandomTypeMovement()
+    {
+        var movesController = new MovesController();
+        Movimiento mov = await movesController.GetRandomTypeMovement(1);
+        GD.Print($"Random Type mov: {mov}");
     }
 
     private void play_walk_animation(Godot.Vector2 direction) {

@@ -156,14 +156,15 @@ public partial class PaginaInicioUI : Node2D
             player = await PlayersControllers.Login(nickname.Text, password.Text);
 
             if (player != null) {
-                await player.asignarPokemons();
-                
                 Game.PlayerPlaying = player;
 
+                // TO DO: Pantalla cargando
+
+                await player.asignarPokemons();
+                
                 // Se asignan visualmente los pokemons del jugador en el menu principal
                 var menuPrincipal = GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
                 menuPrincipal.ColocarPokemonsVisual();
-
 
                 // ventana de jugar
                 var credencialesControl = GetNode<Control>("Credenciales");

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://265aok0khn3c"]
+[gd_scene load_steps=26 format=4 uid="uid://265aok0khn3c"]
 
 [ext_resource type="Texture2D" uid="uid://ds01l6lvlensw" path="res://assets/textures/tilesets/thistle_town_by_ekat99_dg7ast6.png" id="1_an3xm"]
 [ext_resource type="Texture2D" uid="uid://3ax3g2m4s87x" path="res://assets/textures/tilesets/Exteriores increible.png" id="2_ef7i7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c7w21ijtiy5eq" path="res://assets/textures/tilesets/Exterior.png" id="4_xjs0c"]
 [ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/Door.cs" id="6_djuld"]
 [ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="7_xpwe3"]
+[ext_resource type="PackedScene" uid="uid://br88taxkw5e2k" path="res://scenes/others/npc.tscn" id="8_3o77c"]
 [ext_resource type="Texture2D" uid="uid://ce47d1w0f1tkb" path="res://assets/textures/tilesets/Terreno y decoración interior.png" id="8_l2txa"]
 [ext_resource type="Script" uid="uid://bqe0hxs18hwrc" path="res://scripts/Hierbas.cs" id="8_tqktf"]
 
@@ -457,6 +458,12 @@ text = "Laboratorio"
 horizontal_alignment = 1
 language = "es"
 metadata/_edit_use_anchors_ = true
+
+[node name="NPC" parent="1_topGround" instance=ExtResource("8_3o77c")]
+position = Vector2(23, -538)
+scale = Vector2(0.55, 0.55)
+Nombre = "Prueba"
+Dialogos = PackedStringArray("🎶 ¡Cha-ra-raaan! 🎶", "¡Hola,  viajero!  Este  acordeon  ha  visto  mas  caminos  que  mis  zapatos ... ¡Y  eso  ya  es  decir  mucho! ")
 
 [node name="1_Hierbas" type="TileMapLayer" parent="."]
 light_mask = 3

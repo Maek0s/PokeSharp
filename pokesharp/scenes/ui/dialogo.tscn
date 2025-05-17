@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://yysyuybpy0k3"]
+
+[ext_resource type="Script" uid="uid://dqcjylm183fb7" path="res://scripts/ui/Dialogo.cs" id="1_b8unc"]
+[ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="1_yeyg1"]
+[ext_resource type="Theme" uid="uid://dgqnjdnwnafhv" path="res://presets/labelThemes/lblObjects.tres" id="3_qoauy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qoauy"]
+bg_color = Color(0.731078, 0.80436, 0.898971, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_6rvk0"]
+Panel/styles/panel = SubResource("StyleBoxFlat_qoauy")
+
+[sub_resource type="Theme" id="Theme_sejck"]
+MarginContainer/constants/margin_left = 6
+MarginContainer/constants/margin_top = 7
+
+[sub_resource type="Theme" id="Theme_mrvyt"]
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/fonts/normal_font = ExtResource("1_yeyg1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sejck"]
+bg_color = Color(0.567681, 0.67635, 0.81957, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="Theme" id="Theme_w8f62"]
+Panel/styles/panel = SubResource("StyleBoxFlat_sejck")
+
+[node name="Dialogo" type="CanvasLayer"]
+script = ExtResource("1_b8unc")
+
+[node name="Caja" type="Panel" parent="."]
+offset_left = 4.0
+offset_top = 514.0
+offset_right = 757.0
+offset_bottom = 638.0
+theme = SubResource("Theme_6rvk0")
+
+[node name="MarginContainer" type="MarginContainer" parent="Caja"]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 736.0
+offset_bottom = 113.0
+theme = SubResource("Theme_sejck")
+
+[node name="Text" type="RichTextLabel" parent="Caja/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_mrvyt")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = 5
+text = "¿Quieres  combatir?
+"
+
+[node name="PanelName" type="Panel" parent="Caja"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = -40.0
+offset_right = 211.0
+theme = SubResource("Theme_w8f62")
+
+[node name="lblName" type="Label" parent="Caja/PanelName"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 197.0
+offset_bottom = 38.0
+theme = ExtResource("3_qoauy")
+vertical_alignment = 1
+
+[node name="lblContinuar" type="Label" parent="Caja/PanelName"]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 137.0
+offset_right = 734.0
+offset_bottom = 160.0
+theme = ExtResource("3_qoauy")
+theme_override_font_sizes/font_size = 10
+text = "Presiona  E   para   seguir"
+horizontal_alignment = 2
+vertical_alignment = 2

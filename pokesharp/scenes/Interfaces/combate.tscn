@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://dytm46rpe0t7a"]
+[gd_scene load_steps=130 format=3 uid="uid://dytm46rpe0t7a"]
 
 [ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
 [ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
@@ -26,7 +26,10 @@
 [ext_resource type="Texture2D" uid="uid://cq8m322gjcnuh" path="res://multimedia/images/superballItem.png" id="14_mbf2p"]
 [ext_resource type="Texture2D" uid="uid://b5q5yeqxkx4bb" path="res://multimedia/images/ultraballItem.png" id="15_dyosk"]
 [ext_resource type="Texture2D" uid="uid://cmjwlajnah3on" path="res://multimedia/images/masterballItem.png" id="16_wy4kp"]
+[ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="17_ktegq"]
 [ext_resource type="AudioStream" uid="uid://by2br8a4wse4m" path="res://assets/audios/wildBattleMusic.wav" id="27_1qwbm"]
+[ext_resource type="Theme" uid="uid://cayq0xnsirnjq" path="res://presets/panelThemes/invisiblePanel.tres" id="27_1renb"]
+[ext_resource type="Theme" uid="uid://di00nl18u0vol" path="res://presets/btnThemes/btnInvisible.tres" id="28_ewkk2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jijpb"]
 atlas = ExtResource("4_jooxb")
@@ -706,8 +709,9 @@ content_margin_bottom = 5.0
 bg_color = Color(0.830335, 0.830335, 0.830335, 1)
 
 [sub_resource type="Theme" id="Theme_38y2l"]
-default_font = ExtResource("6_61ry6")
+default_font = ExtResource("17_ktegq")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/normal_font_size = 16
 RichTextLabel/styles/background = SubResource("StyleBoxFlat_nm1h7")
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_n7g8q")
 
@@ -807,6 +811,18 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewkk2"]
+bg_color = Color(0.94909, 0.400447, 0.344363, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_ravmv"]
+Label/font_sizes/font_size = 15
+Panel/styles/panel = SubResource("StyleBoxFlat_ewkk2")
+
 [node name="Combate" type="CanvasLayer"]
 offset = Vector2(7.815, -7.555)
 scale = Vector2(1.31, 1.31)
@@ -882,7 +898,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="levelPokemon" type="Label" parent="InfoEnemy/Panel"]
+[node name="textHP" type="Label" parent="InfoEnemy/Panel"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 3.0
@@ -935,7 +951,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="levelPokemon" type="Label" parent="InfoAlly/Panel"]
+[node name="textHP" type="Label" parent="InfoAlly/Panel"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 3.0
@@ -1022,6 +1038,7 @@ offset_right = 8.71198
 offset_bottom = -1.0
 theme = SubResource("Theme_38y2l")
 bbcode_enabled = true
+scroll_following = true
 autowrap_mode = 0
 
 [node name="Moveset" type="Control" parent="ParteInferior/BoxResultCombat"]
@@ -1039,6 +1056,7 @@ text = "Ascuas
 "
 
 [node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/firstMove"]
+visible = false
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -1059,6 +1077,7 @@ text = "Ascuas
 "
 
 [node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/secondMove"]
+visible = false
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -1079,6 +1098,7 @@ text = "Ascuas
 "
 
 [node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/thirdMove"]
+visible = false
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -1099,6 +1119,7 @@ text = "Ascuas
 "
 
 [node name="Label" type="Label" parent="ParteInferior/BoxResultCombat/Moveset/fourthMove"]
+visible = false
 layout_mode = 0
 offset_left = 149.317
 offset_top = 28.5077
@@ -1370,6 +1391,213 @@ vertical_alignment = 1
 position = Vector2(26.416, 24.1641)
 scale = Vector2(0.262049, 0.261723)
 texture = ExtResource("16_wy4kp")
+
+[node name="TuEquipo" type="Panel" parent="ParteInferior"]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 13.0
+offset_right = 508.0
+offset_bottom = 111.0
+theme = ExtResource("27_1renb")
+
+[node name="Poke1" type="Panel" parent="ParteInferior/TuEquipo"]
+visible = false
+layout_mode = 0
+offset_right = 161.3
+offset_bottom = 49.0
+theme = SubResource("Theme_ravmv")
+
+[node name="namePokemon" type="Label" parent="ParteInferior/TuEquipo/Poke1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.76337
+offset_right = 160.0
+offset_bottom = 26.7634
+theme = ExtResource("12_ddtha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke1"]
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 42.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke1"]
+layout_mode = 0
+offset_right = 161.0
+offset_bottom = 49.0
+theme = ExtResource("28_ewkk2")
+
+[node name="Poke2" type="Panel" parent="ParteInferior/TuEquipo"]
+visible = false
+offset_left = -0.302
+offset_top = 47.828
+offset_right = 160.998
+offset_bottom = 96.828
+theme = SubResource("Theme_ravmv")
+
+[node name="namePokemon" type="Label" parent="ParteInferior/TuEquipo/Poke2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.76337
+offset_right = 160.0
+offset_bottom = 26.7634
+theme = ExtResource("12_ddtha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke2"]
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 42.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke2"]
+offset_right = 161.0
+offset_bottom = 49.0
+theme = ExtResource("28_ewkk2")
+
+[node name="Poke3" type="Panel" parent="ParteInferior/TuEquipo"]
+visible = false
+offset_left = 160.004
+offset_top = -0.263
+offset_right = 321.304
+offset_bottom = 48.737
+theme = SubResource("Theme_ravmv")
+
+[node name="namePokemon" type="Label" parent="ParteInferior/TuEquipo/Poke3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.76337
+offset_right = 160.0
+offset_bottom = 26.7634
+theme = ExtResource("12_ddtha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke3"]
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 42.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke3"]
+offset_right = 161.0
+offset_bottom = 49.0
+theme = ExtResource("28_ewkk2")
+
+[node name="Poke4" type="Panel" parent="ParteInferior/TuEquipo"]
+visible = false
+offset_left = 160.004
+offset_top = 47.8283
+offset_right = 321.304
+offset_bottom = 96.8283
+theme = SubResource("Theme_ravmv")
+
+[node name="namePokemon" type="Label" parent="ParteInferior/TuEquipo/Poke4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.76337
+offset_right = 160.0
+offset_bottom = 26.7634
+theme = ExtResource("12_ddtha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke4"]
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 42.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke4"]
+offset_right = 161.0
+offset_bottom = 49.0
+theme = ExtResource("28_ewkk2")
+
+[node name="Poke5" type="Panel" parent="ParteInferior/TuEquipo"]
+visible = false
+offset_left = 320.309
+offset_top = -0.263352
+offset_right = 481.609
+offset_bottom = 48.7366
+theme = SubResource("Theme_ravmv")
+
+[node name="namePokemon" type="Label" parent="ParteInferior/TuEquipo/Poke5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.76337
+offset_right = 160.0
+offset_bottom = 26.7634
+theme = ExtResource("12_ddtha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke5"]
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 42.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke5"]
+offset_right = 161.0
+offset_bottom = 49.0
+theme = ExtResource("28_ewkk2")
+
+[node name="Poke6" type="Panel" parent="ParteInferior/TuEquipo"]
+visible = false
+offset_left = 320.309
+offset_top = 47.8282
+offset_right = 481.609
+offset_bottom = 96.8282
+theme = SubResource("Theme_ravmv")
+
+[node name="namePokemon" type="Label" parent="ParteInferior/TuEquipo/Poke6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.76337
+offset_right = 160.0
+offset_bottom = 26.7634
+theme = ExtResource("12_ddtha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke6"]
+offset_left = 5.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 42.0
+theme = SubResource("Theme_efw1u")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke6"]
+offset_right = 161.0
+offset_bottom = 49.0
+theme = ExtResource("28_ewkk2")
 
 [node name="TransitionManager" type="Node2D" parent="." node_paths=PackedStringArray("allyPokeSprite", "infoAlly", "enemyPokeSprite", "infoEnemy")]
 script = ExtResource("8_eej6d")

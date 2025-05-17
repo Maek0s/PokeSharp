@@ -5,6 +5,9 @@ using System;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using Supabase;
+using System.Linq;
+using Microsoft.IdentityModel.Tokens;
 
 public partial class MgtDatabase : Node
 {
@@ -28,39 +31,72 @@ public partial class MgtDatabase : Node
         TestConnection();
     }
 
-    public async Task<bool> InsertIntoTable(string tableName, Dictionary<string, object> data)
+    private Task<string> SendRequest(string url, string[] headers, Godot.HttpClient.Method method, string body)
     {
-        string url = $"{_supabaseUrl}{tableName}";
-        string json = JsonConvert.SerializeObject(data);
-        
-        var headers = new string[]
-        {
-            $"apikey: {_supabaseKey}",
-            $"Authorization: Bearer {_supabaseKey}",
-            "Content-Type: application/json"
-        };
+        var tcs = new TaskCompletionSource<string>();
 
-        GD.Print(url);
-        GD.Print(json);
-
-        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Post, json);
-        
-        if (response != null)
+        // Verificar que _httpRequest no sea nulo
+        if (_httpRequest == null)
         {
-            GD.Print($"✅ Insertado en {tableName}: {response}");
-            return true;
+            GD.PrintErr("[❌] HttpRequest no está inicializado.");
+            tcs.SetResult(null);
+            return tcs.Task;
         }
-        else
+
+        // Solo desconectar si ya está conectado
+        _httpRequest.RequestCompleted += OnRequestCompleted;
+
+        byte[] bodyBytes = null;
+        if (!string.IsNullOrEmpty(body))
         {
-            GD.PrintErr($"[❌] Error al insertar en {tableName}");
-            return false;
+            bodyBytes = Encoding.UTF8.GetBytes(body);
+        }
+
+        var err = Error.Unavailable;
+
+        try
+        {
+            err = _httpRequest.Request(url, headers, method, body);
+        }
+        catch (System.Exception e)
+        {
+            GD.PrintErr($"Error general {e.Message}");
+            _httpRequest.RequestCompleted -= OnRequestCompleted;
+            tcs.SetResult(null);
+            return tcs.Task;
+        }
+        
+        if (err != Error.Ok)
+        {
+            GD.PrintErr("[❌] Error al enviar la solicitud.");
+            tcs.SetResult(null);
+        }
+
+        return tcs.Task;
+
+        void OnRequestCompleted(long result, long responseCode, string[] responseHeaders, byte[] body)
+        {
+            _httpRequest.RequestCompleted -= OnRequestCompleted;
+
+            string responseBody = Encoding.UTF8.GetString(body);
+
+            if (responseCode >= 200 && responseCode < 300)
+            {
+                string json = Encoding.UTF8.GetString(body);
+                tcs.TrySetResult(json);
+            }
+            else
+            {
+                GD.PrintErr($"[❌] Error en la solicitud: {responseCode}, Respuesta: {responseBody}");
+                tcs.TrySetResult(null);
+            }
         }
     }
 
     public async Task<T[]> GetFromTable<T>(string tableName, string query)
     {
         string url = $"{_supabaseUrl}{tableName}?{query}&apikey={_supabaseKey}";
-        GD.Print(url);
+        //GD.Print(url);
         var headers = new string[]
         {
             $"Authorization: Bearer {_supabaseKey}",
@@ -75,11 +111,44 @@ public partial class MgtDatabase : Node
             GD.PrintErr($"[❌] Error general al obtener información. {e.Message}");
         }
 
+        if (response == null)
+            return null;
+
         if (response.Equals(""))
             return null;
 
         return JsonConvert.DeserializeObject<T[]>(response);
     }
+
+    public async Task<bool> InsertIntoTable(string tableName, Dictionary<string, object> data)
+    {
+        string url = $"{_supabaseUrl}{tableName}";
+        string json = JsonConvert.SerializeObject(data);
+        
+        var headers = new string[]
+        {
+            $"apikey: {_supabaseKey}",
+            $"Authorization: Bearer {_supabaseKey}",
+            "Content-Type: application/json"
+        };
+
+        /*GD.Print(url);
+        GD.Print(json);*/
+
+        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Post, json);
+        
+        if (response != null)
+        {
+            GD.Print($"✅ Insertado en {tableName}: {response}");
+            return true;
+        }
+        else
+        {
+            GD.PrintErr($"[❌] Error al insertar en {tableName}");
+            return false;
+        }
+    }
+    
 
     private async void TestConnection()
     {
@@ -185,8 +254,8 @@ public partial class MgtDatabase : Node
 
         string json = JsonConvert.SerializeObject(data);
 
-        GD.Print($"(UpdatePokemonInTeam) PATCH URL: \n{url}\n");
-        GD.Print($"Body: {json}");
+        /*GD.Print($"(UpdatePokemonInTeam) PATCH URL: \n{url}\n");
+        GD.Print($"Body: {json}");*/
 
         string response = await SendRequest(url, headers, Godot.HttpClient.Method.Patch, json);
 
@@ -202,188 +271,161 @@ public partial class MgtDatabase : Node
         }
     }
 
-
-    private Task<string> SendRequest(string url, string[] headers, Godot.HttpClient.Method method, string body)
+    public async Task<List<Movimiento>> GetAllMovesByPokemonId(int pokePlayerId)
     {
-        var tcs = new TaskCompletionSource<string>();
+        string url =
+            $"{_supabaseUrl}moves" +
+            $"?select=move_id,move_name,type_id,move_power,move_pp,move_accuracy," +
+            $"poke_players_moves!inner(poke_player_id)" +       // <-- aquí
+            $"&poke_players_moves.poke_player_id=eq.{pokePlayerId}" +
+            $"&apikey={_supabaseKey}";
 
-        // Verificar que _httpRequest no sea nulo
-        if (_httpRequest == null)
-        {
-            GD.PrintErr("[❌] HttpRequest no está inicializado.");
-            tcs.SetResult(null);
-            return tcs.Task;
-        }
-
-        // Solo desconectar si ya está conectado
-        _httpRequest.RequestCompleted += OnRequestCompleted;
-
-        byte[] bodyBytes = null;
-        if (!string.IsNullOrEmpty(body))
-        {
-            bodyBytes = Encoding.UTF8.GetBytes(body);
-        }
-
-        var err = Error.Unavailable;
-
-        try
-        {
-            err = _httpRequest.Request(url, headers, method, body);
-        }
-        catch (System.Exception e)
-        {
-            GD.PrintErr($"Error general {e.Message}");
-        }
-        
-        if (err != Error.Ok)
-        {
-            GD.PrintErr("[❌] Error al enviar la solicitud.");
-            tcs.SetResult(null);
-        }
-
-        return tcs.Task;
-
-        void OnRequestCompleted(long result, long responseCode, string[] responseHeaders, byte[] body)
-        {
-            _httpRequest.RequestCompleted -= OnRequestCompleted;
-
-            string responseBody = Encoding.UTF8.GetString(body);
-
-            if (responseCode >= 200 && responseCode < 300)
-            {
-                string json = Encoding.UTF8.GetString(body);
-                tcs.TrySetResult(json);
-            }
-            else
-            {
-                GD.PrintErr($"[❌] Error en la solicitud: {responseCode}, Respuesta: {responseBody}");
-                tcs.TrySetResult(null);
-            }
-        }
-    }
-}
-    
-/*
-    public async Task<bool> UpdatePokemonInTeam(int playerId, int pokId, int newInTeam)
-    {
-        string url = $"{_supabaseUrl}pokemon_players?player_id=eq.{playerId}&pok_id=eq.{pokId}";
+        GD.Print($"(GetAllMovesByPokemonId) URL {url}");
 
         var headers = new string[]
         {
-            $"apikey: {_supabaseKey}",
+            $"Authorization: Bearer {_supabaseKey}",
+            "Content-Type: application/json"
+        };
+
+        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Get, "");
+
+        if (string.IsNullOrEmpty(response))
+        {
+            GD.PrintErr("❌ Error al obtener los movimientos.");
+            return null;
+        }
+
+        try
+        {
+            // Deserializa directamente a lista de Movimiento
+            var moves = JsonConvert.DeserializeObject<List<Movimiento>>(response);
+            GD.Print($"✅ Movimientos obtenidos: {moves.Count}");
+            return moves;
+        }
+        catch (System.Exception ex)
+        {
+            GD.PrintErr("❌ Error al deserializar movimientos: " + ex.Message);
+            return null;
+        }
+    }
+
+    public async Task<bool> InsertPokePlayerMove(Movimiento movimiento)
+    {
+        string url = $"{_supabaseUrl}poke_players_moves?apikey={_supabaseKey}";
+        var headers = new[]
+        {
             $"Authorization: Bearer {_supabaseKey}",
             "Content-Type: application/json",
-            "Prefer: return=representation"
+            "Prefer: return=minimal"      // <-- Le pide a Supabase que devuelva 204 No Content en lugar del array
         };
 
-        var data = new Dictionary<string, int>
+        var payload = new
         {
-            { "inTeam", newInTeam }
+            poke_player_id = Game.PlayerPlaying.id,
+            move_id = movimiento.move_id,
+            inSlot = -1
         };
+        string body = JsonConvert.SerializeObject(payload);
 
-        string json = JsonConvert.SerializeObject(data);
+        // Envías la petición
+        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Post, body);
 
-        GD.Print($"(UpdatePokemonInTeam) PATCH URL: {url}");
-        GD.Print($"Body: {json}");
-
-        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Patch, json);
-
+        // Si no hubo error la petición devolvió algo (incluso vacío, por return=minimal)
         if (response != null)
         {
-            GD.Print($"✅ Pokémon actualizado: inTeam = {newInTeam}");
+            GD.Print($"✅ Insertado poke_players_moves: poke_player_id={Game.PlayerPlaying.id}, move_id={movimiento.move_id}, inSlot={-1}");
             return true;
         }
         else
         {
-            GD.PrintErr("[❌] Error al actualizar el campo inTeam.");
+            GD.PrintErr("❌ Error al insertar en poke_players_moves.");
             return false;
         }
     }
-*/
-/*
-    private Task<string> SendRequest(string url, string[] headers, Godot.HttpClient.Method method, string body)
+
+    public async Task<List<int>> GetTypeIdsByPokemonId(int pokId)
     {
-        var tcs = new TaskCompletionSource<string>();
+        string url =
+            $"{_supabaseUrl}pokemon_types" +
+            $"?select=type_id" +
+            $"&pok_id=eq.{pokId}" +
+            $"&apikey={_supabaseKey}";
 
-        // Verificar que _httpRequest no sea nulo
-        if (_httpRequest == null)
+        //GD.Print($"(GetTypeIdsByPokemonId) URL: {url}");
+
+        var headers = new string[]
         {
-            GD.PrintErr("[❌] HttpRequest no está inicializado.");
-            tcs.SetResult(null);
-            return tcs.Task;
+            $"Authorization: Bearer {_supabaseKey}",
+            "Content-Type: application/json"
+        };
+
+        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Get, "");
+
+        if (string.IsNullOrEmpty(response))
+        {
+            GD.PrintErr("❌ Error al obtener los tipos.");
+            return null;
         }
 
-        // Solo desconectar si ya está conectado
-        _httpRequest.RequestCompleted += OnRequestCompleted;
-
-        byte[] bodyBytes = null;
-        if (!string.IsNullOrEmpty(body))
+         try
         {
-            bodyBytes = Encoding.UTF8.GetBytes(body);
+            var rawList = JsonConvert.DeserializeObject<List<Dictionary<string, int>>>(response);
+            return rawList.Select(x => x["type_id"]).ToList();
         }
-
-        var err = Error.Unavailable;
-
-        try
+        catch (System.Exception ex)
         {
-            err = _httpRequest.Request(url, headers, method, body);
+            GD.PrintErr("❌ Error al deserializar type_ids: " + ex.Message);
+            return null;
         }
-        catch (System.Exception e)
-        {
-            GD.PrintErr($"Error general {e.Message}");
+    }
 
-            if (err == Error.Busy) {
-                _httpRequest2 = new HttpRequest();
-                
-                AddChild(_httpRequest2);
-                _httpRequest2.RequestCompleted += OnRequestCompleted2;
+    public async Task<int> GetMultiplicadorTipo(int atacanteTypeId, int defensorTypeId)
+    {
+        string url = $"{_supabaseUrl}type_efficacy" +
+                    $"?select=damage_factor" +
+                    $"&damage_type_id=eq.{atacanteTypeId}&target_type_id=eq.{defensorTypeId}" +
+                    $"&apikey={_supabaseKey}";
 
-                err = _httpRequest2.Request(url, headers, method, body);
+        var headers = new string[] {
+            $"Authorization: Bearer {_supabaseKey}",
+            "Content-Type: application/json"
+        };
+
+        string response = await SendRequest(url, headers, Godot.HttpClient.Method.Get, "");
+
+        if (string.IsNullOrEmpty(response)) return 100;
+
+        try {
+            var resultado = JsonConvert.DeserializeObject<List<TipoEfectividad>>(response);
+
+            if (resultado.IsNullOrEmpty()) {
+                GD.PrintErr("Resultado es null or empty");
+                return 100;
             }
-        }
-        
-        if (err != Error.Ok)
-        {
-            GD.PrintErr("[❌] Error al enviar la solicitud.");
-            tcs.SetResult(null);
-        }
 
-        return tcs.Task;
-
-        void OnRequestCompleted(long result, long responseCode, string[] responseHeaders, byte[] body)
-        {
-            _httpRequest.RequestCompleted -= OnRequestCompleted;
-
-            string responseBody = Encoding.UTF8.GetString(body);
-
-            if (responseCode >= 200 && responseCode < 300)
-            {
-                string json = Encoding.UTF8.GetString(body);
-                tcs.TrySetResult(json);
+            if (resultado == null || resultado[0].multiplicador == 0) {
+                GD.PrintErr("Null or == 0");
+                return 100;
+            } else {
+                GD.Print("Devuelve correctamente el resultado ", resultado[0].multiplicador);
+                return resultado[0].multiplicador;
             }
-            else
-            {
-                GD.PrintErr($"[❌] Error en la solicitud: {responseCode}, Respuesta: {responseBody}");
-                tcs.TrySetResult(null);
-            }
+        } catch (Exception e) {
+            GD.PrintErr($"Ha ocurrido un error. {e.Message} \n {e.StackTrace}");
+            return 100;
         }
-*/
-        // void OnRequestCompleted2(long result, long responseCode, string[] responseHeaders, byte[] body)
-        // {
-        //     _httpRequest.RequestCompleted -= OnRequestCompleted2;
+    }
 
-        //     string responseBody = Encoding.UTF8.GetString(body);
+    public class TipoEfectividad
+    {
+        [JsonProperty("damage_factor")]
+        public int multiplicador { get; set; }
 
-        //     if (responseCode >= 200 && responseCode < 300)
-        //     {
-        //         string json = Encoding.UTF8.GetString(body);
-        //         tcs.TrySetResult(json);
-        //     }
-        //     else
-        //     {
-        //         GD.PrintErr($"[❌] Error en la solicitud: {responseCode}, Respuesta: {responseBody}");
-        //         tcs.TrySetResult(null);
-        //     }
-        // }
-    //}
-  
+        public override string ToString()
+        {
+            return $"TipoEfectividad: multiplicador {multiplicador}";
+        }
+    }
+
+}

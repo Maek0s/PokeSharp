@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://d6ds0jqd105s"]
+
+[ext_resource type="Script" uid="uid://cagmp47lh1ne3" path="res://scripts/models/Entrenador.cs" id="1_4oha4"]
+
+[node name="Entrenador" type="CharacterBody2D"]
+script = ExtResource("1_4oha4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="InteractiveArea" type="CollisionShape2D" parent="Area2D"]

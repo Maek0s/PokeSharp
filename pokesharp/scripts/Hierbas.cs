@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class Hierbas : Area2D
@@ -53,6 +54,12 @@ public partial class Hierbas : Area2D
     private async void pokemonFound() {
         GD.Print("Pokémon!");
 
+        if (!Game.PlayerPlaying.checkVivos())
+        {
+            GD.Print("No tiene pokémons vivos.");
+            return;
+        }
+
         var musicBattle = GetNode<AudioStreamPlayer2D>("/root/Game/SFX/battleMusic");
         musicBattle.VolumeDb = -15.0f;
 
@@ -61,11 +68,12 @@ public partial class Hierbas : Area2D
         var playerNode = GetNode<MainCharacter>("/root/Game/Player");
         var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
 
-
         // gen 1 hasta la 5
         int idPoke = getRandom(1, 649);
         int levelPokeEnemy = getRandom(MinLevel, MaxLevel);
         Pokemon = await PokemonController.GetPokemonById(idPoke);
+        Pokemon.nivel = levelPokeEnemy;
+        Pokemon.CalcularStats();
 
         Pokemon pokemonAllyFirst = new Pokemon();
 
@@ -74,7 +82,12 @@ public partial class Hierbas : Area2D
             pokemonAllyFirst.Nombre = "charmander";
             pokemonAllyFirst.NombreCamelCase = "Charmander";
         } else {
-            pokemonAllyFirst = Game.PlayerPlaying.listPokemonsTeam[0];
+            foreach (Pokemon pokeTeam in Game.PlayerPlaying.listPokemonsTeam) {
+                if (pokeTeam.currentHP > 0) {
+                    pokemonAllyFirst = pokeTeam;
+                    break;
+                }
+            }
         }
 
         String namePokeUpperEnemy = Pokemon.Nombre.ToUpper();
@@ -90,16 +103,23 @@ public partial class Hierbas : Area2D
             return;
         }
 
-        Pokemon.nivel = levelPokeEnemy;
-        Pokemon.CalcularStats();
-
-        Game.PokemonInFight = Pokemon;
-
-        GD.Print($"Pokemon Hierbas: {Pokemon}");
-
         playerNode.FreezePlayer();
         musicBattle.Play();
         Game.ChangeState(2);
+
+        MovesController movesController = new MovesController();
+        List<Movimiento> listMovimientosPoke = new List<Movimiento>();
+
+        for (int i = 0; i < 4; i++) {
+            listMovimientosPoke.Add(await movesController.GetMovimientoByPorcentage(idPoke));
+        }
+
+        Game.fight = false;
+        Game.PokemonInFight = Pokemon;
+
+        Pokemon.Movimientos = listMovimientosPoke;
+
+        GD.Print($"Pokemon Hierbas: {Pokemon}");
 
         await transitionNode.StartTransition();
 

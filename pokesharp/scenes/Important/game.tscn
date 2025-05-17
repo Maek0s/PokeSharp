@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxy81ylqskur8"]
+[gd_scene load_steps=12 format=3 uid="uid://cxy81ylqskur8"]
 
 [ext_resource type="Script" uid="uid://cjjg1gaabdb5" path="res://scripts/Game.cs" id="1_cp55e"]
 [ext_resource type="PackedScene" uid="uid://265aok0khn3c" path="res://scenes/mapas/pueblo_arcilla.tscn" id="3_72jce"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dkod8e4mtalxi" path="res://scenes/interfaces/pause_menu.tscn" id="7_6ulj2"]
 [ext_resource type="PackedScene" uid="uid://basly4n0vmnkd" path="res://scenes/others/pagina_inicio.tscn" id="8_883ts"]
 [ext_resource type="PackedScene" uid="uid://c14i3tmyehje4" path="res://scenes/interfaces/menu_principal.tscn" id="9_17aap"]
+[ext_resource type="PackedScene" uid="uid://yysyuybpy0k3" path="res://scenes/ui/dialogo.tscn" id="11_oj8n7"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -68,3 +69,5 @@ visible = false
 
 [node name="MenuPrincipal" parent="inScreen/UI" instance=ExtResource("9_17aap")]
 visible = false
+
+[node name="Dialogo" parent="inScreen/UI" instance=ExtResource("11_oj8n7")]

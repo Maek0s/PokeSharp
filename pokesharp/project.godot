@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
 [global_group]
 
 mapa=""
+jugador="Grupo en el que está el jugador."
 
 [importer_defaults]
 

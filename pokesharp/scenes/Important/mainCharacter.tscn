@@ -636,7 +636,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["jugador"]]
 z_index = 1
 script = ExtResource("1_lgr1c")
 

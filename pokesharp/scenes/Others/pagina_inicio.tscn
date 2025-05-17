@@ -327,15 +327,15 @@ text = "Ya  tienes  una  cuenta?  Inicia sesion"
 [node name="MusicManager" type="Node2D" parent="."]
 
 [node name="iconSpeaker" type="Sprite2D" parent="MusicManager"]
-position = Vector2(33.5, 619.25)
-scale = Vector2(0.115234, 0.106445)
+position = Vector2(37, 617)
+scale = Vector2(0.105469, 0.101563)
 texture = ExtResource("9_7dfpl")
 
 [node name="btnMuteUnmute" type="Button" parent="MusicManager"]
-offset_left = 1.0
-offset_top = 591.0
-offset_right = 63.0
-offset_bottom = 648.0
+offset_left = 3.0
+offset_top = 589.0
+offset_right = 65.0
+offset_bottom = 646.0
 theme = ExtResource("10_cn3xf")
 
 [node name="musicBackground" type="AudioStreamPlayer2D" parent="MusicManager"]

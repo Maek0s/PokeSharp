@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 public partial class Game : Node2D
 {
 	[Export] public NodePath MapContainerPath;
+
 	public static Pokemon PokemonInFight;
+	public static bool fight = false;
 	public static Player PlayerPlaying;
 	private static Node2D mapContainer;
 

@@ -14,17 +14,19 @@ public partial class PcPokemons : CanvasLayer
 
     private Panel panelPokemons;
     private Panel panelTuEquipo;
-    private int numCaja = 1;
+    public static int numCaja = 1;
 
     private Label lblInfo;
     private Button btnSalir;
     private Button btnAddTeam;
     private Button btnConfirmarChange;
     private Button btnCancelarChange;
-    
+    private Button btnBackCaja;
+    private Button btnNextCaja;
 
     public override async void _Ready()
     {
+
         panelPokemons = GetNode<Panel>("ContainerScreen/ListPokemons/Pokemons");
         panelTuEquipo = GetNode<Panel>("ContainerScreen/ListPokemons/TuEquipo");
         panelPokemonSelected = GetNode<Panel>("ContainerScreen/PanelOptions/PanelPokemonSelected");
@@ -33,6 +35,8 @@ public partial class PcPokemons : CanvasLayer
 
         lblInfo.Text = "";
 
+        changeCaja();
+        
         // Botones
 
         btnAddTeam = GetNode<Button>("ContainerScreen/PanelOptions/ButtonsOptions/btnAddTeam");
@@ -41,11 +45,40 @@ public partial class PcPokemons : CanvasLayer
         btnSalir = GetNode<Button>("ContainerScreen/PanelOptions/ButtonsOptions/btnSalir");
         btnSalir.Pressed += OnBtnSalirPressed;
 
-        btnConfirmarChange = GetNode<Button>("ContainerScreen/ListPokemons/TuEquipo/btnConfirmar");
+        btnConfirmarChange = panelTuEquipo.GetNode<Button>("btnConfirmar");
         btnConfirmarChange.Pressed += OnBtnConfirmarChangePressed;
 
-        btnCancelarChange = GetNode<Button>("ContainerScreen/ListPokemons/TuEquipo/btnCancelar");
+        btnCancelarChange = panelTuEquipo.GetNode<Button>("btnCancelar");
         btnCancelarChange.Pressed += OnBtnCancelarChangePressed;
+
+        btnBackCaja = GetNode<Button>("ContainerScreen/ListPokemons/NumeroCaja/btnAtrasCaja");
+        btnBackCaja.Pressed += OnBtnBackCajaPressed;
+
+        btnNextCaja = GetNode<Button>("ContainerScreen/ListPokemons/NumeroCaja/btnDelanteCaja");
+        btnNextCaja.Pressed += OnBtnNextCajaPressed;
+    }
+
+    public void OnBtnNextCajaPressed()
+    {
+        if (Math.Ceiling((double) Game.PlayerPlaying.listPokemonsCaja.Count / 24.0) > numCaja) {
+            numCaja++;
+            changeCaja();
+        }
+    }
+
+    public void OnBtnBackCajaPressed()
+    {
+        if (numCaja > 1) {
+            numCaja--;
+            changeCaja();
+        }
+    }
+
+    public void changeCaja()
+    {
+        var lblTextCaja = GetNode<Label>("ContainerScreen/ListPokemons/NumeroCaja/lblNumCaja");
+        lblTextCaja.Text = $"Caja  {numCaja}";
+        mostrarPokemons();
     }
 
     public async Task OnBtnAddTeamPressed()
@@ -108,7 +141,7 @@ public partial class PcPokemons : CanvasLayer
     {
         GD.Print("(OnBtnConfirmarChangePressed) Entrado");
 
-        if (NumPokemonSelectedToChange == -1 ||
+        if (NumPokemonSelectedToChange < 0 ||
             Game.PlayerPlaying.listPokemonsTeam.Count < NumPokemonSelectedToChange) {
                 return;
             }
@@ -160,7 +193,8 @@ public partial class PcPokemons : CanvasLayer
         panelTuEquipo.Visible = false;
         panelPokemons.Visible = true;
 
-        NumPokemonSelectedToChange = -1;
+        changeNumSelectedYourTeam(-1, this);
+        deseleccionar();
 
         lblInfo.Text = "";
         Visible = false;
@@ -201,7 +235,10 @@ public partial class PcPokemons : CanvasLayer
         // para seguir con el orden de 1 hasta 24
         int contador = 1;
 
-        for (int i = 0; i < 24 * numCaja; i++) {
+        for (int i = inicio; i < 24 * numCaja; i++) {
+            if (contador > 24)
+                break;
+
             var panelPoke = panelPokemons.GetNode<Panel>($"PanelPoke{contador}");
             var sprite = panelPoke.GetNode<Sprite2D>("Sprite");
 
@@ -216,6 +253,8 @@ public partial class PcPokemons : CanvasLayer
 
             contador++;
         }
+
+        GD.Print("");
     }
 
     public static void changeNumSelectedYourTeam(int newNum, Node sceneRoot)
@@ -230,6 +269,9 @@ public partial class PcPokemons : CanvasLayer
             panel.Modulate = new Color(1, 1, 1);
         }
 
+        if (NumPokemonSelectedToChange < 1 || NumPokemonSelectedToChange > 6)
+            return;
+
         var selectedPanel = sceneRoot.GetNode<Panel>($"ContainerScreen/ListPokemons/TuEquipo/PanelPoke{NumPokemonSelectedToChange + 1}");
         selectedPanel.Modulate = new Color(0.962f, 0.576f, 0.569f);
     }
@@ -238,6 +280,9 @@ public partial class PcPokemons : CanvasLayer
     {
         // actualizar todo
         NumPokemonSelected = numero - 1;
+
+        if (numCaja != 1)
+            NumPokemonSelected += 24 * (numCaja - 1);
         
         if (NumPokemonSelected >= listPokemons.Count)
             return;
@@ -249,7 +294,6 @@ public partial class PcPokemons : CanvasLayer
 
         // Si se deselecciona
         if (numero == -1) {
-            deseleccionar();
             return;
         } else {
             pokemonSelected = listPokemons[NumPokemonSelected];
@@ -283,9 +327,10 @@ public partial class PcPokemons : CanvasLayer
         speed.Text = $"SPEED: {pokemonSelected.speed}";
     }
 
-    public static void deseleccionar()
+    public void deseleccionar()
     {
-        Pokemon pokemon = null;
+        pokemonSelected = new Pokemon();
+        NumPokemonSelected = -1;
 
         var lblPokemonNameSlctd = panelPokemonSelected.GetNode<Label>("BasicInfo/PokemonSpriteSelected/PokemonSelectedNameLevel");
 
@@ -296,7 +341,7 @@ public partial class PcPokemons : CanvasLayer
         var progressBar = panelPokemonSelected.GetNode<ProgressBar>("BasicInfo/PokemonSpriteSelected/ProgressBar");
         var hpPokemon = progressBar.GetNode<Label>("Label");
 
-        GeneralUtils.AsignValuesProgressBar(progressBar, hpPokemon, pokemon);
+        GeneralUtils.AsignValuesProgressBar(progressBar, hpPokemon, null);
 
         hpPokemon.Text = "";
 
