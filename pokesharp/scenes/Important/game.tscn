@@ -24,7 +24,8 @@ scale = Vector2(1.4, 1.4)
 
 [node name="Player" parent="." instance=ExtResource("3_nik74")]
 visible = false
-position = Vector2(252, -738)
+z_index = 2
+position = Vector2(158.085, -641.63)
 scale = Vector2(0.8, 0.8)
 
 [node name="CameraFollow" type="Camera2D" parent="Player"]
@@ -71,3 +72,4 @@ visible = false
 visible = false
 
 [node name="Dialogo" parent="inScreen/UI" instance=ExtResource("11_oj8n7")]
+visible = false

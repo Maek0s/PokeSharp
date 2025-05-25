@@ -20,7 +20,7 @@ config/icon="uid://cyyvprft2rrpb"
 [autoload]
 
 MgtDatabase="*res://scripts/database/MgtDatabase.cs"
-DoorData="*res://scripts/DoorData.cs"
+DoorData="*res://scripts/systems/DoorData.cs"
 Transitions="*res://scenes/others/transitions.tscn"
 
 [display]

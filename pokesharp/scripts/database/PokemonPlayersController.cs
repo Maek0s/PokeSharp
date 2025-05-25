@@ -26,13 +26,24 @@ public partial class PokemonPlayersController {
         return await mgtDatabase.UpdatePokemonInTeam(playerId, pokId, newInTeam);
     }
 
+    public async Task<bool> UpdateExpPokemon(int idPKPokemon, int exp, int nivel)
+    {
+        return await mgtDatabase.UpdateExpPokemon(idPKPokemon, exp, nivel);
+    }
+
+    public async Task<bool> UpdateFromEvolution(int idPKPokemon, Pokemon pokemon)
+    {
+        return await mgtDatabase.UpdateFromEvolution(idPKPokemon, pokemon);
+    }
+
     public async Task<bool> CapturarPokemon(Pokemon pokemon, Node sceneRoot)
     {
-        pokemon.CalcularStats(); // Asegurarse de que los stats estén bien antes de guardar
+        pokemon.CalcularStats();
 
         int inTeam = -1;
 
-        if (Game.PlayerPlaying.listPokemonsTeam.Count < 6) {
+        if (Game.PlayerPlaying.listPokemonsTeam.Count < 6)
+        {
             inTeam = Game.PlayerPlaying.listPokemonsTeam.Count;
         }
 
@@ -72,9 +83,12 @@ public partial class PokemonPlayersController {
 
         bool result = false;
 
-        if (inTeam == -1) {
+        if (inTeam == -1)
+        {
             result = await Game.PlayerPlaying.AddPokeBoxAsync(pokemon, sceneRoot);
-        } else {
+        }
+        else
+        {
             result = await Game.PlayerPlaying.AddPokeTeamAsync(pokemon, sceneRoot);
         }
 

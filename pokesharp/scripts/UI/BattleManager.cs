@@ -53,27 +53,41 @@ public partial class BattleManager : CanvasLayer {
     {
         Jugador,
         Enemigo,
+        Atacando,
+        AnimacionEnCurso,
         EsperandoAccion,
         EsperandoChange,
         CombateTerminado
     }
 
-    public TurnoEstado turnoActual = TurnoEstado.Jugador;
+    public static TurnoEstado turnoActual = TurnoEstado.Jugador;
 
     public override void _Ready()
     {
         if (!Game.fight)
+        {
             pokemonEnemy = Game.PokemonInFight;
+        }
+        else
+        {
+            pokemonEnemy = Game.ListPokemonInFight[0];
 
-        if (Game.PlayerPlaying.listPokemonsTeam.Count == 0) {
+        }
+
+        if (Game.PlayerPlaying.listPokemonsTeam.Count == 0)
+        {
             pokemonAlly = new Pokemon();
             pokemonAlly.nivel = 1;
             pokemonAlly.Nombre = "charmander";
             pokemonAlly.NombreCamelCase = "Charmander";
-        } else {
+        }
+        else
+        {
             pokemonAlly = Game.PlayerPlaying.listPokemonsTeam[0];
-            foreach (Pokemon pokeTeam in Game.PlayerPlaying.listPokemonsTeam) {
-                if (pokeTeam.currentHP > 0) {
+            foreach (Pokemon pokeTeam in Game.PlayerPlaying.listPokemonsTeam)
+            {
+                if (pokeTeam.currentHP > 0)
+                {
                     pokemonAlly = pokeTeam;
                     RefreshHPBar(false);
                     break;
@@ -159,7 +173,15 @@ public partial class BattleManager : CanvasLayer {
         var namePokeEnemy = char.ToUpper(LblNamePokeEnemy.Text[0]) + LblNamePokeEnemy.Text.Substring(1).ToLower();
 
         combatlog.BbcodeEnabled = true;
-        combatlog.Text += $"¡Ha  aparecido  un \u2009 [b]{namePokeEnemy}[/b] \u2009 salvaje!";
+
+        if (!Game.fight)
+            combatlog.Text += $"¡Ha  aparecido  un \u2009 [b]{namePokeEnemy}[/b] \u2009 salvaje!";
+        else {
+            if (Game.EntrenadorFighting != null)
+            {
+                combatlog.Text += Game.EntrenadorFighting.TextoFight;
+            }
+        }
 
         combatlog.Visible = true;
 
@@ -172,6 +194,13 @@ public partial class BattleManager : CanvasLayer {
 
     public async void EmpezarBatalla()
     {
+        if (pokemonAlly == null)
+            GD.PrintErr("pokemonAlly == null");
+        else if (pokemonEnemy == null)
+            GD.PrintErr("pokemonEnemy == null");
+
+        GD.Print(pokemonEnemy, pokemonAlly);
+
         if (pokemonAlly.speed >= pokemonEnemy.speed)
             turnoActual = TurnoEstado.Jugador;
         else
@@ -180,10 +209,10 @@ public partial class BattleManager : CanvasLayer {
         // Esperar 1 segundo antes de iniciar el turno
         await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
 
-        IniciarTurno();
+        await IniciarTurnoAsync();
     }
 
-    public void IniciarTurno()
+    public async Task IniciarTurnoAsync()
     {
         switch (turnoActual)
         {
@@ -199,7 +228,7 @@ public partial class BattleManager : CanvasLayer {
             case TurnoEstado.EsperandoChange:
                 GD.Print("Tienes que elegir un pokémon");
                 updateVisualTeam();
-                
+
                 ocultarTodo();
                 tuEquipoPanel.Visible = true;
                 break;
@@ -208,6 +237,27 @@ public partial class BattleManager : CanvasLayer {
                 GD.Print("Combate terminado");
                 var sceneRoot = GetTree().Root.GetNode("Game");
                 var scriptMenuPrincipal = sceneRoot.GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
+
+                PokemonPlayersController pokemonPlayersController = new PokemonPlayersController();
+                // Si es un combate que haga la suma de todos los pokemons derrotados
+                foreach (Pokemon pokemonTeam in Game.PlayerPlaying.listPokemonsTeam)
+                {
+                    var xpNecesaria = LevelSystem.ExperienciaParaSubirNivel(pokemonAlly.nivel + 1);
+
+                    await pokemonTeam.AñadirExperiencia(LevelSystem.CalcularExperienciaGanada(pokemonEnemy.ExperienciaBase, pokemonEnemy.nivel));
+                    
+                    GD.Print($"exp base enemy: {pokemonEnemy.ExperienciaBase} - nivel {pokemonEnemy.nivel} \n" +
+                             $"ExperienciaParaSubirNivel {LevelSystem.ExperienciaParaSubirNivel(pokemonAlly.nivel + 1)} \n" +
+                             $"Restante: {xpNecesaria - pokemonEnemy.experienciaActual}");
+                }
+
+                foreach (Pokemon pokeTeam in Game.PlayerPlaying.listPokemonsTeam)
+                {
+                    await pokemonPlayersController.UpdateExpPokemon(pokeTeam.IdPK, pokeTeam.experienciaActual, pokeTeam.nivel);
+                }
+
+                Game.ChangeState(1);
+
                 scriptMenuPrincipal.ColocarPokemonsVisual();
 
                 EjecutarCombateTerminadoDelay(1.5f);
@@ -227,6 +277,8 @@ public partial class BattleManager : CanvasLayer {
         // Pequeño delay antes de iniciar el ataque enemigo
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 
+        turnoActual = TurnoEstado.Atacando;
+
         GD.Print("pokeEnemy Moves Count", pokemonEnemy.Movimientos.Count);
         // Elegir movimiento enemigo aleatoriamente
         var movimientosEnemigo = pokemonEnemy.Movimientos;
@@ -244,7 +296,7 @@ public partial class BattleManager : CanvasLayer {
             combatlog.Text += $"\nPero fallo.";
 
             turnoActual = TurnoEstado.Jugador;
-            IniciarTurno();
+            await IniciarTurnoAsync();
             
             return;
         }
@@ -269,14 +321,39 @@ public partial class BattleManager : CanvasLayer {
             }
             else
             {
-                turnoActual = TurnoEstado.CombateTerminado;
+                if (!Game.fight)
+                {
+                    turnoActual = TurnoEstado.CombateTerminado;
+                }
+                else
+                {
+                    turnoActual = TurnoEstado.AnimacionEnCurso;
+
+                    GD.Print("El entrenador ha ganado");
+
+                    TransitionManager transitionManager = GetNode<TransitionManager>("TransitionManager");
+
+                    await ToSignal(GetTree().CreateTimer(0.6), "timeout");
+
+                    await transitionManager.MoverSpritesFuera();
+
+                    await ToSignal(GetTree().CreateTimer(0.3), "timeout");
+
+                    await transitionManager.MoverSpriteEntrenador(false);
+
+                    combatlog.Text += "\n" + Game.EntrenadorFighting.TextoDerrota;
+
+                    await ToSignal(GetTree().CreateTimer(1.2), "timeout");
+
+                    turnoActual = TurnoEstado.CombateTerminado;
+                }
             }
         } else {
             // Pasar turno al jugador
             turnoActual = TurnoEstado.Jugador;
         }
 
-        IniciarTurno();
+        await IniciarTurnoAsync();
     }
 
     public void changePokemonAlly(int slotTeam)
@@ -318,7 +395,7 @@ public partial class BattleManager : CanvasLayer {
         setPokeVisual(false);
 
         turnoActual = TurnoEstado.Enemigo;
-        IniciarTurno();
+        _ = IniciarTurnoAsync();
     }
 
     public void setPokeVisual(bool isEnemyPokemon)
@@ -505,11 +582,22 @@ public partial class BattleManager : CanvasLayer {
         }
 
         float hpMax = pokemonEnemy.maxHP;
-        float hpCurrent = Mathf.Max(pokemonEnemy.currentHP, 1); // Evita división por cero
+        float hpCurrent = Mathf.Max(pokemonEnemy.currentHP, 1);
         int catchRate = pokemonEnemy.catchRate;
 
         float a = ((3 * hpMax - 2 * hpCurrent) * catchRate * ballBonus) / (3 * hpMax);
         
+        // Mejora basada en porcentaje de vida
+        float vidaRatio = hpCurrent / hpMax;
+        if (vidaRatio < 0.25f)
+        {
+            a *= 1.7f;
+        }
+        else if (vidaRatio < 0.5f)
+        {
+            a *= 1.4f;
+        }
+
         // Clamp para mantenerlo razonable
         a = Mathf.Clamp(a, 1f, 255f);
 
@@ -548,21 +636,29 @@ public partial class BattleManager : CanvasLayer {
         if (turnoActual != TurnoEstado.Jugador)
             return;
 
+        turnoActual = TurnoEstado.Atacando;
+
         moveset.Visible = false;
         combatlog.Visible = true;
 
         GD.Print($"Pressed move{moveIndex}");
 
-        combatlog.Text += $"\nUsaste \u2009 {GeneralUtils.FormatearTexto(pokemonAlly.Movimientos[moveIndex].move_name)}.";
-
         int daño = await pokemonAlly.AtacarPokemon(pokemonEnemy, pokemonAlly.Movimientos[moveIndex]);
 
-        if (daño == -1) {
+        if (daño == -1)
+        {
             combatlog.Text += $"\nUsaste \u2009 {GeneralUtils.FormatearTexto(pokemonAlly.Movimientos[moveIndex].move_name)}.";
 
             combatlog.Text += $"\nPero fallo.";
 
+            turnoActual = TurnoEstado.Enemigo;
+            await IniciarTurnoAsync();
+
             return;
+        }
+        else
+        {
+            combatlog.Text += $"\nUsaste \u2009 {GeneralUtils.FormatearTexto(pokemonAlly.Movimientos[moveIndex].move_name)} \u2009 y \u2009 resto \u2009 {daño} \u2009 de \u2009 vida.";
         }
 
         Attacked(daño);
@@ -570,16 +666,80 @@ public partial class BattleManager : CanvasLayer {
         GD.Print("pokeEnemy currentHP ", pokemonEnemy.currentHP);
         GD.Print($"Ataque con {pokemonAlly.Movimientos[moveIndex]} daño {daño}");
 
-        if (pokemonEnemy.currentHP <= 0)
+        if (!Game.fight)
         {
-            combatlog.Text += $"\n¡Has \u2009 derrotado \u2009 a \u2009 {pokemonEnemy.NombreCamelCase}!";
-            turnoActual = TurnoEstado.CombateTerminado;
-        } else {
-            // Cambiar turno al enemigo
-            turnoActual = TurnoEstado.Enemigo;
+            if (pokemonEnemy.currentHP <= 0)
+            {
+                combatlog.Text += $"\n¡Has \u2009 derrotado \u2009 a \u2009 {pokemonEnemy.NombreCamelCase}!";
+                turnoActual = TurnoEstado.CombateTerminado;
+            }
+            else
+            {
+                // Cambiar turno al enemigo
+                turnoActual = TurnoEstado.Enemigo;
+            }
+        }
+        else
+        {
+            if (pokemonEnemy.currentHP <= 0)
+            {
+                if (Game.EntrenadorFighting.checkVivos())
+                {
+                    GD.Print("Tiene pokémon vivos.");
+
+                    combatlog.Text += $"\nHas  derrotado  a  {pokemonEnemy.NombreCamelCase}";
+
+                    await ToSignal(GetTree().CreateTimer(2.0), "timeout");
+
+                    foreach (Pokemon pokeInTeamEnemy in Game.EntrenadorFighting.EquipoPokemon)
+                    {
+                        if (pokeInTeamEnemy.currentHP > 0)
+                        {
+                            pokemonEnemy = pokeInTeamEnemy;
+
+                            combatlog.Text += $"\n{Game.EntrenadorFighting.Nombre}  ha  sacado  a  {pokemonEnemy.NombreCamelCase}";
+
+                            setPokeVisual(true);
+
+                            await ToSignal(GetTree().CreateTimer(0.5), "timeout");
+
+                            turnoActual = TurnoEstado.Enemigo;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    turnoActual = TurnoEstado.AnimacionEnCurso;
+
+                    GD.Print("El entrenador ha perdido.");
+
+                    TransitionManager transitionManager = GetNode<TransitionManager>("TransitionManager");
+
+                    await ToSignal(GetTree().CreateTimer(0.6), "timeout");
+
+                    await transitionManager.MoverSpritesFuera();
+
+                    await ToSignal(GetTree().CreateTimer(0.3), "timeout");
+
+                    await transitionManager.MoverSpriteEntrenador(false);
+
+                    combatlog.Text += "\n" + Game.EntrenadorFighting.TextoVictoria;
+
+                    await ToSignal(GetTree().CreateTimer(1.0), "timeout");
+
+                    Player.CurarEquipo(Game.EntrenadorFighting.EquipoPokemon);
+
+                    turnoActual = TurnoEstado.CombateTerminado;
+                }
+            }
+            else
+            {
+                turnoActual = TurnoEstado.Enemigo;
+            }
         }
 
-        IniciarTurno();
+        await IniciarTurnoAsync();
     }
 
     public void OnYesLanzarPokeball()
@@ -642,7 +802,7 @@ public partial class BattleManager : CanvasLayer {
              .SetEase(Tween.EaseType.Out);
         
         // BALANCEO (ROTACIÓN)
-        float balanceoGrados = 10f; // cuánto se inclina a cada lado
+        float balanceoGrados = 10f;
         float tiempo = 0.2f;
         float intervalo = 0.2f;
 
@@ -684,7 +844,6 @@ public partial class BattleManager : CanvasLayer {
                 var effect = pokeball.GetNode<AnimatedSprite2D>("Effects");
                 effect.Play("captured");
 
-                // Suscribirse a la señal animation_finished
                 effect.AnimationFinished += () =>
                 {
                     Game.StartCoroutine(-80.0f, GetTree().Root.GetNode("Game"));
@@ -725,7 +884,7 @@ public partial class BattleManager : CanvasLayer {
 
                 turnoActual = TurnoEstado.Enemigo;
 
-                IniciarTurno();
+                _ = IniciarTurnoAsync();
             }));
         }
     }
@@ -750,6 +909,8 @@ public partial class BattleManager : CanvasLayer {
 
     public void TerminarCombate()
     {
+        Game.StartCoroutine(-80.0f, GetTree().Root.GetNode("Game"));
+
         // Muestra de nuevo el mapa
         Node mapa = GetTree().GetFirstNodeInGroup("mapa");
 
@@ -758,10 +919,13 @@ public partial class BattleManager : CanvasLayer {
         else
             GD.Print("Mapa not null");
 
-        if (mapa is Node2D node2D) {
+        if (mapa is Node2D node2D)
+        {
             node2D.Visible = true;
             GD.Print("Mostrando mapa...");
-        } else {
+        }
+        else
+        {
             GD.Print("Mapa not Node2D");
         }
 
@@ -771,14 +935,24 @@ public partial class BattleManager : CanvasLayer {
         playerNode.UnfreezePlayer();
         Game.EstadoJuego = 1;
 
-        // Borra la escena de combate
-        if (battle != null) {
-            battle.QueueFree();
-            GD.Print("Combate terminado.");
-        } else {
-            GD.Print("Error al acabar el combate.");
+        if (Game.fight)
+        {
+            Game.EntrenadorFighting = new Entrenador();
         }
 
+        // Cura a todo el equipo después del combate
+        Player.CurarEquipo(Game.PlayerPlaying.listPokemonsTeam);
+
+        // Borra la escena de combate
+        if (battle != null)
+        {
+            battle.QueueFree();
+            GD.Print("Combate terminado.");
+        }
+        else
+        {
+            GD.Print("Error al acabar el combate.");
+        }
     }
 
     /* Botones */
@@ -820,7 +994,6 @@ public partial class BattleManager : CanvasLayer {
             return;
 
         GD.Print("Button Huir pressed");
-        Game.StartCoroutine(-80.0f, GetTree().Root.GetNode("Game"));
 
         TerminarCombate();
     }
@@ -841,6 +1014,13 @@ public partial class BattleManager : CanvasLayer {
     }
 
     public void lanzarPokeball(Button typePokeball) {
+        var panelObjectsCaptura = panelObjetos.GetNode<Panel>("PanelObjetosCaptura");
+        var confirmarCaptura = panelObjectsCaptura.GetNode<Panel>("ConfirmacionCaptura");
+        var lblConfirmacion = confirmarCaptura.GetNode<RichTextLabel>("LblInfoConfirmacion");
+
+        // Si es un combate contra un entrenador no podrá capturar el pokémon
+        if (Game.fight) return;
+
         var typeOfPokeball = typePokeball.GetNode<Label>("LblName");
         var color = "black";
 
@@ -863,14 +1043,10 @@ public partial class BattleManager : CanvasLayer {
                 break;
         }
 
-        var panelObjectsCaptura = panelObjetos.GetNode<Panel>("PanelObjetosCaptura");
-
         var panelPokeball = panelObjectsCaptura.GetNode<Panel>("Pokeballs");
-        var confirmarCaptura = panelObjectsCaptura.GetNode<Panel>("ConfirmacionCaptura");
 
         panelPokeball.Visible = false;
 
-        var lblConfirmacion = confirmarCaptura.GetNode<RichTextLabel>("LblInfoConfirmacion");
         lblConfirmacion.BbcodeEnabled = true;
         lblConfirmacion.Text = $"¿Estas  seguro  de  usar la  [b][color={color}] {typeOfPokeball.Text}[/color][/b]?";
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://dytm46rpe0t7a"]
+[gd_scene load_steps=135 format=3 uid="uid://dytm46rpe0t7a"]
 
 [ext_resource type="Texture2D" uid="uid://cyv6c5b6r7dar" path="res://assets/images/battle-grass.png" id="1_4lwss"]
 [ext_resource type="Theme" uid="uid://cb7e1uf3ogmic" path="res://presets/themesButtons/btnBattle.tres" id="1_llmlm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3ten1fjg0t7q" path="res://assets/pokemons/front/RIOLU.png" id="3_eej6d"]
 [ext_resource type="Texture2D" uid="uid://wf4q4kschx8e" path="res://multimedia/images/ball_BEASTBALL.png" id="3_mbf2p"]
 [ext_resource type="Texture2D" uid="uid://co51aepdkdqd2" path="res://assets/textures/battle/pokeballs/ball_MASTERBALL_open.png" id="4_jooxb"]
+[ext_resource type="Texture2D" uid="uid://cyppl2ar5tm4y" path="res://assets/characters/trainerImages/Oscar.png" id="4_ravmv"]
 [ext_resource type="Texture2D" uid="uid://c8xyb2tt4dks5" path="res://multimedia/images/captureEffectPrueba.png" id="5_wy4kp"]
 [ext_resource type="Texture2D" uid="uid://ii0vjglq6kyp" path="res://assets/textures/battle/pokeballs/ball_GREATBALL_open.png" id="6_04jrt"]
 [ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="6_61ry6"]
@@ -25,11 +26,13 @@
 [ext_resource type="Theme" uid="uid://43m64ucajq5j" path="res://presets/themesButtons/btnConfirmarCaptura.tres" id="13_mbf2p"]
 [ext_resource type="Texture2D" uid="uid://cq8m322gjcnuh" path="res://multimedia/images/superballItem.png" id="14_mbf2p"]
 [ext_resource type="Texture2D" uid="uid://b5q5yeqxkx4bb" path="res://multimedia/images/ultraballItem.png" id="15_dyosk"]
+[ext_resource type="Texture2D" uid="uid://dy7wqepxl6roe" path="res://assets/characters/main/boy/POKEMONTRAINER_Red_back.png" id="15_ngxn1"]
 [ext_resource type="Texture2D" uid="uid://cmjwlajnah3on" path="res://multimedia/images/masterballItem.png" id="16_wy4kp"]
 [ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="17_ktegq"]
 [ext_resource type="AudioStream" uid="uid://by2br8a4wse4m" path="res://assets/audios/wildBattleMusic.wav" id="27_1qwbm"]
 [ext_resource type="Theme" uid="uid://cayq0xnsirnjq" path="res://presets/panelThemes/invisiblePanel.tres" id="27_1renb"]
 [ext_resource type="Theme" uid="uid://di00nl18u0vol" path="res://presets/btnThemes/btnInvisible.tres" id="28_ewkk2"]
+[ext_resource type="Texture2D" uid="uid://dsm47pwyem12c" path="res://assets/images/versus.png" id="33_pe4dt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jijpb"]
 atlas = ExtResource("4_jooxb")
@@ -464,6 +467,21 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe4dt"]
+atlas = ExtResource("15_ngxn1")
+region = Rect2(0, 0, 176, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4mvr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe4dt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe6pr"]
 bg_color = Color(0.99666, 0.989636, 0.986782, 1)
 border_width_left = 2
@@ -839,6 +857,17 @@ position = Vector2(1000.09, 174)
 scale = Vector2(1.58, 1.206)
 texture = ExtResource("3_eej6d")
 
+[node name="EntrenadorSprite" type="Sprite2D" parent="."]
+position = Vector2(1010.83, 154.622)
+scale = Vector2(0.461344, 0.371909)
+texture = ExtResource("4_ravmv")
+
+[node name="Versus" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(419.989, 244.317)
+scale = Vector2(1.22853, 1.13907)
+texture = ExtResource("33_pe4dt")
+
 [node name="Pokeball" type="AnimatedSprite2D" parent="."]
 position = Vector2(29.9122, 416.454)
 sprite_frames = SubResource("SpriteFrames_04jrt")
@@ -853,6 +882,11 @@ autoplay = "default"
 position = Vector2(-131.92, 278.286)
 scale = Vector2(1.58, 1.2625)
 texture = ExtResource("6_eej6d")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-134.317, 261.034)
+scale = Vector2(1.6754, 1.49237)
+sprite_frames = SubResource("SpriteFrames_y4mvr")
 
 [node name="InfoEnemy" type="Panel" parent="."]
 offset_left = 68.0
@@ -1039,7 +1073,6 @@ offset_bottom = -1.0
 theme = SubResource("Theme_38y2l")
 bbcode_enabled = true
 scroll_following = true
-autowrap_mode = 0
 
 [node name="Moveset" type="Control" parent="ParteInferior/BoxResultCombat"]
 visible = false
@@ -1419,6 +1452,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke1"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 31.0
 offset_right = 157.0
@@ -1436,6 +1470,7 @@ theme = ExtResource("28_ewkk2")
 
 [node name="Poke2" type="Panel" parent="ParteInferior/TuEquipo"]
 visible = false
+layout_mode = 0
 offset_left = -0.302
 offset_top = 47.828
 offset_right = 160.998
@@ -1453,6 +1488,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke2"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 31.0
 offset_right = 157.0
@@ -1463,12 +1499,14 @@ rounded = true
 show_percentage = false
 
 [node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke2"]
+layout_mode = 0
 offset_right = 161.0
 offset_bottom = 49.0
 theme = ExtResource("28_ewkk2")
 
 [node name="Poke3" type="Panel" parent="ParteInferior/TuEquipo"]
 visible = false
+layout_mode = 0
 offset_left = 160.004
 offset_top = -0.263
 offset_right = 321.304
@@ -1486,6 +1524,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke3"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 31.0
 offset_right = 157.0
@@ -1496,12 +1535,14 @@ rounded = true
 show_percentage = false
 
 [node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke3"]
+layout_mode = 0
 offset_right = 161.0
 offset_bottom = 49.0
 theme = ExtResource("28_ewkk2")
 
 [node name="Poke4" type="Panel" parent="ParteInferior/TuEquipo"]
 visible = false
+layout_mode = 0
 offset_left = 160.004
 offset_top = 47.8283
 offset_right = 321.304
@@ -1519,6 +1560,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke4"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 31.0
 offset_right = 157.0
@@ -1529,12 +1571,14 @@ rounded = true
 show_percentage = false
 
 [node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke4"]
+layout_mode = 0
 offset_right = 161.0
 offset_bottom = 49.0
 theme = ExtResource("28_ewkk2")
 
 [node name="Poke5" type="Panel" parent="ParteInferior/TuEquipo"]
 visible = false
+layout_mode = 0
 offset_left = 320.309
 offset_top = -0.263352
 offset_right = 481.609
@@ -1552,6 +1596,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke5"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 31.0
 offset_right = 157.0
@@ -1562,12 +1607,14 @@ rounded = true
 show_percentage = false
 
 [node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke5"]
+layout_mode = 0
 offset_right = 161.0
 offset_bottom = 49.0
 theme = ExtResource("28_ewkk2")
 
 [node name="Poke6" type="Panel" parent="ParteInferior/TuEquipo"]
 visible = false
+layout_mode = 0
 offset_left = 320.309
 offset_top = 47.8282
 offset_right = 481.609
@@ -1585,6 +1632,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ParteInferior/TuEquipo/Poke6"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 31.0
 offset_right = 157.0
@@ -1595,6 +1643,7 @@ rounded = true
 show_percentage = false
 
 [node name="btnChangePoke" type="Button" parent="ParteInferior/TuEquipo/Poke6"]
+layout_mode = 0
 offset_right = 161.0
 offset_bottom = 49.0
 theme = ExtResource("28_ewkk2")

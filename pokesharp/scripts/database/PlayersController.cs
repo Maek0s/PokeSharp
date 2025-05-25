@@ -8,12 +8,20 @@ public partial class PlayersControllers {
 
     public static async Task<Player> Login(string nickname, string password)
     {
+        if (!MgtDatabase.ConexionEstablecida)
+        {
+            GD.PrintErr("Conexión no establecida todavía.");
+            return null;
+        }
+
         Player player = null;
         MgtDatabase mgtDatabase = new MgtDatabase();
 
         GD.Print($"input nickname '{nickname}'");
 
         var listPlayers = await mgtDatabase.GetFromTable<Player>("players", $"nickname=ilike.{nickname.Trim()}");
+
+        if (listPlayers == null) return null;
 
         if (listPlayers.Length > 0)
         {
@@ -38,6 +46,8 @@ public partial class PlayersControllers {
     }
 
     public static async Task<Player> GetPlayerByNickname(string nickname) {
+        if (!MgtDatabase.ConexionEstablecida) return null;
+
         Player player = null;
         MgtDatabase mgtDatabase = new MgtDatabase();
 
@@ -97,7 +107,7 @@ public partial class PlayersControllers {
         {
             _httpRequest.RequestCompleted -= OnRequestCompleted;
 
-            if (responseCode == 201) // Created
+            if (responseCode == 201)
             {
                 GD.Print("[✅] Player insertado correctamente.");
                 tcs.TrySetResult(true);

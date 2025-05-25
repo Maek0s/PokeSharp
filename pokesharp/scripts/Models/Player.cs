@@ -1,13 +1,13 @@
-// un nombre, id, usuario vinculado (correo y contraseña),
-// lista pokemons, medallas
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Newtonsoft.Json;
 
-public class Player {
+public class Player
+{
     [JsonProperty("player_id")]
     public int id { get; set; }
     [JsonProperty("nickname")]
@@ -18,6 +18,7 @@ public class Player {
     public string skin { get; set; }
     public List<Pokemon> listPokemonsTeam { get; set; } = new List<Pokemon>();
     public List<Pokemon> listPokemonsCaja { get; set; } = new List<Pokemon>();
+    public int MediaPoke = 0;
 
     public override string ToString()
     {
@@ -34,10 +35,10 @@ public class Player {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public async Task<bool> AddPokeTeamAsync(Pokemon pokemon, Node sceneRoot)
     {
         await pokemon.getMovesetDB();
@@ -102,7 +103,7 @@ public class Player {
         GD.Print($"Añadiendo pokemon {pokemon.NombreCamelCase} a la caja.");
         listPokemonsCaja.Add(pokemon);
         var scriptPcPokemons = sceneRoot.GetNode<PcPokemons>("/root/Game/inScreen/UI/MenuPrincipal/PCPokemons");
-        
+
         scriptPcPokemons.updateBox();
 
         var pokemonPlayersController = new PokemonPlayersController();
@@ -125,31 +126,58 @@ public class Player {
         var pokemonPlayersController = new PokemonPlayersController();
         var listaAllPokemons = await pokemonPlayersController.GetPokemonsByPlayer(id);
 
-        foreach (Pokemon poke in listaAllPokemons) {
+        foreach (Pokemon poke in listaAllPokemons)
+        {
             poke.CalcularStats();
-            //GD.Print(poke);
 
-            if (poke.inTeam == -1) {
-                //GD.Print($"Entro con {poke.NombreCamelCase}");
-                if (!listPokemonsCaja.Contains(poke)) {
-                    //GD.Print($"Añadido pokemon caja a {poke.NombreCamelCase}");
+            if (poke.inTeam == -1)
+            {
+                if (!listPokemonsCaja.Contains(poke))
+                {
                     listPokemonsCaja.Add(poke);
                 }
-                //GD.Print("Salió");
-            } else {
-                if (!listPokemonsTeam.Contains(poke)) {
+            }
+            else
+            {
+                if (!listPokemonsTeam.Contains(poke))
+                {
                     await poke.getMovesetDB();
 
-                    if (poke.Movimientos == null || poke.Movimientos.Count < 4) {
+                    if (poke.Movimientos == null || poke.Movimientos.Count < 4)
+                    {
                         GD.Print($"Pokémon {poke.NombreCamelCase} con menos de 4 moves ({poke.Movimientos.Count} moves), generando moveset.");
 
                         await poke.generateMoveset(true);
                     }
 
-                    //GD.Print($"Añadido pokemon team a {poke.NombreCamelCase}");
+                    GD.Print($"Pokémon en team:\n {poke}");
                     listPokemonsTeam.Add(poke);
                 }
             }
+        }
+    }
+
+    public static int CalcularNivelReferencia(List<Pokemon> equipo)
+    {
+        // Ordenar de mayor a menor nivel
+        var niveles = equipo.Select(p => p.nivel).OrderByDescending(n => n).ToList();
+
+        // Tomar los 3 niveles más altos
+        var nivelesConsiderados = niveles.Take(Math.Min(3, niveles.Count));
+
+        // Sacar la media de esos
+        var media = (int)Mathf.Round(nivelesConsiderados.Average() * 0.90f);
+
+        GD.Print("media ", media);
+
+        return media;
+    }
+
+    public static void CurarEquipo(List<Pokemon> equipo)
+    {
+        foreach (Pokemon pokeTeam in equipo)
+        {
+            pokeTeam.currentHP = pokeTeam.maxHP;
         }
     }
 }

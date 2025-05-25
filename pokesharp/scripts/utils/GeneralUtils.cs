@@ -90,7 +90,6 @@ public partial class GeneralUtils : Node
              .SetEase(Tween.EaseType.InOut);
         tween.Play();
 
-        // También puedes actualizar color inmediatamente para el valor inicial
         tween.Finished += () => UpdateProgressBarColor(progressBar);
     }
 
@@ -155,10 +154,8 @@ public partial class GeneralUtils : Node
     }
 
     public static string FormatearTexto(String text) {
-        // Reemplazas los guiones por dos espacios
         string replaced = text.Replace("-", "  ");
 
-        // Te aseguras de que no esté vacío antes de capitalizar
         string formatted = string.IsNullOrEmpty(replaced)
             ? replaced
             : char.ToUpper(replaced[0]) + replaced.Substring(1);

@@ -1,10 +1,25 @@
-[gd_scene load_steps=80 format=3 uid="uid://dvnh42nse360s"]
+[gd_scene load_steps=84 format=3 uid="uid://dvnh42nse360s"]
 
 [ext_resource type="Texture2D" uid="uid://cyq0r5yslmd5k" path="res://assets/characters/main/boy/trProtag_BoyWalk.png" id="1_b8ely"]
 [ext_resource type="Script" uid="uid://cvwqcukqbt1lt" path="res://scripts/MainCharacter.cs" id="1_lgr1c"]
+[ext_resource type="FontFile" uid="uid://054msus2vjc7" path="res://multimedia/fonts/PokemonEmeraldLatinFCChanged.ttf" id="2_avqbv"]
 [ext_resource type="Texture2D" uid="uid://7bduv5em1xf1" path="res://assets/characters/main/boy/trProtag_BoyWalkGrass.png" id="3_37rx8"]
 [ext_resource type="Texture2D" uid="uid://c1dltoftapf2q" path="res://assets/characters/main/boy/trProtag_BoyRun.png" id="3_a0tur"]
 [ext_resource type="Texture2D" uid="uid://bwhf8cjcfxtlg" path="res://assets/characters/main/boy/trProtag_BoyRunGrass.png" id="5_u6v76"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4py0j"]
+bg_color = Color(0.110486, 0.511273, 0.797864, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_6o54e"]
+Panel/styles/panel = SubResource("StyleBoxFlat_4py0j")
+
+[sub_resource type="Theme" id="Theme_j0v0v"]
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("2_avqbv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0qjeb"]
 radius = 13.0
@@ -639,6 +654,31 @@ animations = [{
 [node name="Player" type="CharacterBody2D" groups=["jugador"]]
 z_index = 1
 script = ExtResource("1_lgr1c")
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+position = Vector2(-102, -87.4074)
+scale = Vector2(1, 1.07407)
+points = PackedVector2Array(93, 28.3104, 102, 36, 111, 28.3104)
+default_color = Color(0.109804, 0.509804, 0.796078, 1)
+
+[node name="BoxFloating" type="Panel" parent="."]
+visible = false
+offset_left = -103.0
+offset_top = -84.0
+offset_right = 103.0
+offset_bottom = -52.0
+theme = SubResource("Theme_6o54e")
+
+[node name="Label" type="Label" parent="BoxFloating"]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 205.0
+offset_bottom = 29.0
+theme = SubResource("Theme_j0v0v")
+text = "¡Swinub   ha   evolucionado!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color(0, 0, 0, 1)

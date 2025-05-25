@@ -977,6 +977,7 @@ theme = ExtResource("25_bkfox")
 text = "Poner en  equipo"
 
 [node name="btnCurar" type="Button" parent="ContainerScreen/PanelOptions/ButtonsOptions"]
+modulate = Color(1, 1, 1, 0.6)
 layout_mode = 0
 offset_top = 112.0
 offset_right = 214.0
@@ -986,6 +987,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_tjs64")
 text = "Curar"
 
 [node name="btnLiberar" type="Button" parent="ContainerScreen/PanelOptions/ButtonsOptions"]
+modulate = Color(1, 1, 1, 0.6)
 layout_mode = 0
 offset_top = 184.0
 offset_right = 214.0

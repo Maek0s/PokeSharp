@@ -56,7 +56,41 @@ public partial class MovesController {
 
         if (movimiento == null) {
             movimiento = await GetRandomMovement();
-            GD.Print("Movement was null, ", movimiento);
+            GD.Print("Movement was null, generando random, ", movimiento);
+        }
+
+        return movimiento;
+    }
+
+    public async Task<Movimiento> GetMovimientoByCustomPorcentage(int idPokemon, int movesTutor, int movesType, int movesRandom)
+    {
+        Random rnd = new Random();
+        Movimiento movimiento = new Movimiento();
+
+        int numRnd = rnd.Next(1, 100);
+
+        GD.Print($"Número random de GetMovement() {numRnd} - IDPokemon {idPokemon}");
+
+        if (numRnd <= movesRandom) {
+            GD.Print("move random");
+            movimiento = await GetRandomMovement();
+
+            GD.Print(movimiento);
+        } else if (numRnd > movesRandom && movesType <= numRnd) {
+            GD.Print("move type");
+            movimiento = await GetRandomTypeMovement(idPokemon);
+
+            GD.Print(movimiento);
+        } else {
+            GD.Print("move tutor");
+            movimiento = await GetRandomTutorMovement(idPokemon);
+
+            GD.Print(movimiento);
+        }
+
+        if (movimiento == null) {
+            movimiento = await GetRandomMovement();
+            GD.Print("Movement was null, generando random, ", movimiento);
         }
 
         return movimiento;

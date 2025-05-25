@@ -47,6 +47,8 @@ public partial class PokemonController {
 
         GD.Print($"Pokemon: {pokemon}");
 
+        pokemon.CalcularStats();
+
         return pokemon;
     }
 }

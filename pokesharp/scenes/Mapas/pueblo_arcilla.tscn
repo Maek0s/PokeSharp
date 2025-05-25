@@ -1,15 +1,19 @@
-[gd_scene load_steps=26 format=4 uid="uid://265aok0khn3c"]
+[gd_scene load_steps=35 format=4 uid="uid://265aok0khn3c"]
 
 [ext_resource type="Texture2D" uid="uid://ds01l6lvlensw" path="res://assets/textures/tilesets/thistle_town_by_ekat99_dg7ast6.png" id="1_an3xm"]
 [ext_resource type="Texture2D" uid="uid://3ax3g2m4s87x" path="res://assets/textures/tilesets/Exteriores increible.png" id="2_ef7i7"]
 [ext_resource type="Texture2D" uid="uid://w3wymp7uur0q" path="res://assets/textures/tilesets/Interior general.PNG" id="2_ne640"]
 [ext_resource type="Texture2D" uid="uid://bcjro50kd1jrw" path="res://assets/textures/tilesets/exteriores bien.png" id="3_e34cm"]
 [ext_resource type="Texture2D" uid="uid://c7w21ijtiy5eq" path="res://assets/textures/tilesets/Exterior.png" id="4_xjs0c"]
-[ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/Door.cs" id="6_djuld"]
+[ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/systems/Door.cs" id="6_djuld"]
 [ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="7_xpwe3"]
 [ext_resource type="PackedScene" uid="uid://br88taxkw5e2k" path="res://scenes/others/npc.tscn" id="8_3o77c"]
 [ext_resource type="Texture2D" uid="uid://ce47d1w0f1tkb" path="res://assets/textures/tilesets/Terreno y decoración interior.png" id="8_l2txa"]
-[ext_resource type="Script" uid="uid://bqe0hxs18hwrc" path="res://scripts/Hierbas.cs" id="8_tqktf"]
+[ext_resource type="Script" uid="uid://bqe0hxs18hwrc" path="res://scripts/systems/Hierbas.cs" id="8_tqktf"]
+[ext_resource type="PackedScene" uid="uid://d6ds0jqd105s" path="res://scenes/others/entrenador.tscn" id="9_gx35y"]
+[ext_resource type="Resource" uid="uid://cqykgqykb7m0i" path="res://resources/pokemons/machamp.tres" id="10_bqkn3"]
+[ext_resource type="Texture2D" uid="uid://njyv1do2t1tk" path="res://assets/characters/npcs/trCyclist_M.png" id="10_oxeau"]
+[ext_resource type="Resource" uid="uid://bisyoiiweav70" path="res://resources/pokemons/lucario.tres" id="11_ayxjj"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_16y3a"]
 tile_data = PackedInt32Array(0, 131072, 1, 65536, 196608, 1, 1, 262144, 1, 65537, 131072, 0, 2, 131072, 1, 65538, 196608, 0)
@@ -314,6 +318,42 @@ pattern_0 = SubResource("TileMapPattern_16y3a")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xbdoj"]
 size = Vector2(14.9815, 146.196)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqkn3"]
+atlas = ExtResource("10_oxeau")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayxjj"]
+atlas = ExtResource("10_oxeau")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5roo"]
+atlas = ExtResource("10_oxeau")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1q75"]
+atlas = ExtResource("10_oxeau")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7n2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqkn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayxjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5roo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1q75")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b7yb8"]
 texture = ExtResource("8_l2txa")
 9:42/size_in_atlas = Vector2i(6, 6)
@@ -462,8 +502,25 @@ metadata/_edit_use_anchors_ = true
 [node name="NPC" parent="1_topGround" instance=ExtResource("8_3o77c")]
 position = Vector2(23, -538)
 scale = Vector2(0.55, 0.55)
-Nombre = "Prueba"
+Nombre = "Pepe"
 Dialogos = PackedStringArray("🎶 ¡Cha-ra-raaan! 🎶", "¡Hola,  viajero!  Este  acordeon  ha  visto  mas  caminos  que  mis  zapatos ... ¡Y  eso  ya  es  decir  mucho! ")
+
+[node name="EntrenadorOscar" parent="1_topGround" instance=ExtResource("9_gx35y")]
+position = Vector2(188, -426)
+scale = Vector2(0.55, 0.55)
+Nombre = "Oscar  Garcia"
+equipoResources = [ExtResource("10_bqkn3"), ExtResource("11_ayxjj")]
+Dialogos = PackedStringArray("Me pillas ocupado haciendo bici mientras estudio para el examen de hoy y preparo RETOS para mis alumnos.", "¡Pero seguro que puedo hacer una cosa mas! Veamos lo que has evolucionado.")
+TextoFight = "Oscar:  ¡Prepara  ese  Powershell!"
+TextoDerrota = "Oscar:  ¡JAJA!  Los   scripts   de  Windows   me   hicieron   mas   fuerte."
+TextoVictoria = "Oscar:  Habras  podido  conmigo...  ¡Pero  no  podras  derrotar  a  mi  maestro  Sergi!"
+condicion = 2
+textCondicionInvalida = "Te  falta  Uduu. Vuelve  cuando  tengas  2  pokemon  minimo."
+spriteFrames = SubResource("SpriteFrames_o7n2n")
+levelPokemon = 6
+dificultad = -2
+totalPokemon = 2
+movesTutor = 100
 
 [node name="1_Hierbas" type="TileMapLayer" parent="."]
 light_mask = 3

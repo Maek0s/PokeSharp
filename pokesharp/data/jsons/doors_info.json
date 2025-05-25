@@ -1,4 +1,4 @@
 {
-    "Door_1": { "label": "Laboratorio", "interior": "false", "scene": "res://scenes/mapas/interiores/interior.tscn", "xSpawnPoint": "-84", "ySpawnPoint": "191,6667" },
+    "Door_1": { "label": "Laboratorio", "interior": "false", "scene": "res://scenes/mapas/interiores/interior.tscn", "xSpawnPoint": "-51,843", "ySpawnPoint": "157,50" },
     "Door_2": { "label": "Salir a Pueblo Arcilla", "interior": "true", "scene": "res://scenes/mapas/pueblo_arcilla.tscn", "xSpawnPoint": "-41,78065", "ySpawnPoint": "-556,4369"}
 }

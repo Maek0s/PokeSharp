@@ -48,7 +48,6 @@ public partial class BattleTransition : CanvasLayer
         await playAnimTask;
 	}
 
-    // funciona mal, no quita el zoom o no se
     public async Task LetCamera()
     {
         var tween = GetTree().CreateTween();

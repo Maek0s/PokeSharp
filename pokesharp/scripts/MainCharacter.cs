@@ -15,10 +15,19 @@ public partial class MainCharacter : CharacterBody2D
     public bool in_grass = false;
     public int etapaJuego = 0;
 
+    public static Line2D line2D;
+    public static Panel cajaFloating;
+    public static Label textFloating;
+    public static Tween tween;
+
     public override void _Ready()
     {
         animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         AddToGroup("player");
+
+        line2D = GetNode<Line2D>("Line2D");
+        cajaFloating = GetNode<Panel>("BoxFloating");
+        textFloating = cajaFloating.GetNode<Label>("Label");
     }
 
     public void StopPlayer()
@@ -81,22 +90,9 @@ public partial class MainCharacter : CharacterBody2D
 
         // debug
         if (Input.IsActionJustPressed("debug")) {
-            GD.Print("");
 
-            _ = CallDeferred(nameof(CallGetRandomMovement));
+            GD.Print($"X: {Position.X} - Y: {Position.Y}");
 
-            _ = CallDeferred(nameof(CallGetRandomTutorMovement));
-
-            _ = CallDeferred(nameof(CallGetRandomTypeMovement));
-            /*GD.Print($"\n(listPokemonsCaja) Count {Game.PlayerPlaying.listPokemonsCaja.Count} - Lista pokemons en caja:");
-            foreach (Pokemon pokemon in Game.PlayerPlaying.listPokemonsCaja) {
-                GD.Print(pokemon);
-            }
-
-            GD.Print($"\n(listPokemonsTeam) Count {Game.PlayerPlaying.listPokemonsTeam.Count} - Lista pokemons en team:");
-            foreach (Pokemon pokemon in Game.PlayerPlaying.listPokemonsTeam) {
-                GD.Print(pokemon);
-            }*/
         }
 
         // Ajusta la velocidad dependiendo de si está corriendo o no
@@ -124,6 +120,63 @@ public partial class MainCharacter : CharacterBody2D
                 last_direction = Godot.Vector2.Zero;
             }
         }
+    }
+
+    public static void ChangeTextFloating(string text)
+    {
+        textFloating.Text = text;
+        EnableTextFloating();
+    }
+
+    public static void EnableTextFloating()
+    {
+        if (tween != null && tween.IsRunning())
+        {
+            tween.Kill();
+        }
+
+        // Aparece inmediatamente visible
+        cajaFloating.Visible = true;
+        line2D.Visible = true;
+
+        var modulate = cajaFloating.Modulate;
+        modulate.A = 1.0f;
+        cajaFloating.Modulate = modulate;
+
+        tween = cajaFloating.GetTree().CreateTween();
+
+        tween.TweenInterval(5.0f);
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            line2D.Visible = false;
+        }));
+
+        tween.TweenProperty(cajaFloating, "modulate:a", 0.0f, 2.5f)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.In);
+
+        // Al finalizar el tween, oculta el panel y la línea
+        tween.TweenCallback(Callable.From(() =>
+        {
+            cajaFloating.Visible = false;
+        }));
+    }
+
+    public static void OcultarCajaFloating()
+    {
+        if (tween != null && tween.IsRunning())
+        {
+            tween.Kill();
+        }
+
+        tween = cajaFloating.GetTree().CreateTween();
+
+        line2D.Visible = false;
+
+        tween.TweenProperty(cajaFloating, "modulate:a", 0.0f, 0.5f)
+             .SetTrans(Tween.TransitionType.Sine)
+             .SetEase(Tween.EaseType.In);
     }
 
     private async void CallGetRandomMovement()

@@ -1,0 +1,128 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1jpmouckibno"]
+
+[ext_resource type="FontFile" uid="uid://cknn2s12o0xsb" path="res://multimedia/fonts/PokemonEmeraldLatinFCChangedTildes.ttf" id="1_y1rcq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjm4u"]
+bg_color = Color(0.314159, 0.637931, 0.829394, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_q22a8"]
+Panel/styles/panel = SubResource("StyleBoxFlat_jjm4u")
+
+[sub_resource type="Theme" id="Theme_cqlme"]
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_y1rcq")
+
+[sub_resource type="Theme" id="Theme_bcmny"]
+Label/font_sizes/font_size = 14
+Label/fonts/font = ExtResource("1_y1rcq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sa50f"]
+bg_color = Color(1, 0.307185, 0.289905, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_41l4n"]
+Button/fonts/font = ExtResource("1_y1rcq")
+Button/styles/normal = SubResource("StyleBoxFlat_sa50f")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56ihl"]
+bg_color = Color(2.16588e-06, 0.553908, 0.304346, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_sx0du"]
+Button/fonts/font = ExtResource("1_y1rcq")
+Button/styles/normal = SubResource("StyleBoxFlat_56ihl")
+
+[node name="AceptarCombate" type="CanvasLayer"]
+
+[node name="PantallaAviso" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.5
+offset_top = -128.5
+offset_right = 302.5
+offset_bottom = 128.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_q22a8")
+
+[node name="lblAviso" type="Label" parent="PantallaAviso"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 47.0
+offset_right = 520.0
+offset_bottom = 93.0
+theme = SubResource("Theme_cqlme")
+text = "¡Oscar  te   reta   a   un   combate!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lblPokeNecesarios" type="Label" parent="PantallaAviso"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 100.0
+offset_right = 349.0
+offset_bottom = 133.0
+theme = SubResource("Theme_bcmny")
+text = "Pokemon   necesarios: "
+vertical_alignment = 1
+
+[node name="lblPokeNecesariosNum" type="Label" parent="PantallaAviso/lblPokeNecesarios"]
+layout_mode = 0
+offset_left = 187.0
+offset_right = 239.0
+offset_bottom = 33.0
+theme = SubResource("Theme_bcmny")
+text = "0"
+vertical_alignment = 1
+
+[node name="lblDificultad" type="Label" parent="PantallaAviso"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 125.0
+offset_right = 261.0
+offset_bottom = 158.0
+theme = SubResource("Theme_bcmny")
+text = "Dificultad: "
+vertical_alignment = 1
+
+[node name="lblDificultadNum" type="Label" parent="PantallaAviso/lblDificultad"]
+layout_mode = 0
+offset_left = 99.0
+offset_right = 151.0
+offset_bottom = 33.0
+theme = SubResource("Theme_bcmny")
+text = "0"
+vertical_alignment = 1
+
+[node name="btnNo" type="Button" parent="PantallaAviso"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 178.0
+offset_right = 249.0
+offset_bottom = 220.0
+theme = SubResource("Theme_41l4n")
+text = "No"
+
+[node name="btnSi" type="Button" parent="PantallaAviso"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 178.0
+offset_right = 518.0
+offset_bottom = 220.0
+theme = SubResource("Theme_sx0du")
+text = "Si"

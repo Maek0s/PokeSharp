@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -10,6 +11,8 @@ public partial class Game : Node2D
 	[Export] public NodePath MapContainerPath;
 
 	public static Pokemon PokemonInFight;
+	public static Entrenador EntrenadorFighting;
+	public static List<Pokemon> ListPokemonInFight = new List<Pokemon>();
 	public static bool fight = false;
 	public static Player PlayerPlaying;
 	private static Node2D mapContainer;
@@ -34,11 +37,9 @@ public partial class Game : Node2D
     */
 	public static int EstadoJuego = -1;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		asignarVariables();
-		asignarLimitesCamera();
 		ChangeState(-1);
 	}
 
@@ -88,20 +89,20 @@ public partial class Game : Node2D
 	}
 
 	public static async void StartCoroutine(float targetVolume, Node rootNode)
-    {
+	{
 		GD.Print(rootNode.GetPath());
-        var battleMusic = rootNode.GetNode<AudioStreamPlayer2D>("SFX/battleMusic");
+		var battleMusic = rootNode.GetNode<AudioStreamPlayer2D>("SFX/battleMusic");
 
-        float time = 0;
-        float startVolume = battleMusic.VolumeDb;
+		float time = 0;
+		float startVolume = battleMusic.VolumeDb;
 
-        while (time < 2.5f)
-        {
-            time += (float)rootNode.GetProcessDeltaTime();
-            battleMusic.VolumeDb = Mathf.Lerp(startVolume, targetVolume, time / 2.5f);
-            await Task.Delay(5);
-        }
-        battleMusic.VolumeDb = targetVolume;
+		while (time < 2.5f)
+		{
+			time += (float)rootNode.GetProcessDeltaTime();
+			battleMusic.VolumeDb = Mathf.Lerp(startVolume, targetVolume, time / 2.5f);
+			await Task.Delay(5);
+		}
+		battleMusic.VolumeDb = targetVolume;
     }
 
 	public static void ChangeState(int newState) {
@@ -159,6 +160,8 @@ public partial class Game : Node2D
 		fpsDisplay.Visible = true;
 		menuInGame.Visible = false;
 		player.SetPhysicsProcess(true);
+
+
 	}
 
 	public async void StartBattle()
@@ -234,6 +237,8 @@ public partial class Game : Node2D
 		menuInGame = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
 		pauseMenu = GetNode<CanvasLayer>("/root/Game/inScreen/UI/PauseMenu");
 		menuPrincipal = GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
+
+		asignarLimitesCamera();
 	}
 
 	public void asignarLimitesCamera()

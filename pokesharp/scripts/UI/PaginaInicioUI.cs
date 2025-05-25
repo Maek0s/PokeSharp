@@ -8,8 +8,6 @@ public partial class PaginaInicioUI : Node2D
     private Button btnSettings;
     private Button btnExit;
 
-    // Inicio y Registro de usuario
-
     private Label lblError;
     private LineEdit nickname;
     private LineEdit password;
@@ -115,7 +113,7 @@ public partial class PaginaInicioUI : Node2D
     {
         try
         {
-            // comprobar el nickname por si es único y la contraseña que sea segura
+            // Comprobar el nickname por si es único
             PlayersControllers playersControllers = new PlayersControllers();
             Player player = null;
 
@@ -136,7 +134,6 @@ public partial class PaginaInicioUI : Node2D
                 var pokemonPlayersController = new PokemonPlayersController();
                 bool added = await pokemonPlayersController.CapturarPokemon(pokemonStarter, GetTree().Root.GetNode("Game"));
             }
-
         }
         catch (Exception ex)
         {
@@ -146,33 +143,32 @@ public partial class PaginaInicioUI : Node2D
 
     public async void OnBtnIniciarSesionPressed()
     {
-        // todo ok deja el player en Game y te muestra para darle a jugar y settings
         try
         {
-            // comprobar el nickname por si es único y la contraseña que sea segura
             PlayersControllers playersControllers = new PlayersControllers();
             Player player = null;
 
             player = await PlayersControllers.Login(nickname.Text, password.Text);
 
-            if (player != null) {
+            if (player != null)
+            {
                 Game.PlayerPlaying = player;
 
-                // TO DO: Pantalla cargando
-
                 await player.asignarPokemons();
-                
+
                 // Se asignan visualmente los pokemons del jugador en el menu principal
                 var menuPrincipal = GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
                 menuPrincipal.ColocarPokemonsVisual();
 
-                // ventana de jugar
+                // Ventana de jugar
                 var credencialesControl = GetNode<Control>("Credenciales");
                 var buttonsMenu = GetNode<Control>("Buttons");
 
                 credencialesControl.Visible = false;
                 buttonsMenu.Visible = true;
-            } else {
+            }
+            else
+            {
                 lblError.Text = "¡Credenciales incorrectas!";
             }
         }

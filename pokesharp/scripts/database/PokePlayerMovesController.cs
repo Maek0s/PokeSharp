@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Godot;
 
-public partial class PokePlayerMovesController {
+public partial class PokePlayerMovesController
+{
     MgtDatabase mgtDatabase = new MgtDatabase();
 
-    public async Task<List<Movimiento>> GetMovesetByPokeId(int pokeId) {
+    public async Task<List<Movimiento>> GetMovesetByPokeId(int pokeId)
+    {
         List<Movimiento> moveset = await mgtDatabase.GetAllMovesByPokemonId(pokeId);
 
         if (moveset != null && moveset.Count > 4)
@@ -17,17 +19,4 @@ public partial class PokePlayerMovesController {
 
         return moveset;
     }
-
-    public async Task<bool> InsertMovementPokePlayer(Movimiento movimiento)
-    {
-        bool result = await mgtDatabase.InsertPokePlayerMove(movimiento);
-
-        if (result)
-            GD.Print("Se ha insertado el movimiento ", movimiento);
-        else
-            GD.PrintErr("Error al insertar el movimiento ", movimiento);
-
-        return result;
-    }
-
 }

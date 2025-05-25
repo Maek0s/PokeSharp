@@ -41,13 +41,22 @@ public partial class Dialogo : CanvasLayer
 
     public void MostrarTexto(string texto, string npcName)
     {
+        var textVisible = "";
+
         Visible = true;
+
+        var list = texto.Split(" ");
+
+        foreach (var word in list)
+        {
+            textVisible += $"   {word}";
+        }
 
         GD.Print($"Mostrando {texto}");
 
         caja.Visible = true;
         
-        textLabel.Text = texto;
+        textLabel.Text = textVisible;
         lblNameNpc.Text = npcName;
     }
 

@@ -33,12 +33,6 @@ public partial class MenuPrincipal : CanvasLayer
 
         List<Pokemon> pokeTeam = Game.PlayerPlaying.listPokemonsTeam;
 
-        var pruebanum = 1;
-        foreach (Pokemon pokemon1 in pokeTeam)
-        {
-            GD.Print($"poke {pruebanum}: \n: {pokemon1}");
-        }
-
         for (int i = 1; i <= 6; i++) {
             var nodePanel = GetNode<Panel>($"Pokemons/Pokemon{i}");
 
@@ -50,7 +44,7 @@ public partial class MenuPrincipal : CanvasLayer
 
         int contador = 1;
         foreach (Pokemon pokemon in pokeTeam) {
-            GD.Print($"Asignando Pokemon {pokemon.Nombre} Nv.{pokemon.nivel} - inTeam {pokemon.inTeam}");
+            //GD.Print($"Asignando Pokemon {pokemon.Nombre} Nv.{pokemon.nivel} - inTeam {pokemon.inTeam}");
             if (contador > 6) {
                 GD.PrintErr("Lista equipo mayor que 6");
                 break;
@@ -64,7 +58,7 @@ public partial class MenuPrincipal : CanvasLayer
                 continue;
             }
 
-            GD.Print($"Asignando Pokemon {pokemon.Nombre} {pokemon.nivel}");
+            //GD.Print($"Asignando Pokemon {pokemon.Nombre} {pokemon.nivel}");
             if (contador > 6) {
                 GD.PrintErr("Lista equipo mayor que 6");
                 break;

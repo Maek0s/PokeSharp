@@ -26,7 +26,6 @@ public partial class PcPokemons : CanvasLayer
 
     public override async void _Ready()
     {
-
         panelPokemons = GetNode<Panel>("ContainerScreen/ListPokemons/Pokemons");
         panelTuEquipo = GetNode<Panel>("ContainerScreen/ListPokemons/TuEquipo");
         panelPokemonSelected = GetNode<Panel>("ContainerScreen/PanelOptions/PanelPokemonSelected");
@@ -177,7 +176,6 @@ public partial class PcPokemons : CanvasLayer
             return;
         }
 
-
         // 4) Eliminamos de la caja al pokémon que va a sustituir
         Game.PlayerPlaying.RemovePokeBox(pokemonSelected, root);
 
@@ -269,7 +267,7 @@ public partial class PcPokemons : CanvasLayer
             panel.Modulate = new Color(1, 1, 1);
         }
 
-        if (NumPokemonSelectedToChange < 1 || NumPokemonSelectedToChange > 6)
+        if (NumPokemonSelectedToChange < 0 || NumPokemonSelectedToChange > 5)
             return;
 
         var selectedPanel = sceneRoot.GetNode<Panel>($"ContainerScreen/ListPokemons/TuEquipo/PanelPoke{NumPokemonSelectedToChange + 1}");
@@ -278,7 +276,6 @@ public partial class PcPokemons : CanvasLayer
 
     public static void changeNumSelected(int numero)
     {
-        // actualizar todo
         NumPokemonSelected = numero - 1;
 
         if (numCaja != 1)

@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://ce47d1w0f1tkb" path="res://assets/textures/tilesets/Terreno y decoración interior.png" id="1_j0pqh"]
 [ext_resource type="Texture2D" uid="uid://3ax3g2m4s87x" path="res://assets/textures/tilesets/Exteriores increible.png" id="2_kh1y6"]
-[ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/Door.cs" id="2_mhq7h"]
+[ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/systems/Door.cs" id="2_mhq7h"]
 [ext_resource type="Texture2D" uid="uid://bcjro50kd1jrw" path="res://assets/textures/tilesets/exteriores bien.png" id="3_ar7ha"]
 [ext_resource type="FontFile" uid="uid://cca3ceryr7hhv" path="res://multimedia/fonts/PressStart2P.ttf" id="3_prnuf"]
-[ext_resource type="Script" uid="uid://bqe0hxs18hwrc" path="res://scripts/Hierbas.cs" id="6_wjn1f"]
+[ext_resource type="Script" uid="uid://bqe0hxs18hwrc" path="res://scripts/systems/Hierbas.cs" id="6_wjn1f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dsby5"]
 texture = ExtResource("1_j0pqh")

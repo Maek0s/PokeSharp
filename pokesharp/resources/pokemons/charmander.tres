@@ -5,6 +5,4 @@
 [resource]
 script = ExtResource("1_cqpfh")
 Id = 4
-Nombre = "Charmander"
-ExperienciaBase = 30
-nivel = 6
+ExperienciaBase = 200
