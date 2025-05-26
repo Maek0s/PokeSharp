@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://chk6hi5bam6im"]
+
+[ext_resource type="Script" uid="uid://dnayu6ra3j6y6" path="res://scripts/models/Pokemon.cs" id="1_atddj"]
+
+[resource]
+script = ExtResource("1_atddj")
+Id = 384
+ExperienciaBase = 500

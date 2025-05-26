@@ -160,8 +160,6 @@ public partial class Game : Node2D
 		fpsDisplay.Visible = true;
 		menuInGame.Visible = false;
 		player.SetPhysicsProcess(true);
-
-
 	}
 
 	public async void StartBattle()
@@ -173,22 +171,36 @@ public partial class Game : Node2D
 		await transition.StartTransition();
 	}
 
-    public async void ChangeMap(String scenePath, bool _isInterior, float _xSpawnPoint, float _ySpawnPoint) {
+    public async void ChangeMap(String scenePath, bool _isInterior, float _xSpawnPoint, float _ySpawnPoint, bool isADoor) {
 		// Obtener la transición global
 		DoorTransition transition = (DoorTransition) GetNode("/root/Transitions/DoorTransition");
 
 		// Iniciar la animación de transición y esperar a que termine
-		await transition.StartTransition();
+		await transition.StartTransition(isADoor);
 		
 		// Borrar las anteriores escenas cargadas
 		foreach (Node child in mapContainer.GetChildren()) {
 			child.QueueFree();
 		}
 
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+
 		// Cargar nueva escena
 		PackedScene newMap = (PackedScene) ResourceLoader.Load(scenePath);
 		Node2D newMapInstance = (Node2D) newMap.Instantiate();
 		mapContainer.AddChild(newMapInstance);
+
+		await ToSignal(GetTree(), "process_frame");
+		asignarLimitesCamera();
+
+		// ahi que ordenar un node para los mapas y que se vauyan liberando creo
+		GD.Print("Mapa nuevo agregado: ", newMapInstance.Name);
+
+		if (!isADoor)
+		{
+			var gameNode = GetNode<Game>("/root/Game");
+			gameNode.asignarLimitesCamera();
+		}
 
 		// Teletransportar al jugador
 		Godot.Vector2 posSpawnPoint = new Godot.Vector2(0.0f, 0.0f);
@@ -243,11 +255,20 @@ public partial class Game : Node2D
 
 	public void asignarLimitesCamera()
 	{
-		StaticBody2D limites = mapContainer.GetNode<StaticBody2D>("Limites");
+		var map = mapContainer.GetChildren();
+		StaticBody2D limites = map[0].GetNode<StaticBody2D>("Limites");
+
+		if (limites == null)
+		{
+			GD.PrintErr($"No se encontró el nodo 'Limites' en el mapa.");
+			return;
+		}
+
+		//StaticBody2D limites = mapContainer.GetNode<StaticBody2D>("Limites");
 
 		CollisionShape2D colIzq = limites.GetNode<CollisionShape2D>("Izquierda");
-		CollisionShape2D colDer = limites.GetNode<CollisionShape2D>("Derecha");
 		CollisionShape2D colArriba = limites.GetNode<CollisionShape2D>("Arriba");
+		CollisionShape2D colDer = limites.GetNode<CollisionShape2D>("Derecha");
 		CollisionShape2D colAbajo = limites.GetNode<CollisionShape2D>("Abajo");
 
 		Godot.Vector2 GetXMin(CollisionShape2D col)
@@ -282,9 +303,9 @@ public partial class Game : Node2D
 			return new Godot.Vector2(0, Mathf.Max(p1.Y, p2.Y));
 		}
 
-		cameraFollow.LimitLeft = (int)GetXMin(colIzq).X;
-		cameraFollow.LimitRight = (int)GetXMax(colDer).X;
 		cameraFollow.LimitTop = (int)GetYMin(colArriba).Y;
 		cameraFollow.LimitBottom = (int)GetYMax(colAbajo).Y;
+		cameraFollow.LimitLeft = (int)GetXMin(colIzq).X;
+		cameraFollow.LimitRight = (int)GetXMax(colDer).X;
 	}
 }

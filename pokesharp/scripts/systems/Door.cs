@@ -4,17 +4,18 @@ using System.Diagnostics;
 
 public partial class Door : Area2D
 {
-	[Export] public string SceneToLoad = "";
-	private bool _canEnter = false;
-	private Label _label;
+    [Export] public string SceneToLoad = "";
+    private bool _canEnter = false;
+    private Label _label;
+    private bool isADoor = true;
     private bool _isInterior = false;
     private float _xSpawnPoint = 0.0f;
     private float _ySpawnPoint = 0.0f;
 
-	public override void _Ready()
-	{
-		BodyEntered += OnBodyEntered;
-		BodyExited += OnBodyExited;
+    public override void _Ready()
+    {
+        BodyEntered += OnBodyEntered;
+        BodyExited += OnBodyExited;
 
         _label = GetNodeOrNull<Label>("Label");
         if (_label != null)
@@ -26,16 +27,26 @@ public partial class Door : Area2D
         if (doorData.DoorDestinations.TryGetValue(Name, out var doorInfo))
         {
             SceneToLoad = doorInfo["scene"];
+            var isADoortxt = doorInfo["isADoor"];
+
+            if (isADoortxt == "false")
+                isADoor = false;
+            else
+                isADoor = true;
+
             if (_label != null)
             {
                 _label.Text = doorInfo["label"];
             }
 
-            if (doorInfo["interior"].Equals("true")) {
+            if (doorInfo["interior"].Equals("true"))
+            {
                 _isInterior = true;
                 _xSpawnPoint = float.Parse(doorInfo["xSpawnPoint"]);
                 _ySpawnPoint = float.Parse(doorInfo["ySpawnPoint"]);
-            } else {
+            }
+            else
+            {
                 _isInterior = false;
                 _xSpawnPoint = float.Parse(doorInfo["xSpawnPoint"]);
                 _ySpawnPoint = float.Parse(doorInfo["ySpawnPoint"]);
@@ -45,14 +56,14 @@ public partial class Door : Area2D
         {
             GD.PrintErr($"❌ No data from the door: {Name} / No data from the door: {Name} ❌");
         }
-	}
+    }
 
-	private void OnBodyEntered(Node body)
+    private void OnBodyEntered(Node body)
     {
         if (body.IsInGroup("player"))
         {
             _canEnter = true;
-			_label.Visible = true;
+            _label.Visible = true;
         }
     }
 
@@ -61,7 +72,7 @@ public partial class Door : Area2D
         if (body.IsInGroup("player"))
         {
             _canEnter = false;
-			_label.Visible = false;
+            _label.Visible = false;
         }
     }
 
@@ -69,8 +80,16 @@ public partial class Door : Area2D
     {
         if (@event.IsActionPressed("interact") && _canEnter)
         {
-            GetTree().CurrentScene.Call("ChangeMap", SceneToLoad, _isInterior, _xSpawnPoint, _ySpawnPoint);
+            _canEnter = false;
+            EnterDoorAsync();
         }
+    }
+
+    private async void EnterDoorAsync()
+    {
+        GetTree().CurrentScene.Call("ChangeMap", SceneToLoad, _isInterior, _xSpawnPoint, _ySpawnPoint, isADoor);
+        await ToSignal(GetTree().CreateTimer(1.0), SceneTreeTimer.SignalName.Timeout);
+        _canEnter = true;
     }
 
 }

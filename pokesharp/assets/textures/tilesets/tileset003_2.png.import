@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmw5kirbdjcum"
-path="res://.godot/imported/Belen.png-8a2ed262d3bd16a074d87c198fd5c6f3.ctex"
+uid="uid://dnbjny1ixgx2k"
+path="res://.godot/imported/tileset003_2.png-1fbc45291b79571575b2e5cad3b1ee1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/trainerImages/Belen.png"
-dest_files=["res://.godot/imported/Belen.png-8a2ed262d3bd16a074d87c198fd5c6f3.ctex"]
+source_file="res://assets/textures/tilesets/tileset003_2.png"
+dest_files=["res://.godot/imported/tileset003_2.png-1fbc45291b79571575b2e5cad3b1ee1f.ctex"]
 
 [params]
 

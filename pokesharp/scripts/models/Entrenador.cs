@@ -316,7 +316,7 @@ public partial class Entrenador : CharacterBody2D
         // Sacamos el nodo del juego para consultar sus variables
         var playerNode = GetNode<MainCharacter>("/root/Game/Player");
 
-        Texture2D nuevoSprite = GD.Load<Texture2D>($"res://assets/pokemons/front/{EquipoPokemon[0].NombreCamelCase}.png");
+        Texture2D nuevoSprite = GD.Load<Texture2D>($"res://assets/pokemons/front/{EquipoPokemon[0].Nombre.ToUpper()}.png");
 
         if (nuevoSprite == null)
         {

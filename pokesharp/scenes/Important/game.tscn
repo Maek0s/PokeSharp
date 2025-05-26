@@ -15,12 +15,14 @@
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_cp55e")
-MapContainerPath = NodePath("Pueblo Arcilla")
+MapContainerPath = NodePath("MapContainer")
 
-[node name="Pueblo Arcilla" parent="." groups=["mapa"] instance=ExtResource("3_72jce")]
-visible = false
-position = Vector2(62, 29)
+[node name="MapContainer" type="Node2D" parent="."]
+y_sort_enabled = true
 scale = Vector2(1.4, 1.4)
+
+[node name="Pueblo Arcilla" parent="MapContainer" groups=["mapa"] instance=ExtResource("3_72jce")]
+position = Vector2(44.2857, 20.7143)
 
 [node name="Player" parent="." instance=ExtResource("3_nik74")]
 visible = false

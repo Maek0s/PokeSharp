@@ -26,18 +26,23 @@ public partial class DoorTransition : CanvasLayer
 	}
 
 	// Inicia la transición / Starts the transition
-	public async Task StartTransition()
+	public async Task StartTransition(bool isADoor)
 	{
 		_camera.PositionSmoothingEnabled = false;
         _player.FreezePlayer();
 
 		Node listSounds = GetNode("/root/Game/SFX");
-		AudioStreamPlayer2D audio = (AudioStreamPlayer2D) listSounds.GetNode("doorOpen");
-		audio.Play();
+		if (isADoor)
+		{
+			GD.Print("Sonando, isAdoor ", isADoor);
+			AudioStreamPlayer2D audio = (AudioStreamPlayer2D) listSounds.GetNode("doorOpen");
+
+			audio.Play();
+		}
 
 		Layer = 1;
 
-		await PlayAnimation("transition");
+		await PlayAnimation("transition", isADoor: isADoor);
 	}
 
 	// Finaliza la transición / Stops the transition
@@ -58,7 +63,7 @@ public partial class DoorTransition : CanvasLayer
 	/// <param name="backwards">Hacia delante o hacia atras / Forward or backward</param>
 	/// <returns></returns>
 	
-	private async Task PlayAnimation(string animName, bool backwards = false)
+	private async Task PlayAnimation(string animName, bool backwards = false, bool isADoor = false)
 	{
 		var tcs = new TaskCompletionSource<bool>();
 
@@ -76,10 +81,13 @@ public partial class DoorTransition : CanvasLayer
 		if (backwards) {
 			_animationPlayer.PlayBackwards(animName);
 
-			// Reproduce el sonido de cerrar la puerta / Plays the sound of closing the door
-			Node listSounds = GetNode("/root/Game/SFX");
-			AudioStreamPlayer2D audio = (AudioStreamPlayer2D) listSounds.GetNode("doorClose");
-			audio.Play();
+			if (isADoor)
+			{
+				// Reproduce el sonido de cerrar la puerta / Plays the sound of closing the door
+				Node listSounds = GetNode("/root/Game/SFX");
+				AudioStreamPlayer2D audio = (AudioStreamPlayer2D) listSounds.GetNode("doorClose");
+				audio.Play();
+			}
 		} else
 			_animationPlayer.Play(animName);
 

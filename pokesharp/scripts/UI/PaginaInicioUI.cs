@@ -41,8 +41,9 @@ public partial class PaginaInicioUI : Node2D
         nickname = credentialsPanel.GetNode<LineEdit>("Nickname");
         password = credentialsPanel.GetNode<LineEdit>("Password");
 
-        nickname.Text = "";
-        password.Text = "";
+        // pruebas
+        nickname.Text = "Prueba1";
+        password.Text = "123";
 
         // Botones //
 
@@ -119,20 +120,48 @@ public partial class PaginaInicioUI : Node2D
 
             player = await PlayersControllers.GetPlayerByNickname(nickname.Text);
 
-            if (player != null) {
+            if (player != null)
+            {
                 lblError.Text = "¡El  nickname  utilizado  ya  existe!";
-            } else {
+            }
+            else
+            {
                 await playersControllers.InsertPlayer(nickname.Text, password.Text);
+
+                player = await PlayersControllers.GetPlayerByNickname(nickname.Text);
 
                 Pokemon pokemonStarter = new Pokemon();
 
-                pokemonStarter = await PokemonController.GetPokemonById(4);
+                Random rnd = new Random();
+                var random = rnd.Next(1, 3);
+
+                int idPokeStarter = 1;
+
+                switch (random)
+                {
+                    case 1:
+                        idPokeStarter = 1;
+                        break;
+                    case 2:
+                        idPokeStarter = 4;
+                        break;
+                    case 3:
+                        idPokeStarter = 7;
+                        break;
+                }
+
+                pokemonStarter = await PokemonController.GetPokemonById(idPokeStarter);
+                pokemonStarter.nivel = 5;
                 pokemonStarter.CalcularStats();
+
+                GD.Print("starter: ", pokemonStarter);
 
                 Game.PlayerPlaying = player;
 
                 var pokemonPlayersController = new PokemonPlayersController();
                 bool added = await pokemonPlayersController.CapturarPokemon(pokemonStarter, GetTree().Root.GetNode("Game"));
+
+                await player.AddPokeTeamAsync(pokemonStarter, GetTree().Root.GetNode("Game"));
             }
         }
         catch (Exception ex)

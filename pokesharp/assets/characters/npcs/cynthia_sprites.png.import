@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmw5kirbdjcum"
-path="res://.godot/imported/Belen.png-8a2ed262d3bd16a074d87c198fd5c6f3.ctex"
+uid="uid://ch1hf1g4t1nys"
+path="res://.godot/imported/cynthia_sprites.png-cb0c9eec0b1edb2b4e673ee68deee799.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/trainerImages/Belen.png"
-dest_files=["res://.godot/imported/Belen.png-8a2ed262d3bd16a074d87c198fd5c6f3.ctex"]
+source_file="res://assets/characters/npcs/cynthia_sprites.png"
+dest_files=["res://.godot/imported/cynthia_sprites.png-cb0c9eec0b1edb2b4e673ee68deee799.ctex"]
 
 [params]
 
