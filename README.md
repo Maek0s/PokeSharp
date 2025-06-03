@@ -53,7 +53,7 @@ Para información más detallada y visual del proyecto, visita la web:
 🎮 PokeSharp es un fangame de **Pokémon**, creado por una sola persona, con el objetivo de ofrecer una experiencia diferente, innovadora y divertida.
 
 ### 4️⃣ ¿Cuándo estará disponible oficialmente?
-⏳ Aún está en desarrollo, sin una fecha de lanzamiento oficial. Para más novedades, ¡únase al servidor de [**Discord**](https://discord.com/invite/FqJ6ZgYRrU)!
+⏳ Aún está en estado alfa, es jugable y puedes entrar a [Releases](https://github.com/Maek0s/PokeSharp/releases) para jugar la última versión disponible. Para más novedades, ¡Únase al servidor de [**Discord**](https://discord.com/invite/FqJ6ZgYRrU)!
 
 ### 5️⃣ ¿Por qué se creó PokeSharp?
 🔍 PokeSharp nació de varios intentos anteriores de crear un fangame de **Pokémon** y evolucionó hasta convertirse en un **proyecto final de curso** para el Grado Superior <abbr title="Desarrollo de Aplicaciones Multiplataforma">**DAM**</abbr>.
@@ -62,7 +62,7 @@ Para información más detallada y visual del proyecto, visita la web:
 💡 Antes se llamaba **PokeJava**, pero tras cambiar el lenguaje de programación a **C#**, el nombre cambio a **PokeSharp**.
 
 ### 7️⃣ ¿Qué se necesita para jugar?
-🖥️ Los **requisitos mínimos y recomendados** aún no están definidos, pero serán accesibles para la mayoría de jugadores.
+🖥️ Los **requisitos mínimos y recomendados** aún no están definidos, pero serán accesibles para la mayoría de jugadores, por las pruebas realizadas en dispositivos de gama media es muy estable en el aspecto de rendimiento.
 
 ### 8️⃣ ¿Puedo colaborar?
 🤝 Actualmente no hay opciones de colaboración, pero en el futuro podría ser posible. Sin embargo, **sugerencias y reportes de bugs** siempre son bienvenidos. ¡Gracias por tu apoyo!
