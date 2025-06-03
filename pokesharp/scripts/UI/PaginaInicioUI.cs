@@ -42,8 +42,8 @@ public partial class PaginaInicioUI : Node2D
         password = credentialsPanel.GetNode<LineEdit>("Password");
 
         // pruebas
-        nickname.Text = "Prueba1";
-        password.Text = "123";
+        nickname.Text = "";
+        password.Text = "";
 
         // Botones //
 
@@ -227,4 +227,3 @@ public partial class PaginaInicioUI : Node2D
         btnNoAccount.Visible = true;
     }
 }
-

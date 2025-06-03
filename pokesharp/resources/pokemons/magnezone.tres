@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c57vae0s2pn3f"]
+
+[ext_resource type="Script" uid="uid://dnayu6ra3j6y6" path="res://scripts/models/Pokemon.cs" id="1_d3ldl"]
+
+[resource]
+script = ExtResource("1_d3ldl")
+Id = 462
+ExperienciaBase = 0

@@ -166,6 +166,7 @@ offset_top = 495.0
 offset_right = 709.0
 offset_bottom = 537.0
 theme = SubResource("Theme_mi0lt")
+disabled = true
 text = "Ajustes"
 
 [node name="SalirButton" type="Button" parent="Buttons"]
@@ -276,8 +277,8 @@ anchor_right = 0.012
 anchor_bottom = 0.036
 offset_left = 40.0
 offset_top = 201.0
-offset_right = 300.98
-offset_bottom = 215.008
+offset_right = 300.52
+offset_bottom = 223.56
 theme = SubResource("Theme_kugs4")
 
 [node name="Label" type="Label" parent="Credenciales/Panel/Botones/btnNoAccount"]
@@ -287,14 +288,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -134.5
-offset_top = -9.0
-offset_right = 131.5
-offset_bottom = 14.0
+offset_left = -135.5
+offset_top = -21.0
+offset_right = 130.5
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_l5r15")
 text = "¿No  tienes  una  cuenta?  Registrate"
+vertical_alignment = 1
 
 [node name="btnYesAccount" type="Button" parent="Credenciales/Panel/Botones"]
 visible = false
@@ -303,9 +305,9 @@ anchors_preset = -1
 anchor_right = 0.012
 anchor_bottom = 0.036
 offset_left = 40.0
-offset_top = 209.0
-offset_right = 300.98
-offset_bottom = 223.008
+offset_top = 203.0
+offset_right = 300.52
+offset_bottom = 225.56
 theme = SubResource("Theme_kugs4")
 
 [node name="Label" type="Label" parent="Credenciales/Panel/Botones/btnYesAccount"]
@@ -315,10 +317,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -136.0
-offset_top = -17.0
-offset_right = 133.0
-offset_bottom = 6.0
+offset_left = -135.5
+offset_top = -20.0
+offset_right = 133.5
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_l5r15")

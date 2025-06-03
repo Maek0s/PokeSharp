@@ -252,11 +252,25 @@ public partial class Entrenador : CharacterBody2D
 
                             GD.Print("mediaRecibida:", mediaRecibida);
 
-                            foreach (Pokemon pokeTeam in EquipoPokemon)
+                            if (mediaRecibida > 83)
                             {
-                                pokeTeam.nivel = mediaRecibida;
-                                pokeTeam.CalcularStats();
+                                int variacionNivel2 = GD.RandRange(1, 10);
+
+                                if (variacionNivel2 + mediaRecibida > 100)
+                                {
+                                    mediaRecibida = 100;
+                                }
+                                else
+                                {
+                                    mediaRecibida += variacionNivel2;
+                                }
                             }
+
+                            foreach (Pokemon pokeTeam in EquipoPokemon)
+                                {
+                                    pokeTeam.nivel = mediaRecibida;
+                                    pokeTeam.CalcularStats();
+                                }
                         }
                     }
                     else
@@ -276,6 +290,8 @@ public partial class Entrenador : CharacterBody2D
                     {
                         if (Game.EntrenadorFighting != this)
                         {
+
+
                             _ = EjecutarAnimacionEncuentro();
                         }
                     }
@@ -301,7 +317,7 @@ public partial class Entrenador : CharacterBody2D
 
         GD.Print("equipoke entrenador: ", Game.EntrenadorFighting.EquipoPokemon.Count);
 
-        await ToSignal(GetTree().CreateTimer(1.0), "timeout");
+        await ToSignal(GetTree().CreateTimer(3.0), "timeout");
 
         var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
 

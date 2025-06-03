@@ -84,10 +84,6 @@ public partial class MainCharacter : CharacterBody2D
             direction = new Godot.Vector2(0, raw_direction.Y);
         }
 
-        if (Input.IsActionJustPressed("sacarCoords")) {
-            GD.Print("X: " + Position.X + " | Y: " + Position.Y);
-        }
-
         // debug
         if (Input.IsActionJustPressed("debug")) {
 

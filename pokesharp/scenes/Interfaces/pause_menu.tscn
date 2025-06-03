@@ -103,6 +103,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wr3kl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_s3ior")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_cjqq1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_rr18j")
+disabled = true
 text = "Ajustes"
 
 [node name="btnExit" type="Button" parent="Panel"]

@@ -1,10 +1,14 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c0b6mthpimccj"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c0b6mthpimccj"]
 
 [ext_resource type="FontFile" uid="uid://dqvp4pb3yrdww" path="res://multimedia/fonts/PokemonEmeraldLatinFC.ttf" id="1_sop2s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qmvk"]
+bg_color = Color(0.196835, 0.535343, 0.67658, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sop2s"]
 
 [resource]
 Button/font_sizes/font_size = 15
 Button/fonts/font = ExtResource("1_sop2s")
+Button/styles/disabled = SubResource("StyleBoxFlat_0qmvk")
 Button/styles/normal = SubResource("StyleBoxFlat_sop2s")

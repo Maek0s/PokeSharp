@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class GeneralUtils : Node
 {
@@ -11,7 +12,8 @@ public partial class GeneralUtils : Node
         tween = GetTree().CreateTween();
     }
 
-    public static void AsignValuesProgressBar(ProgressBar progressBar, Label hpPokemon, Pokemon pokemon) {
+    public static void AsignValuesProgressBar(ProgressBar progressBar, Label hpPokemon, Pokemon pokemon)
+    {
         if (pokemon == null)
             return;
         float porcentaje = (pokemon.currentHP / (float)pokemon.maxHP) * 100f;
@@ -37,8 +39,9 @@ public partial class GeneralUtils : Node
         progressBar.MaxValue = pokemon.maxHP;
         progressBar.Value = pokemon.currentHP;
     }
-    
-    public static void AsignValuesProgressBarNoAnimation(ProgressBar progressBar, Pokemon pokemon) {
+
+    public static void AsignValuesProgressBarNoAnimation(ProgressBar progressBar, Pokemon pokemon)
+    {
         if (pokemon == null)
             return;
         float porcentaje = (pokemon.currentHP / (float)pokemon.maxHP) * 100f;
@@ -121,7 +124,7 @@ public partial class GeneralUtils : Node
         if (!GodotObject.IsInstanceValid(progressBar))
             return;
 
-        float porcentaje = (float) (progressBar.Value / progressBar.MaxValue) * 100f;
+        float porcentaje = (float)(progressBar.Value / progressBar.MaxValue) * 100f;
 
         Color color;
 
@@ -138,7 +141,8 @@ public partial class GeneralUtils : Node
         progressBar.AddThemeStyleboxOverride("fill", fillStyle);
     }
 
-    private void OnTweenStep() {
+    private void OnTweenStep()
+    {
         UpdateProgressBarColor(progressBarRef);
     }
 
@@ -153,7 +157,8 @@ public partial class GeneralUtils : Node
         progressBarRef.Value = Mathf.MoveToward(progressBarRef.Value, targetValue, animationSpeed);
     }
 
-    public static string FormatearTexto(String text) {
+    public static string FormatearTexto(String text)
+    {
         string replaced = text.Replace("-", "  ");
 
         string formatted = string.IsNullOrEmpty(replaced)
@@ -163,30 +168,31 @@ public partial class GeneralUtils : Node
         return formatted;
     }
 
-    public static Color GetColorByType(String type) {
+    public static Color GetColorByType(String type)
+    {
         if (string.IsNullOrEmpty(type))
             return Colors.Gray;
 
         switch (type.Trim().ToLowerInvariant())
         {
-            case "normal":    return new Color(0.66f, 0.66f, 0.47f);
-            case "fighting":  return new Color(0.78f, 0.30f, 0.22f);
-            case "flying":    return new Color(0.64f, 0.55f, 0.78f);
-            case "poison":    return new Color(0.64f, 0.32f, 0.64f);
-            case "ground":    return new Color(0.86f, 0.70f, 0.43f);
-            case "rock":      return new Color(0.68f, 0.59f, 0.44f);
-            case "bug":       return new Color(0.53f, 0.78f, 0.16f);
-            case "ghost":     return new Color(0.44f, 0.31f, 0.60f);
-            case "steel":     return new Color(0.70f, 0.70f, 0.76f);
-            case "fire":      return new Color(1.00f, 0.459f, 0.078f);
-            case "water":     return new Color(0.37f, 0.58f, 1.00f);
-            case "grass":     return new Color(0.48f, 0.78f, 0.36f);
-            case "electric":  return new Color(1.00f, 0.85f, 0.10f);
-            case "psychic":   return new Color(1.00f, 0.32f, 0.56f);
-            case "ice":       return new Color(0.53f, 0.80f, 0.88f);
-            case "dragon":    return new Color(0.50f, 0.48f, 0.96f);
-            case "dark":      return new Color(0.42f, 0.36f, 0.35f);
-            case "fairy":     return new Color(0.92f, 0.59f, 0.79f);
+            case "normal": return new Color(0.66f, 0.66f, 0.47f);
+            case "fighting": return new Color(0.78f, 0.30f, 0.22f);
+            case "flying": return new Color(0.64f, 0.55f, 0.78f);
+            case "poison": return new Color(0.64f, 0.32f, 0.64f);
+            case "ground": return new Color(0.86f, 0.70f, 0.43f);
+            case "rock": return new Color(0.68f, 0.59f, 0.44f);
+            case "bug": return new Color(0.53f, 0.78f, 0.16f);
+            case "ghost": return new Color(0.44f, 0.31f, 0.60f);
+            case "steel": return new Color(0.70f, 0.70f, 0.76f);
+            case "fire": return new Color(1.00f, 0.459f, 0.078f);
+            case "water": return new Color(0.37f, 0.58f, 1.00f);
+            case "grass": return new Color(0.48f, 0.78f, 0.36f);
+            case "electric": return new Color(1.00f, 0.85f, 0.10f);
+            case "psychic": return new Color(1.00f, 0.32f, 0.56f);
+            case "ice": return new Color(0.53f, 0.80f, 0.88f);
+            case "dragon": return new Color(0.50f, 0.48f, 0.96f);
+            case "dark": return new Color(0.42f, 0.36f, 0.35f);
+            case "fairy": return new Color(0.92f, 0.59f, 0.79f);
 
             default:
                 GD.PrintErr("Tipo no definido: ", type);
@@ -194,7 +200,8 @@ public partial class GeneralUtils : Node
         }
     }
 
-    public static Button SetButtonSettings(Button button, String typeName) {
+    public static Button SetButtonSettings(Button button, String typeName)
+    {
         var style1 = new StyleBoxFlat();
 
         style1.BgColor = GetColorByType(typeName);
@@ -212,5 +219,18 @@ public partial class GeneralUtils : Node
         button.Visible = true;
 
         return button;
+    }
+    
+    public static async Task Esperar(float segundos)
+    {
+        Tween tween = GetTreeRoot().CreateTween();
+        tween.TweenInterval(segundos);
+        await tween.ToSignal(tween, new StringName("finished"));
+    }
+
+    // Función auxiliar para acceder al árbol desde una clase estática
+    private static SceneTree GetTreeRoot()
+    {
+        return (SceneTree)Engine.GetMainLoop();
     }
 }

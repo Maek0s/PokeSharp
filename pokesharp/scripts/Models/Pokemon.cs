@@ -105,15 +105,13 @@ public partial class Pokemon : Resource
         PokePlayerMovesController pokePlayerMovesController = new PokePlayerMovesController();
         Movimientos = await pokePlayerMovesController.GetMovesetByPokeId(IdPK);
 
-        GD.Print($"Movimientos conseguidos de DB de {NombreCamelCase} - Movimientos:\n- {string.Join("\n- ", Movimientos)}\n");
+        //GD.Print($"Movimientos conseguidos de DB de {NombreCamelCase} - Movimientos:\n- {string.Join("\n- ", Movimientos)}\n");
 
         return true;
     }
 
     public async Task<bool> generateMoveset(bool insertDB)
     {
-        GD.Print("getMoveset()");
-
         MovesController movesController = new MovesController();
 
         var move1 = await movesController.GetMovimientoByPorcentage(Id);
@@ -245,7 +243,6 @@ public partial class Pokemon : Resource
         return rand.Next(0, 16) == 0;
     }
 
-
     public async Task AñadirExperiencia(int cantidad)
     {
         // Límite de nivel
@@ -254,7 +251,7 @@ public partial class Pokemon : Resource
         experienciaActual += cantidad;
         GD.Print($"¡{NombreCamelCase} obtuvó {cantidad} de experiencia! Experiencia actual {experienciaActual}");
 
-        while (experienciaActual >= LevelSystem.ExperienciaParaSubirNivel(nivel + 1))
+        while (experienciaActual >= LevelSystem.ExperienciaParaSubirNivel(nivel + 1) && nivel < 100)
         {
             experienciaActual -= LevelSystem.ExperienciaParaSubirNivel(nivel + 1);
             nivel++;
@@ -262,30 +259,36 @@ public partial class Pokemon : Resource
             GD.Print($"{NombreCamelCase} subió al nivel {nivel}!");
         }
 
-        MgtDatabase mgtDatabase = new MgtDatabase();
-
-        var nivelEvo = await mgtDatabase.GetNivelMinimoEvolucion(Id);
-
-        if (nivelEvo.HasValue && nivelEvo.Value <= nivel)
+        // A partir de este nivel ningún pokémon evoluciona, así nos evitamos peticiones SQL
+        if (nivel < 65)
         {
-            PokemonEvolutionController pokemonEvolutionController = new PokemonEvolutionController();
-            GD.Print($"{NombreCamelCase} ha evolucionado. nivel {nivel} {nivelEvo.Value}");
+            MgtDatabase mgtDatabase = new MgtDatabase();
 
-            var intId = await pokemonEvolutionController.GetEvolutionFrom(Id);
+            var nivelEvo = await mgtDatabase.GetNivelMinimoEvolucion(Id);
 
-            if (intId != null)
+            if (nivelEvo.HasValue && nivelEvo.Value <= nivel)
             {
-                await Evolucionar((int)intId);
+                PokemonEvolutionController pokemonEvolutionController = new PokemonEvolutionController();
+                GD.Print($"{NombreCamelCase} ha evolucionado. nivel {nivel} {nivelEvo.Value}");
+
+                var intId = await pokemonEvolutionController.GetEvolutionFrom(Id);
+
+                if (intId != null)
+                {
+                    await Evolucionar((int)intId);
+                }
+            }
+            else if (nivelEvo.HasValue)
+            {
+                GD.Print($"{NombreCamelCase} no ha evolucionado todavía. nivel {nivel} {nivelEvo.Value}");
+            }
+            else
+            {
+                GD.Print($"No tendrá más evoluciones posiblemente");
             }
         }
-        else if (nivelEvo.HasValue)
-        {
-            GD.Print($"{NombreCamelCase} no ha evolucionado todavía. nivel {nivel} {nivelEvo.Value}");
-        }
-        else
-        {
-            GD.Print($"No tendrá más evoluciones posiblemente");
-        }
+
+        
 
         Game.PlayerPlaying.MediaPoke = Player.CalcularNivelReferencia(Game.PlayerPlaying.listPokemonsTeam);
     }

@@ -44,26 +44,21 @@ public partial class TransitionManager : Node2D
         if (mapa is Node2D node2D)
             node2D.Visible = false;  // Ocultar el mapa
 
-        GD.Print($"pre turnoactual: {BattleManager.turnoActual}");
-        var turnoAnterior = BattleManager.turnoActual;
-
         BattleManager.turnoActual = BattleManager.TurnoEstado.AnimacionEnCurso;
-        GD.Print($"in turnoactual: {BattleManager.turnoActual}");
 
         await MoverSpriteEntrenador(true);
 
         // Intervalo para ocultar los sprites
-        await ToSignal(GetTree().CreateTimer(0.8), "timeout");
+        //await ToSignal(GetTree().CreateTimer(0.8), "timeout");
+        await GeneralUtils.Esperar(0.8f);
 
         await MoverSpriteEntrenadorFuera();
 
         // Intervalo mostrar los pokémon
-        await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+        //await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+        await GeneralUtils.Esperar(0.2f);
 
         await MoverSprites();
-
-        BattleManager.turnoActual = turnoAnterior;
-        GD.Print($"out turnoactual: {BattleManager.turnoActual}");
     }
 
     public async Task MoverSpriteEntrenador(bool versusAppear)

@@ -14,11 +14,11 @@ public partial class DoorData : Node
         {
             string jsonText = Godot.FileAccess.GetFileAsString(path);
             DoorDestinations = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(jsonText);
-            GD.Print("[✅] 🚪 DoorSystem 🚪 Información de la puerta cargada. / Door data loaded successfully.");
+            GD.Print("✅ 🚪 DoorSystem 🚪 Información de la puerta cargada. / Door data loaded successfully.");
         }
         else
         {
-            GD.PrintErr("[❌] 🚪 DoorSystem 🚪 No se encontró el archivo doors_info.json / File doors_info.json was not found");
+            GD.PrintErr("❌ 🚪 DoorSystem 🚪 No se encontró el archivo doors_info.json / File doors_info.json was not found");
         }
     }
 }

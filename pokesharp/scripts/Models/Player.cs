@@ -150,7 +150,7 @@ public class Player
                         await poke.generateMoveset(true);
                     }
 
-                    GD.Print($"Pokémon en team:\n {poke}");
+                   // GD.Print($"Pokémon en team:\n {poke}");
                     listPokemonsTeam.Add(poke);
                 }
             }

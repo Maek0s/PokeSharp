@@ -17,8 +17,6 @@ public partial class PlayersControllers {
         Player player = null;
         MgtDatabase mgtDatabase = new MgtDatabase();
 
-        GD.Print($"input nickname '{nickname}'");
-
         var listPlayers = await mgtDatabase.GetFromTable<Player>("players", $"nickname=ilike.{nickname.Trim()}");
 
         if (listPlayers == null) return null;
@@ -29,7 +27,7 @@ public partial class PlayersControllers {
 
             if (player.password == password)
             {
-                GD.Print($"[✅] Login exitoso para '{nickname}'.");
+                GD.Print($"✅ Login exitoso para '{nickname}'.");
                 return player;
             }
             else
@@ -50,8 +48,6 @@ public partial class PlayersControllers {
 
         Player player = null;
         MgtDatabase mgtDatabase = new MgtDatabase();
-
-        GD.Print($"input nickname '{nickname}'");
 
         var listPlayers = await mgtDatabase.GetFromTable<Player>("players", $"nickname=ilike.{nickname.Trim()}");
 
@@ -74,7 +70,7 @@ public partial class PlayersControllers {
         var _httpRequest = MgtDatabase._httpRequest;
 
         string url = $"{_supabaseUrl}players?apikey={_supabaseKey}";
-        GD.Print($"[📤] Insertando player: {nickname}");
+        GD.Print($"Insertando player: {nickname}");
 
         var headers = new string[]
         {
@@ -109,7 +105,7 @@ public partial class PlayersControllers {
 
             if (responseCode == 201)
             {
-                GD.Print("[✅] Player insertado correctamente.");
+                GD.Print("✅ Player insertado correctamente.");
                 tcs.TrySetResult(true);
             }
             else

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://265aok0khn3c"]
+[gd_scene load_steps=33 format=4 uid="uid://265aok0khn3c"]
 
 [ext_resource type="TileSet" uid="uid://dljsugk6wvo3y" path="res://scenes/mapas/tilesets/pueblo_arcilla.tres" id="1_3o77c"]
 [ext_resource type="Script" uid="uid://b20p2kw57ktle" path="res://scripts/systems/Door.cs" id="6_djuld"]
@@ -16,13 +16,12 @@
 [ext_resource type="Resource" uid="uid://bisyoiiweav70" path="res://resources/pokemons/lucario.tres" id="11_ayxjj"]
 [ext_resource type="Resource" uid="uid://08du22gsj7up" path="res://resources/pokemons/reshiram.tres" id="11_gvgi8"]
 [ext_resource type="Texture2D" uid="uid://dnbjny1ixgx2k" path="res://assets/textures/tilesets/tileset003_2.png" id="11_m5roo"]
-[ext_resource type="Resource" uid="uid://bmtmr2l51cas6" path="res://resources/pokemons/pichu.tres" id="13_rabam"]
-[ext_resource type="Resource" uid="uid://dtt8o01yx02n8" path="res://resources/pokemons/emolga.tres" id="14_8mb3i"]
-[ext_resource type="Resource" uid="uid://b2ksblb0c7gv6" path="res://resources/pokemons/milotic.tres" id="15_vup42"]
-[ext_resource type="Texture2D" uid="uid://ch1hf1g4t1nys" path="res://assets/characters/npcs/cynthia_sprites.png" id="16_bhgxq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xbdoj"]
 size = Vector2(22.4722, 183.23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rabam"]
+size = Vector2(110.633, 119.753)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bqkn3"]
 atlas = ExtResource("10_oxeau")
@@ -75,22 +74,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e6edi"]
-atlas = ExtResource("16_bhgxq")
-region = Rect2(0, 0, 68, 72)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_38lgw"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e6edi")
-}],
-"loop": false,
-"name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b7yb8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i1q75"]
 texture = ExtResource("8_l2txa")
 9:42/size_in_atlas = Vector2i(6, 6)
 9:42/0 = 0
@@ -165,10 +149,10 @@ texture = ExtResource("8_l2txa")
 15:5/0 = 0
 15:4/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i1q75"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o7n2n"]
 texture = ExtResource("10_ayxjj")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o7n2n"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gvgi8"]
 texture = ExtResource("11_m5roo")
 10:4/size_in_atlas = Vector2i(2, 6)
 10:4/0 = 0
@@ -178,9 +162,9 @@ texture = ExtResource("11_m5roo")
 [sub_resource type="TileSet" id="TileSet_jt0ji"]
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
-sources/0 = SubResource("TileSetAtlasSource_b7yb8")
-sources/3 = SubResource("TileSetAtlasSource_i1q75")
-sources/4 = SubResource("TileSetAtlasSource_o7n2n")
+sources/0 = SubResource("TileSetAtlasSource_i1q75")
+sources/3 = SubResource("TileSetAtlasSource_o7n2n")
+sources/4 = SubResource("TileSetAtlasSource_gvgi8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrr3a"]
 size = Vector2(32.2118, 31.3356)
@@ -239,9 +223,9 @@ scale = Vector2(0.61, 1.0405)
 script = ExtResource("6_djuld")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="1_topGround/Door_3"]
-position = Vector2(192.582, -593.945)
+position = Vector2(201.598, -590.445)
 scale = Vector2(2.84504, -0.246521)
-shape = SubResource("RectangleShape2D_xbdoj")
+shape = SubResource("RectangleShape2D_rabam")
 
 [node name="Label" type="Label" parent="1_topGround/Door_3"]
 offset_left = 136.025
@@ -298,25 +282,6 @@ totalPokemon = 3
 movesTutor = 5
 movesType = 10
 movesRandom = 85
-
-[node name="EntrenadorBelen" parent="1_topGround" instance=ExtResource("9_gx35y")]
-position = Vector2(-258, -311)
-scale = Vector2(0.55, 0.55)
-Nombre = "Belen  Lopez"
-equipoResources = [ExtResource("13_rabam"), ExtResource("14_8mb3i"), ExtResource("15_vup42")]
-Dialogos = PackedStringArray("Espero que no tengas pokemon tipo viento... mi coche no lo aguantara.", "¡Este va a ser tu fin!")
-TextoFight = "Belen:  Te  voy  a  dejar  clarito  como  usar  los  Files  en  Java."
-TextoDerrota = "Belen:  Demasido  facil,  tanto  como  derrotar  a  ese  tal  Izan."
-TextoVictoria = "Belen:  Vaya...  esto  si   que  no  me  lo  esperaba..."
-condicion = 4
-textCondicionInvalida = "¿¡No  has  atendido  o  que!? Necesitas  4  pokemon  minimo."
-spriteFrames = SubResource("SpriteFrames_38lgw")
-levelPokemon = 10
-dificultad = 5
-totalPokemon = 3
-movesTutor = 50
-movesType = 20
-movesRandom = 30
 
 [node name="1_Hierbas" type="TileMapLayer" parent="."]
 light_mask = 3

@@ -879,7 +879,7 @@ sprite_frames = SubResource("SpriteFrames_jijpb")
 autoplay = "default"
 
 [node name="PokeAlly" type="Sprite2D" parent="."]
-position = Vector2(-131.92, 278.286)
+position = Vector2(-132.683, 278.286)
 scale = Vector2(1.58, 1.2625)
 texture = ExtResource("6_eej6d")
 
@@ -950,10 +950,10 @@ theme = SubResource("Theme_eej6d")
 
 [node name="levelPokemon" type="Label" parent="InfoAlly"]
 layout_mode = 0
-offset_left = 224.0
+offset_left = 223.0
 offset_top = 10.0
-offset_right = 282.0
-offset_bottom = 33.0
+offset_right = 283.0
+offset_bottom = 36.0
 theme = SubResource("Theme_4jk2h")
 text = "Lv30"
 

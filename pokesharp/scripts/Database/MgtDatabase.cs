@@ -97,7 +97,7 @@ public partial class MgtDatabase : Node
     public async Task<T[]> GetFromTable<T>(string tableName, string query)
     {
         string url = $"{_supabaseUrl}{tableName}?{query}&apikey={_supabaseKey}";
-        //GD.Print(url);
+
         var headers = new string[]
         {
             $"Authorization: Bearer {_supabaseKey}",
@@ -136,9 +136,6 @@ public partial class MgtDatabase : Node
             "Content-Type: application/json"
         };
 
-        /*GD.Print(url);
-        GD.Print(json);*/
-
         string response = await SendRequest(url, headers, Godot.HttpClient.Method.Post, json);
 
         if (response != null)
@@ -168,21 +165,18 @@ public partial class MgtDatabase : Node
         string response = await SendRequest(url, headers, Godot.HttpClient.Method.Get, "");
         if (response != null)
         {
-            GD.Print("[✅] 🌐 Database 🌐 Conexión establecida.");
+            GD.Print("✅ 🌐 Database 🌐 Conexión establecida.");
             ConexionEstablecida = true;
-            GD.Print($"Respuesta: {response}");
         }
         else
         {
-            GD.PrintErr("[❌] 🌐 Database 🌐 (Testing) Error al enviar la solicitud.");
+            GD.PrintErr("❌ 🌐 Database 🌐 (Testing) Error al enviar la solicitud. ❌");
         }
     }
 
     public async Task<List<Pokemon>> GetAllPokemons(int idPlayer)
     {
         string url = $"{_supabaseUrl}pokemon_players?player_id=eq.{idPlayer}&apikey={_supabaseKey}";
-
-        GD.Print($"(GetAllPokemons) URL {url}");
 
         var headers = new string[]
         {
@@ -196,12 +190,12 @@ public partial class MgtDatabase : Node
         {
             // Deserializar la respuesta a una ArrayList de Pokémon
             List<Pokemon> pokemons = JsonConvert.DeserializeObject<List<Pokemon>>(response);
-            GD.Print($"✅ Pokémon obtenidos: {pokemons.Count}");
+            GD.Print($"✅ Pokémon obtenidos de la idPlayer '{idPlayer}': {pokemons.Count}");
             return pokemons;
         }
         else
         {
-            GD.PrintErr("[❌] Error al obtener los Pokémon.");
+            GD.PrintErr("[❌] Error al obtener los Pokémon. [❌]");
             return null;
         }
     }
@@ -210,8 +204,6 @@ public partial class MgtDatabase : Node
     {
         string url = $"{_supabaseUrl}pokemon_players?player_id=eq.{idPlayer}&inTeam=eq.-1&apikey={_supabaseKey}";
 
-        GD.Print($"(GetAllPokemons) URL {url}");
-
         var headers = new string[]
         {
             $"Authorization: Bearer {_supabaseKey}",
@@ -224,12 +216,12 @@ public partial class MgtDatabase : Node
         {
             // Deserializar la respuesta a una ArrayList de Pokémon
             List<Pokemon> pokemons = JsonConvert.DeserializeObject<List<Pokemon>>(response);
-            GD.Print($"✅ Pokémon obtenidos: {pokemons.Count}");
+            GD.Print($"✅ Pokémon obtenidos de la idPlayer {idPlayer}: {pokemons.Count}");
             return pokemons;
         }
         else
         {
-            GD.PrintErr("[❌] Error al obtener los Pokémon.");
+            GD.PrintErr("[❌] Error al obtener los Pokémon. [❌]");
             return null;
         }
     }
@@ -265,7 +257,7 @@ public partial class MgtDatabase : Node
         }
         else
         {
-            GD.PrintErr("[❌] Error al actualizar el campo inTeam.");
+            GD.PrintErr("[❌] Error al actualizar el campo inTeam. [❌]");
             return false;
         }
     }
@@ -304,9 +296,6 @@ public partial class MgtDatabase : Node
         };
 
         string json = JsonConvert.SerializeObject(data);
-
-        GD.Print($"(UpdateFromEvolution) PATCH URL: \n{url}\n");
-        GD.Print($"Body: {json}");
 
         string response = await SendRequest(url, headers, Godot.HttpClient.Method.Patch, json);
 
@@ -397,8 +386,6 @@ public partial class MgtDatabase : Node
             $"?select=type_id" +
             $"&pok_id=eq.{pokId}" +
             $"&apikey={_supabaseKey}";
-
-        //GD.Print($"(GetTypeIdsByPokemonId) URL: {url}");
 
         var headers = new string[]
         {

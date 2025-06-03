@@ -1,6 +1,8 @@
 {
     "Door_1": { "label": "Laboratorio", "isADoor": "true", "interior": "false", "scene": "res://scenes/mapas/interiores/interior.tscn", "xSpawnPoint": "-112,74", "ySpawnPoint": "198" },
-    "Door_2": { "label": "Salir a Pueblo Arcilla", "isADoor": "true", "interior": "true", "scene": "res://scenes/mapas/pueblo_arcilla.tscn", "xSpawnPoint": "-41,78065", "ySpawnPoint": "-556,4369"},
+    "Door_2": { "label": "Salir a Pueblo Arcilla", "isADoor": "true", "interior": "true", "scene": "res://scenes/mapas/pueblo_arcilla.tscn", "xSpawnPoint": "-98,78065", "ySpawnPoint": "-566,9371"},
     "Door_3": { "label": "Ruta 1", "isADoor": "false", "interior": "false", "scene": "res://scenes/mapas/camino_spawn.tscn", "xSpawnPoint": "185,87", "ySpawnPoint": "811,2"},
-    "Door_4": { "label": "Volver a Spawn", "isADoor": "false", "interior": "true", "scene": "res://scenes/mapas/pueblo_arcilla.tscn", "xSpawnPoint": "256,533", "ySpawnPoint": "-869,93"}
+    "Door_4": { "label": "Volver a Spawn", "isADoor": "false", "interior": "true", "scene": "res://scenes/mapas/pueblo_arcilla.tscn", "xSpawnPoint": "256,533", "ySpawnPoint": "-869,93"},
+    "Door_5": { "label": "Pueblo", "isADoor": "false", "interior": "false", "scene": "res://scenes/mapas/Pueblo.tscn", "xSpawnPoint": "588,923", "ySpawnPoint": "892,57"},
+    "Door_6": { "label": "Ruta 1", "isADoor": "false", "interior": "true", "scene": "res://scenes/mapas/camino_spawn.tscn", "xSpawnPoint": "179,42", "ySpawnPoint": "-12"}
 }

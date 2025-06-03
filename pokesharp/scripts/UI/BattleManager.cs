@@ -1,4 +1,5 @@
 using Godot;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Host;
 using System;
 using System.Threading.Tasks;
 
@@ -71,7 +72,6 @@ public partial class BattleManager : CanvasLayer {
         else
         {
             pokemonEnemy = Game.ListPokemonInFight[0];
-
         }
 
         if (Game.PlayerPlaying.listPokemonsTeam.Count == 0)
@@ -194,6 +194,12 @@ public partial class BattleManager : CanvasLayer {
 
     public async void EmpezarBatalla()
     {
+        if (Game.fight)
+        {
+            // Esperar tiempo para que acaben las animaciones
+            await ToSignal(GetTree().CreateTimer(4.0f), "timeout");
+        }
+        
         if (pokemonAlly == null)
             GD.PrintErr("pokemonAlly == null");
         else if (pokemonEnemy == null)
@@ -206,6 +212,8 @@ public partial class BattleManager : CanvasLayer {
         else
             turnoActual = TurnoEstado.Enemigo;
 
+        GD.Print($"turnoActual EmpezarBatalla {turnoActual}");
+
         // Esperar 1 segundo antes de iniciar el turno
         await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
 
@@ -214,6 +222,7 @@ public partial class BattleManager : CanvasLayer {
 
     public async Task IniciarTurnoAsync()
     {
+        GD.Print($"iniciado turno {turnoActual}");
         switch (turnoActual)
         {
             case TurnoEstado.Jugador:
@@ -224,7 +233,7 @@ public partial class BattleManager : CanvasLayer {
                 GD.Print("Turno del enemigo");
                 AtaqueEnemigo();
                 break;
-            
+
             case TurnoEstado.EsperandoChange:
                 GD.Print("Tienes que elegir un pokémon");
                 updateVisualTeam();
@@ -235,8 +244,6 @@ public partial class BattleManager : CanvasLayer {
 
             case TurnoEstado.CombateTerminado:
                 GD.Print("Combate terminado");
-                var sceneRoot = GetTree().Root.GetNode("Game");
-                var scriptMenuPrincipal = sceneRoot.GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
 
                 PokemonPlayersController pokemonPlayersController = new PokemonPlayersController();
                 // Si es un combate que haga la suma de todos los pokemons derrotados
@@ -245,7 +252,7 @@ public partial class BattleManager : CanvasLayer {
                     var xpNecesaria = LevelSystem.ExperienciaParaSubirNivel(pokemonAlly.nivel + 1);
 
                     await pokemonTeam.AñadirExperiencia(LevelSystem.CalcularExperienciaGanada(pokemonEnemy.ExperienciaBase, pokemonEnemy.nivel));
-                    
+
                     GD.Print($"exp base enemy: {pokemonEnemy.ExperienciaBase} - nivel {pokemonEnemy.nivel} \n" +
                              $"ExperienciaParaSubirNivel {LevelSystem.ExperienciaParaSubirNivel(pokemonAlly.nivel + 1)} \n" +
                              $"Restante: {xpNecesaria - pokemonEnemy.experienciaActual}");
@@ -257,8 +264,6 @@ public partial class BattleManager : CanvasLayer {
                 }
 
                 Game.ChangeState(1);
-
-                scriptMenuPrincipal.ColocarPokemonsVisual();
 
                 EjecutarCombateTerminadoDelay(1.5f);
                 break;
@@ -274,19 +279,20 @@ public partial class BattleManager : CanvasLayer {
 
     private async void AtaqueEnemigo()
     {
+        GD.Print("Ataque Enemigo");
+
         // Pequeño delay antes de iniciar el ataque enemigo
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 
         turnoActual = TurnoEstado.Atacando;
 
-        GD.Print("pokeEnemy Moves Count", pokemonEnemy.Movimientos.Count);
         // Elegir movimiento enemigo aleatoriamente
         var movimientosEnemigo = pokemonEnemy.Movimientos;
 
         RandomNumberGenerator random = new RandomNumberGenerator();
         int indexMovimiento = random.RandiRange(0, 3);
 
-        GD.Print("indexMov ", indexMovimiento);
+        GD.Print($"El enemigo utilizó {movimientosEnemigo[indexMovimiento]}");
 
         int daño = await pokemonEnemy.AtacarPokemon(pokemonAlly, movimientosEnemigo[indexMovimiento]);
 
@@ -301,11 +307,17 @@ public partial class BattleManager : CanvasLayer {
             return;
         }
 
-        // Aplicar daño al aliado
-        pokemonAlly.currentHP -= daño;
-
-        if (pokemonAlly.currentHP < 0)
+        // Aplicar daño al pokémon
+        if (pokemonAlly.currentHP - daño < 0)
+        {
+            daño = pokemonAlly.currentHP;
             pokemonAlly.currentHP = 0;
+        }
+        else
+        {
+            pokemonAlly.currentHP -= daño;
+        }
+
         RefreshHPBar(false);
 
         combatlog.Text += $"\nEl \u2009 enemigo \u2009 uso \u2009 {GeneralUtils.FormatearTexto(movimientosEnemigo[indexMovimiento].move_name)} \u2009 y \u2009 resto \u2009 {daño} \u2009 de \u2009 vida.";
@@ -588,17 +600,14 @@ public partial class BattleManager : CanvasLayer {
         float a = ((3 * hpMax - 2 * hpCurrent) * catchRate * ballBonus) / (3 * hpMax);
         
         // Mejora basada en porcentaje de vida
-        float vidaRatio = hpCurrent / hpMax;
-        if (vidaRatio < 0.25f)
-        {
-            a *= 1.7f;
-        }
-        else if (vidaRatio < 0.5f)
-        {
-            a *= 1.4f;
-        }
+        float lifeFactor = (hpMax - hpCurrent) / hpMax;
+        GD.Print($"[DEBUG] vidaRatio = {lifeFactor:P2} (HP = {hpCurrent}/{hpMax})");
 
-        // Clamp para mantenerlo razonable
+        float bonusPorVida = 1f + lifeFactor * 10f;
+        bonusPorVida = Mathf.Min(bonusPorVida, 15f);
+
+        a *= bonusPorVida;
+
         a = Mathf.Clamp(a, 1f, 255f);
 
         if (a >= 255f)
@@ -618,6 +627,7 @@ public partial class BattleManager : CanvasLayer {
 
         float probabilidad = Mathf.Pow(b / 65536f, 4) * 100f;
         GD.Print($"📊 Probabilidad: {probabilidad:F2}% | Bola: {stringTypePokeball} | Vida: {((hpMax - hpCurrent) / hpMax):P0}");
+        GD.Print($"[DEBUG] HP: {hpCurrent}/{hpMax} ({(hpCurrent / hpMax):P2})");
 
         return capturado;
     }
@@ -658,13 +668,21 @@ public partial class BattleManager : CanvasLayer {
         }
         else
         {
+            // Aplicar daño al pokémon
+            if (pokemonEnemy.currentHP - daño < 0)
+            {
+                daño = pokemonEnemy.currentHP;
+                pokemonEnemy.currentHP = 0;
+            }
+            else
+            {
+                pokemonEnemy.currentHP -= daño;
+            }
+
             combatlog.Text += $"\nUsaste \u2009 {GeneralUtils.FormatearTexto(pokemonAlly.Movimientos[moveIndex].move_name)} \u2009 y \u2009 resto \u2009 {daño} \u2009 de \u2009 vida.";
         }
 
         Attacked(daño);
-
-        GD.Print("pokeEnemy currentHP ", pokemonEnemy.currentHP);
-        GD.Print($"Ataque con {pokemonAlly.Movimientos[moveIndex]} daño {daño}");
 
         if (!Game.fight)
         {
@@ -683,11 +701,11 @@ public partial class BattleManager : CanvasLayer {
         {
             if (pokemonEnemy.currentHP <= 0)
             {
+                combatlog.Text += $"\nHas  derrotado  a  {pokemonEnemy.NombreCamelCase}.";
+
                 if (Game.EntrenadorFighting.checkVivos())
                 {
                     GD.Print("Tiene pokémon vivos.");
-
-                    combatlog.Text += $"\nHas  derrotado  a  {pokemonEnemy.NombreCamelCase}";
 
                     await ToSignal(GetTree().CreateTimer(2.0), "timeout");
 
@@ -942,6 +960,8 @@ public partial class BattleManager : CanvasLayer {
 
         // Cura a todo el equipo después del combate
         Player.CurarEquipo(Game.PlayerPlaying.listPokemonsTeam);
+        var menuPrincipal = GetNode<MenuPrincipal>("/root/Game/inScreen/UI/MenuPrincipal");
+        menuPrincipal.ColocarPokemonsVisual();
 
         // Borra la escena de combate
         if (battle != null)
@@ -1079,8 +1099,6 @@ public partial class BattleManager : CanvasLayer {
         lanzarPokeball(btnMasterball);
     }
 
-    
-
     public void RefreshHPBarsTeam()
     {
         for (int i = 1; i < Game.PlayerPlaying.listPokemonsTeam.Count + 1; i++)
@@ -1094,8 +1112,6 @@ public partial class BattleManager : CanvasLayer {
             GeneralUtils.AsignValuesProgressBarNoAnimation(progressBar, pokemon);
         }
     }
-
-    
 
     public void ocultarTodo(Node node) {
         moveset.Visible = false;

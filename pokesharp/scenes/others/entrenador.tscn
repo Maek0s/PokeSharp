@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cagmp47lh1ne3" path="res://scripts/models/Entrenador.cs" id="1_4oha4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4oha4"]
-size = Vector2(37, 28)
+size = Vector2(37, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3ojr"]
 size = Vector2(72, 72)
@@ -17,7 +17,7 @@ script = ExtResource("1_4oha4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -4)
+position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_4oha4")
 debug_color = Color(0, 0.644535, 0.278952, 0.42)
 

@@ -273,7 +273,7 @@ texture = ExtResource("2_0qi1t")
 sources/0 = SubResource("TileSetAtlasSource_lbwhd")
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jpxnb"]
-a = Vector2(256, -468)
+a = Vector2(256, -507)
 b = Vector2(256, -198)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_m48kn"]
@@ -378,5 +378,5 @@ position = Vector2(-24, 72)
 shape = SubResource("SegmentShape2D_m48kn")
 
 [node name="Arriba" type="CollisionShape2D" parent="Limites"]
-position = Vector2(-25, -187)
+position = Vector2(-25, -236)
 shape = SubResource("SegmentShape2D_m48kn")

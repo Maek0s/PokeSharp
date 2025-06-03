@@ -90,7 +90,6 @@ public partial class Game : Node2D
 
 	public static async void StartCoroutine(float targetVolume, Node rootNode)
 	{
-		GD.Print(rootNode.GetPath());
 		var battleMusic = rootNode.GetNode<AudioStreamPlayer2D>("SFX/battleMusic");
 
 		float time = 0;
@@ -223,13 +222,9 @@ public partial class Game : Node2D
 		if (_isInterior) {
 			posSpawnPoint = new Godot.Vector2(_xSpawnPoint, _ySpawnPoint);
 			
-			GD.Print("Entrando a exterior");
-
 			sprite2D.Play("idle_down");
 		} else {
 			posSpawnPoint = new Godot.Vector2(_xSpawnPoint, _ySpawnPoint);
-
-			GD.Print("Entrando a interior");
 
 			sprite2D.Play("idle_up");
 		}
