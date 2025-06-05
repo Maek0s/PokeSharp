@@ -69,8 +69,7 @@ public partial class Hierbas : Area2D
         var transitionNode = GetNode<BattleTransition>("/root/Transitions/BattleTransition");
 
         // gen 1 hasta la 5
-//        int idPoke = getRandom(1, 649);
-        int idPoke = 245;
+        int idPoke = getRandom(1, 649);
 
         int levelPokeEnemy = getRandom(MinLevel, MaxLevel);
         Pokemon = await PokemonController.GetPokemonById(idPoke);

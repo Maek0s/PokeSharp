@@ -112,6 +112,8 @@ public partial class PaginaInicioUI : Node2D
 
     public async void OnBtnRegistrarsePressedAsync()
     {
+        if (nickname.Text.Trim() == "" || password.Text.Trim() == "") return;
+
         try
         {
             // Comprobar el nickname por si es único
