@@ -77,7 +77,7 @@ Para información más detallada y visual del proyecto, visita la web:
 ⏳ Aún está en estado alfa, es jugable y puedes entrar a [Releases](https://github.com/Maek0s/PokeSharp/releases) para jugar la última versión disponible. Para más novedades, ¡Únase al servidor de [**Discord**](https://discord.com/invite/FqJ6ZgYRrU)!
 
 ### 5️⃣ ¿Por qué se creó PokeSharp?
-🔍 PokeSharp nació de varios intentos anteriores de crear un fangame de **Pokémon** y evolucionó hasta convertirse en un **proyecto final de curso** para el Grado Superior <abbr title="Desarrollo de Aplicaciones Multiplataforma">**DAM**</abbr>.
+🔍 PokeSharp nació de varios intentos anteriores de crear un fangame de **Pokémon** y evolucionó hasta convertirse en un **proyecto final de ciclo** para el Grado Superior <abbr title="Desarrollo de Aplicaciones Multiplataforma">**DAM**</abbr>.
 
 ### 6️⃣ ¿De dónde viene el nombre "PokeSharp"?
 💡 Antes se llamaba **PokeJava**, pero tras cambiar el lenguaje de programación a **C#**, el nombre cambio a **PokeSharp**.
