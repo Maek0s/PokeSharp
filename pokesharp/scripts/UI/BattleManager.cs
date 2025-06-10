@@ -226,11 +226,9 @@ public partial class BattleManager : CanvasLayer {
         switch (turnoActual)
         {
             case TurnoEstado.Jugador:
-                GD.Print("Turno del jugador");
                 break;
 
             case TurnoEstado.Enemigo:
-                GD.Print("Turno del enemigo");
                 AtaqueEnemigo();
                 break;
 
