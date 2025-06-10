@@ -14,10 +14,31 @@ Un juego inspirado en el mundo **Pokémon**, con una historia única y una exper
 ---
 
 ## 📜 Tabla de Contenidos
+- [⌨️ Como jugar](#-como-jugar)
 - [🌐 Web Oficial](#-web-oficial)
 - [📣 Redes Sociales](#-redes-sociales)
 - [❓ FAQ (Preguntas Frecuentes)](#-faq-preguntas-frecuentes)
 - [‼️ IMPORTANTE](#%EF%B8%8F-importante)
+
+---
+
+## ⌨️ Como jugar
+
+### Controles
+
+**E** - Interactuar <br>
+**R** - Abrir menu
+
+### Cosas básicas a saber
+
+**¿Cómo capturo un pokémon?** <br>
+Busca unas hierbas, pasa sobre ellas un rato y te saldrá un pokémon, de ahí puedes capturarlo con "Bag" > "Items captura" y seleccionas una pokeball, todas las pokeball excepto la Masterball tienen probabilidades, en caso de la masterball es una captura asegurada. Como consejo podrás bajar la vida a tu enemigo para capturarlo con algo que no sea una masterball para una experiencia más real de Pokémon.
+
+**¿Cuando tengo más de 6 pokémon como puedo verlos?** <br>
+Al pasar la capacidad de tu equipo, es decir 6, tus pokémon se mandarán a tu PC, esto se encuentra en el menú -> "Tus Pokémon"
+
+**¿Cómo subo de nivel a mis pokémon?** <br>
+Combatiendo contra pokémon en encuentros o en combates contra entrenadores y ganando.
 
 ---
 
@@ -56,7 +77,7 @@ Para información más detallada y visual del proyecto, visita la web:
 ⏳ Aún está en estado alfa, es jugable y puedes entrar a [Releases](https://github.com/Maek0s/PokeSharp/releases) para jugar la última versión disponible. Para más novedades, ¡Únase al servidor de [**Discord**](https://discord.com/invite/FqJ6ZgYRrU)!
 
 ### 5️⃣ ¿Por qué se creó PokeSharp?
-🔍 PokeSharp nació de varios intentos anteriores de crear un fangame de **Pokémon** y evolucionó hasta convertirse en un **proyecto final de curso** para el Grado Superior <abbr title="Desarrollo de Aplicaciones Multiplataforma">**DAM**</abbr>.
+🔍 PokeSharp nació de varios intentos anteriores de crear un fangame de **Pokémon** y evolucionó hasta convertirse en un **proyecto final de ciclo** para el Grado Superior <abbr title="Desarrollo de Aplicaciones Multiplataforma">**DAM**</abbr>.
 
 ### 6️⃣ ¿De dónde viene el nombre "PokeSharp"?
 💡 Antes se llamaba **PokeJava**, pero tras cambiar el lenguaje de programación a **C#**, el nombre cambio a **PokeSharp**.
