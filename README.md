@@ -9,6 +9,7 @@ Un juego inspirado en el mundo **Pokémon**, con una historia única y una exper
 
 ---
 
+### ℹ️ Estado actual: **PAUSADO**
 ### 🚀 Versión Actual: **v1.0.3-alpha**
 
 ---
